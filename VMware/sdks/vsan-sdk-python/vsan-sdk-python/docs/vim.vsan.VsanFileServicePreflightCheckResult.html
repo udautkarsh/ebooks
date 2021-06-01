@@ -1,0 +1,202 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script type="text/javascript" src="./commonRes.js" language="JavaScript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vsan.VsanFileServicePreflightCheckResult" name="vim.vsan.VsanFileServicePreflightCheckResult"></a>
+<h1>Data Object - VsanFileServicePreflightCheckResult(vim.vsan.VsanFileServicePreflightCheckResult)</h1>
+<dl>
+<dt>Returned by</dt>
+<dd>
+<a href="vim.vsan.VsanFileServiceSystem.html#performFileServicePreflightCheck">VsanPerformFileServiceEnablePreflightCheck</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>Since </dt>
+<dd>vSAN API 7.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The preflight check result for enabling vSAN file services.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="domainConfigIssue" name="domainConfigIssue"></a><strong>domainConfigIssue</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Checks whether the domain configuration is valid. Currently the check only
+    includes the existence of the file server IP addresses. This field will only
+    be present when the domain configuration issue is detected.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="dvsConfigIssue" name="dvsConfigIssue"></a><strong>dvsConfigIssue</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Checks whether the dvs configuration is valid. This check validates
+    if the supplied network for file service is dvsPortGroup, the DSwitch
+    which is hosting the port group has version equal to or older then 6.6.0.
+    This field will only be present when DVS configuration issue is detected.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="fileServiceVersion" name="fileServiceVersion"></a><strong>fileServiceVersion</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         This field indicates the highest file service version that the cluster can
+    support. The field will be left empty if the cluster doesn't meet the
+    requirement to enalbe file service.
+      <p></p>
+<B><I>Since </I></B>vSAN API vSAN 7.0U1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="fsvmVersion" name="fsvmVersion"></a><strong>fsvmVersion</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         This field indicates current running file service OVF version used by vSAN
+    file service. It will only be present if there are file service VMs running
+    in this cluster without mixed version.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="hostVersion" name="hostVersion"></a><strong>hostVersion</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Field to indicate the lowest host version in this cluster. This filed will be
+    left empty if there are no hosts in the cluster.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="lastUpgradeDate" name="lastUpgradeDate"></a><strong>lastUpgradeDate</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:dateTime</td><td>
+<p></p>
+         This field indicates date file service VMs last upgraded.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="mixedModeIssue" name="mixedModeIssue"></a><strong>mixedModeIssue</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         vSAN file service cannot be enabled when there are hosts with lower than
+    '7.0.0' in this cluster. This issue will be reported if hosts with versions
+    lower than '7.0.0' are detected. If this field is empty, it means all hosts
+    in this cluster is with version '7.0.0' or higher.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="networkPartitionIssue" name="networkPartitionIssue"></a><strong>networkPartitionIssue</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Issues regarding whether there are network partitions in the cluster. This
+    field will be left empty if there are no network partitions in this cluster.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="ovfInstalled" name="ovfInstalled"></a><strong>ovfInstalled</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         This field indicates whether the file service OVF for running vSAN file
+    services has been installed on the vCenter or not. This field will show the
+    highest OVF version present on this vCenter that is compatible to the
+    cluster. This field will not be set if no compatible OVF version could be
+    found on this vCenter.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ovfMixedModeIssue" name="ovfMixedModeIssue"></a><strong>ovfMixedModeIssue</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Field to indicate whether there are multiple file service VM ovf versions
+    running.
+    This field will be left empty if there is no issue regarding the mixed OVF
+    version file service VMs.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="vsanDatastoreIssue" name="vsanDatastoreIssue"></a><strong>vsanDatastoreIssue</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Checks whether the vSAN datastore is present to all the hosts to the cluster.
+    If hosts without vSAN datastore will be reported in this field. This
+    field will be left empty if all the host in this cluster are with vSAN
+    datastore.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">None</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="VsanFileServicePreflightCheckResult">
+            <complexContent>
+               <extension base="vsan:DynamicData">
+                  <sequence>
+                     <element name="ovfInstalled" type="xsd:string" minOccurs="0"/>
+                     <element name="fsvmVersion" type="xsd:string" minOccurs="0"/>
+                     <element name="lastUpgradeDate" type="xsd:dateTime" minOccurs="0"/>
+                     <element name="ovfMixedModeIssue" type="xsd:string" minOccurs="0"/>
+                     <element name="hostVersion" type="xsd:string" minOccurs="0"/>
+                     <element name="mixedModeIssue" type="xsd:string" minOccurs="0"/>
+                     <element name="networkPartitionIssue" type="xsd:string" minOccurs="0"/>
+                     <element name="vsanDatastoreIssue" type="xsd:string" minOccurs="0"/>
+                     <element name="domainConfigIssue" type="xsd:string" minOccurs="0"/>
+                     <element name="fileServiceVersion" type="xsd:string" minOccurs="0"/>
+                     <element name="dvsConfigIssue" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+class vCenter():
+	def __intit__(self, connectionData):
+		self.hostname =  connectionData['hostname']
+		self.username = connectionData['username']
+		self.password = connectionData['password']
+		self.port = 443
+	
+	def connect(self):
+		pass
+	def disconnect(self):
+		pass
+		
+	@staticmethod
+	def getvCenterConnection(vcType):
+	
+		if vcType == 'mgmt':
+			ticgObj = nps_api.get_vcenter_mgmt()
+		elif vcType == 'resource':
+			ticgObj = nps_api.get_vcenter_res()
+		else:
+			return 'unknownvCenterType'
+			
+		connectionData = {}
+		vcsaData = ticgObj.get_data()
+		connectionData['hostname'] = vcsaData['hostname']
+		connectionData['password'] = vcsaData['password']
+		connectionData['username'] = "Administrator@"+platform_data['domain_name']
+		connection = vCenter(connectionData) 
+		return connection
+
+class Cluster(vCenter):
+	def __init__(self, vcType):
+		vCenter.getvCenterConnection(vcType)
+	
+	def createCluster(self):
+		pass
+
+class Datacenter(vCenter):
+	def __init__(self, vcType):
+		vCenter.getvCenterConnection(vcType)
+	
+	def createDatacenter(self):
+		pass
+
+class vSphereHA(vCenter):
+	def __init__(self, vcType):
+		vCenter.getvCenterConnection(vcType)
+	
+	def enablevSphereHA(self):
+		pass

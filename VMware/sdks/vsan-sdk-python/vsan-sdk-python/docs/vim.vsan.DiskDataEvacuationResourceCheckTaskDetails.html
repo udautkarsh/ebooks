@@ -1,0 +1,127 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script type="text/javascript" src="./commonRes.js" language="JavaScript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vsan.DiskDataEvacuationResourceCheckTaskDetails" name="vim.vsan.DiskDataEvacuationResourceCheckTaskDetails"></a>
+<h1>Data Object - VsanDiskDataEvacuationResourceCheckTaskDetails(vim.vsan.DiskDataEvacuationResourceCheckTaskDetails)</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.vsan.ResourceCheckTaskDetails.html">VsanResourceCheckTaskDetails</a>
+</dd>
+<dt>Since </dt>
+<dd>vSAN API 7.2</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The detailed information of a resource check task for disk/disk-group
+    data evacuation (i.e. the resource check in which
+    <a href="vim.vsan.ResourceCheckSpec.html#operation">operation</a> is "DiskDataEvacuation").
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="diskUuid" name="diskUuid"></a><strong>diskUuid</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         If <a href="vim.vsan.ResourceCheckSpec.html#operation">operation</a> is "DiskDataEvacuation",
+    this will be the vSAN UUID of cache-tier disk or capacity-tier disk in
+    a disk-group depending on whether the task is for a disk-group or a disk.
+    If the task is for a disk-group, this is the vSAN UUID of the cache-tier
+    disk in the disk-group.
+    If the task is for a disk, this is the vSAN UUID of the corresponding
+    capacity-tier disk.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="isCapacityTier" name="isCapacityTier"></a><strong>isCapacityTier</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         If <a href="vim.vsan.ResourceCheckSpec.html#operation">operation</a> is "DiskDataEvacuation",
+    this flag indicates whether the task is for a disk-group or just a disk.
+    If the flag is true, the task is for a capacity-tier disk with vSAN UUID
+    in vim.vsan.ResourceCheckTaskDetails#diskUuid; otherwise the task
+    is for a disk-group represented by its cache-tier disk with vSAN UUID in
+    vim.vsan.ResourceCheckTaskDetails#diskUuid.
+ 
+    This field could be unset if the backend is not ready to decide on the
+    disk tier information (e.g. disk information query takes longer due to
+    underlying networking delay) or even not able to get the disk tier
+    information (e.g. the host which owns the disk/disk-group gets disconnected
+    or not responding).
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.vsan.ResourceCheckTaskDetails.html">VsanResourceCheckTaskDetails</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.vsan.ResourceCheckTaskDetails.html#host">host</a>, <a href="vim.vsan.ResourceCheckTaskDetails.html#hostUuid">hostUuid</a>, <a href="vim.vsan.ResourceCheckTaskDetails.html#maintenanceSpec">maintenanceSpec</a>, <a href="vim.vsan.ResourceCheckTaskDetails.html#task">task</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="VsanDiskDataEvacuationResourceCheckTaskDetails">
+            <complexContent>
+               <extension base="vsan:VsanResourceCheckTaskDetails">
+                  <sequence>
+                     <element name="diskUuid" type="xsd:string" minOccurs="0"/>
+                     <element name="isCapacityTier" type="xsd:boolean" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

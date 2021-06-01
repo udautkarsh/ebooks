@@ -1,0 +1,46 @@
+registry movement:
+==================
+
+oc edit -o yaml ImageContentSourcePolicy  hosntname 
+oc edit cm user-ca-bundle -o yaml -n openshift-config
+oc get secret pull-secret -n openshift-config -oyaml
+
+
+
+
+oc get cm cluster-config-v1 -o yaml -n kube-system
+
+Decode ca certifiacte:
+======================
+openssl x509 -in domain-new.crt -text
+rct cat-cert openshift-config-user-ca-bundle.crt
+
+
+
+ssh core@worker-1.ocp4.lab.com  ================> do it for all nodes including masters
+sudo su
+cp domain-new.crt /etc/pki/ca-trust/source/anchors/
+cd /etc/pki/ca-trust/source/anchors/
+mv openshift-config-user-ca-bundle.crt openshift-config-user-ca-bundle.crt_old
+cp domain-new.crt openshift-config-user-ca-bundle.crt
+update-ca-trust
+
+
+
+ssh core@worker-1.ocp4.lab.com  ===============> do it for all nodes including masters
+sudo su
+mkdir -p /etc/docker/certs.d/registry-new.ocp4.lab.com:5000
+cp domain-new.crt /etc/docker/certs.d/registry-new.ocp4.lab.com:5000
+update-ca-trust
+exit
+exit
+
+
+
+
+
+
+
+
+
+

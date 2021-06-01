@@ -1,0 +1,433 @@
+[root@registry scale_out]# ansible-playbook -i hosts /usr/share/ansible/openshift-ansible/playbooks/scaleup.yml
+
+
+PLAY [Pre-scaleup checks] ********************************************************************************************************************************
+
+TASK [openshift_node : Ensure [new_workers] group is populated] ******************************************************************************************
+skipping: [localhost]
+
+TASK [openshift_node : Get cluster nodes] ****************************************************************************************************************
+changed: [localhost]
+
+TASK [openshift_node : Check for nodes which are already part of the cluster] ****************************************************************************
+skipping: [localhost] => (item=worker-2.ocp4.nfv.com)
+
+TASK [openshift_node : Fail if new_workers group contains active nodes] **********************************************************************************
+skipping: [localhost]
+
+PLAY [install nodes] *************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************
+ok: [worker-2.ocp4.nfv.com]
+
+TASK [openshift_node : include_tasks] ********************************************************************************************************************
+included: /usr/share/ansible/openshift-ansible/roles/openshift_node/tasks/install.yml for worker-2.ocp4.nfv.com
+
+TASK [openshift_node : Install openshift support packages] ***********************************************************************************************
+ok: [worker-2.ocp4.nfv.com]
+
+TASK [openshift_node : Create CNI dirs for crio] *********************************************************************************************************
+ok: [worker-2.ocp4.nfv.com] => (item=/var/lib/cni/bin)
+ok: [worker-2.ocp4.nfv.com] => (item=/etc/kubernetes/cni/net.d/)
+ok: [worker-2.ocp4.nfv.com] => (item=/opt/cni/bin/)
+
+TASK [openshift_node : Get cluster version] **************************************************************************************************************
+changed: [worker-2.ocp4.nfv.com -> localhost]
+
+TASK [openshift_node : Set fact l_cluster_version] *******************************************************************************************************
+ok: [worker-2.ocp4.nfv.com]
+
+TASK [openshift_node : Override version when running CI] *************************************************************************************************
+skipping: [worker-2.ocp4.nfv.com]
+
+TASK [openshift_node : Install openshift packages] *******************************************************************************************************
+ok: [worker-2.ocp4.nfv.com]
+
+TASK [openshift_node : Enable the CRI-O service] *********************************************************************************************************
+ok: [worker-2.ocp4.nfv.com]
+
+TASK [openshift_node : include_tasks] ********************************************************************************************************************
+included: /usr/share/ansible/openshift-ansible/roles/openshift_node/tasks/config.yml for worker-2.ocp4.nfv.com
+
+TASK [openshift_node : Disable swap] *********************************************************************************************************************
+ok: [worker-2.ocp4.nfv.com]
+
+TASK [openshift_node : Enable IP Forwarding] *************************************************************************************************************
+[WARNING]: The value 1 (type int) in a string field was converted to u'1' (type string). If this does not look like what you expect, quote the entire
+value to ensure it does not change.
+
+ok: [worker-2.ocp4.nfv.com]
+
+TASK [openshift_node : Disable firewalld service] ********************************************************************************************************
+ok: [worker-2.ocp4.nfv.com]
+
+TASK [openshift_node : Setting sebool container_manage_cgroup] *******************************************************************************************
+ok: [worker-2.ocp4.nfv.com]
+
+TASK [openshift_node : Create temp directory] ************************************************************************************************************
+changed: [worker-2.ocp4.nfv.com]
+
+TASK [openshift_node : Wait for bootstrap endpoint to show up] *******************************************************************************************
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (60 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (59 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (58 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (57 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (56 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (55 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (54 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (53 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (52 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (51 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (50 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (49 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (48 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (47 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (46 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (45 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (44 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (43 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (42 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (41 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (40 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (39 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (38 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (37 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (36 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (35 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (34 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (33 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (32 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (31 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (30 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (29 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (28 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (27 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (26 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (25 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (24 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (23 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (22 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (21 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (20 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (19 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (18 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (17 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (16 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (15 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (14 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (13 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (12 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (11 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (10 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (9 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (8 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (7 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (6 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (5 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (4 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (3 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (2 retries left).
+FAILED - RETRYING: Wait for bootstrap endpoint to show up (1 retries left).
+fatal: [worker-2.ocp4.nfv.com]: FAILED! => {"attempts": 60, "changed": false, "content": "", "elapsed": 0, "msg": "Status code was -1 and not [200]: Request failed: <urlopen error [Errno 111] Connection refused>", "redirected": false, "status": -1, "url": "https://api.ocp4.nfv.com:22623/config/worker"}
+
+PLAY RECAP ***********************************************************************************************************************************************
+localhost                  : ok=1    changed=1    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0
+worker-2.ocp4.nfv.com      : ok=14   changed=2    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0
+
+
+Monday 13 January 2020  10:44:06 +0530 (0:10:19.165)       0:11:57.095 ********
+===============================================================================
+openshift_node : Wait for bootstrap endpoint to show up ----------------------------------------------------------------------------------------- 619.17s
+openshift_node : Install openshift support packages ---------------------------------------------------------------------------------------------- 61.06s
+openshift_node : Install openshift packages ------------------------------------------------------------------------------------------------------ 30.47s
+openshift_node : Get cluster nodes ---------------------------------------------------------------------------------------------------------------- 1.69s
+Gathering Facts ----------------------------------------------------------------------------------------------------------------------------------- 1.31s
+openshift_node : Enable the CRI-O service --------------------------------------------------------------------------------------------------------- 0.56s
+openshift_node : Create CNI dirs for crio --------------------------------------------------------------------------------------------------------- 0.56s
+openshift_node : Setting sebool container_manage_cgroup ------------------------------------------------------------------------------------------- 0.44s
+openshift_node : Get cluster version -------------------------------------------------------------------------------------------------------------- 0.29s
+openshift_node : Enable IP Forwarding ------------------------------------------------------------------------------------------------------------- 0.28s
+openshift_node : Disable swap --------------------------------------------------------------------------------------------------------------------- 0.28s
+openshift_node : Create temp directory ------------------------------------------------------------------------------------------------------------ 0.27s
+openshift_node : Disable firewalld service -------------------------------------------------------------------------------------------------------- 0.23s
+openshift_node : include_tasks -------------------------------------------------------------------------------------------------------------------- 0.15s
+openshift_node : include_tasks -------------------------------------------------------------------------------------------------------------------- 0.09s
+openshift_node : Set fact l_cluster_version ------------------------------------------------------------------------------------------------------- 0.05s
+openshift_node : Override version when running CI ------------------------------------------------------------------------------------------------- 0.05s
+openshift_node : Ensure [new_workers] group is populated ------------------------------------------------------------------------------------------ 0.03s
+openshift_node : Fail if new_workers group contains active nodes ---------------------------------------------------------------------------------- 0.03s
+openshift_node : Check for nodes which are already part of the cluster ---------------------------------------------------------------------------- 0.03s
+
+
+
+############################
+Other Details
+############################
+
+
+[root@registry scale_out]# more hosts
+[all:vars]
+ansible_user=root
+#ansible_become=True
+
+openshift_kubeconfig_path="~/.kube/config"
+
+[new_workers]
+worker-2.ocp4.nfv.com
+[root@registry scale_out]#
+[root@registry scale_out]#
+[root@registry scale_out]#
+[root@registry scale_out]# more ~/.kube/config
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM3VENDQWRXZ0F3SUJBZ0lCQVRBTkJna3Foa2lHOXcwQkFRc0ZBREFtTVNRd0lnWURWUVFEREJ0cGJtZH
+kKWlhOekxXOXdaWEpoZEc5eVFERTFOemcxTkRRd05UTXdIaGNOTWpBd01UQTVNRFF5TnpNeVdoY05Nakl3TVRBNApNRFF5TnpNeldqQW1NU1F3SWdZRFZRUUREQnRwYm1keVpYTnpMVzl3WlhKaGRHOXlR
+REUxTnpnMU5EUXdOVE13CmdnRWlNQTBHQ1NxR1NJYjNEUUVCQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUUNoVHhWUng4bjdEQUcvQjZoc0kwaGEKZk9ZdFdqL0R0RzBzR1JRUHc5T0FFaGlqd2tyc3RUU0lzT3
+JybWpoNVdveTh0SzNRVHRsSUcyMUQwWmNrTkorTApMeEdrcUgvY3l4bHhrMDdmQlEvVTZuK1FiZXduMFhmTThOSk1LSlRlN1FVZmRhMEJXSXBsWkc5MWNjRXJmd1B3CnBFcEdaQTZBbUI0akE1b2dMeDVs
+dytJZ3VKbDROeW1ZSVhUZkFNRi9JeHRlOWxpbjJjeDRxTmI3b2ZyTk5Uci8KS3J4UWtjZWJPYS81VDE1cUg5eXpMMHJMVXVMbm1Zc3NEVGdwYlJtRXZGSzdpczd2S0hqY0dhRDRuMlNTVG96bApCRDAyU2
+EwYUpZRDBIQXdqT0hQdjJSeFlkc3RUSXZuVE1jSTJjMFBQNk42Y0FwK05yVnBsaGlTcWRkTmVZZGVMCkFnTUJBQUdqSmpBa01BNEdBMVVkRHdFQi93UUVBd0lDcERBU0JnTlZIUk1CQWY4RUNEQUdBUUgv
+QWdFQU1BMEcKQ1NxR1NJYjNEUUVCQ3dVQUE0SUJBUUJNcjNobU1JQWJDRjc3ZFF5aHdyNlUyVzZYNTA1emVNcUk1WE9TTHZqNgpGVGYxZ3c3NWlzdWpzelhmblpHeFlSUWJWdDlUNW4xcWJydlNES0l3MX
+JVZHYzNVIxeFVRV3I3eUErL3dxOEZSCjJlNDkyM1pkRVRSS3UwWVdBTEU0Z2RHaWJWM3RGZDhWZWdXbFUwRDQrUEtNSFVTS0RwNGRqVDZsTTdBalVpMWkKM3JSd09FNUd3ekpxT2tHdGsxakdicGgrUnFz
+WmYvRktIYkZMUHhEZVNkY3d2Z1RFaFkxNWdkY3htbGJnUXdhcAp1bU1mMThHMFRSdXpWUVJuUWllTUpqWVhja3dtdEpjY091WjdlQlB2bSs1eWdIUFBoUWRZcVZvK0dJQUlBVERECktSeEhMUUw2WXRpcn
+NlU20wU1Y1OFNPOWZUWmh4bWJnaVVzdXFYYU5xTEpjCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0KLS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURRRENDQWlpZ0F3SUJBZ0lJZnhNOEtsS3pL
+eTR3RFFZSktvWklodmNOQVFFTEJRQXdQakVTTUJBR0ExVUUKQ3hNSmIzQmxibk5vYVdaME1TZ3dKZ1lEVlFRREV4OXJkV0psTFdGd2FYTmxjblpsY2kxc2IyTmhiR2h2YzNRdApjMmxuYm1WeU1CNFhEVE
+l3TURFd09UQXpNall5T1ZvWERUTXdNREV3TmpBek1qWXlPVm93UGpFU01CQUdBMVVFCkN4TUpiM0JsYm5Ob2FXWjBNU2d3SmdZRFZRUURFeDlyZFdKbExXRndhWE5sY25abGNpMXNiMk5oYkdodmMzUXQK
+YzJsbmJtVnlNSUlCSWpBTkJna3Foa2lHOXcwQkFRRUZBQU9DQVE4QU1JSUJDZ0tDQVFFQXRmczlraGR0VnpZWgo0NFdZSFlWQlBEdFNsTURPbmpseWFMWXFhN24yM3R2bmhBSjB6SUtmZFM1a3N1S3E0SG
+tJK2ljWGhJV0ljVm1rCnFRZFFMM2hycWJxN1FTMURyTUliRGFEQzNqaEFSanQ4dDQrT1lRNGdzVHFyZVIvVDFhak5vZjZUR2pkNHRjdk0KTzg4QVliUldNb2pDRG9KUmFnK1UwakFSdTR3OGNmOTY2SFB6
+SVluMU43SlhPU25XQ2FuWnZXaHd0ZDVRdnh5MgpWZXMrU2RJVWFhUW8rcFBvMmY4d1k0OWJyZk4rNFVFV0RHM0F4OVZKZnFuNjBMcGE4TzJYSENQT0FBcVo3aU5mCk9Xbm1jbXoxaTVuSGNZUFduSkN3Z1
+p1andpaFRUUEVtRWtLSGVWSWc1WEV3Q0oxck9HNWF5c2gxUkZuZ004dUUKSXdpSUVYRiswUUlEQVFBQm8wSXdRREFPQmdOVkhROEJBZjhFQkFNQ0FxUXdEd1lEVlIwVEFRSC9CQVV3QXdFQgovekFkQmdO
+VkhRNEVGZ1FVU2RWYUEvYmh4cEZJalVvR3oxQ3FUUitWYnJ3d0RRWUpLb1pJaHZjTkFRRUxCUUFECmdnRUJBR3RKdHlleVVjN3VJYXFsV1BYUG1TUm5mVkUvVDJFTHlnMDJQcUFkVTlWbG01QVFWdS81eF
+VPM3BhU2cKNmVYVWVrY29sNzZaRGZOVTZtTGdmQ2kvcVlCVkZtUTZxQUJYUEx1Q2pvV3hiNGVhUzJOZU5kWmZuWVpCeHNRcgpTd1FoM2RWVnVGWUFTMEI2T2NnS1JOKzVTUDhBYUR0N0dFY0p4S2hzVGNI
+a0lqY1B6QmtIVXRqN1M0VHl5RU5pCnY4QUZWWDdvOFo3QWJnenNPZmFYQ3R6SitWN0VDZXRuSzBkQnhlelZHcUh5OXlkRzhRRjBNNXIyNnJhSThvb0MKVCtpMk9ZQjJqWFJzR2Qvai9zZWw0eTU2L1UvQW
+h3dkxSSnZQUUJtdFFMcU52QzZRUjd3TkNtczNMN2dXcCtKNQpueXlVTlNPck8vSHZIL3JsVjR1K2QxTzdaNms9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0KLS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0t
+LS0tCk1JSURURENDQWpTZ0F3SUJBZ0lJS2dQeUVsd095eTB3RFFZSktvWklodmNOQVFFTEJRQXdSREVTTUJBR0ExVUUKQ3hNSmIzQmxibk5vYVdaME1TNHdMQVlEVlFRREV5VnJkV0psTFdGd2FYTmxjbl
+psY2kxelpYSjJhV05sTFc1bApkSGR2Y21zdGMybG5ibVZ5TUI0WERUSXdNREV3T1RBek1qWXlPVm9YRFRNd01ERXdOakF6TWpZeU9Wb3dSREVTCk1CQUdBMVVFQ3hNSmIzQmxibk5vYVdaME1TNHdMQVlE
+VlFRREV5VnJkV0psTFdGd2FYTmxjblpsY2kxelpYSjIKYVdObExXNWxkSGR2Y21zdGMybG5ibVZ5TUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQwpBUUVBdWlNUzhhZE9tV1dRY0
+tHU091WGhBTVNQRys1Y3lRQkhqNFlFMzU2ZnVPSGN0OENkVnZZY3orOEdRTVFkCk5aVUM3emVWQ2dhWE5tU21waitwWE9XdG5KZWJzajc0blVzdjBoU0tnSGhheEJ6cGY1ajgzMEtTT3A5T0QvMWUKUkhU
+ajBXRUxWNGNoelJiQXllYnVlN0J2VWozTVBPaldrSTE4RlhsYnZnejY2MXZDaVcvQUF6cE5mUjY3SFlyQworU21QeE1rNXd6SGU3THZnSlVyaGJzNVNMWm1WQldrSGNhYitTeUJCUjR6cUpTOXN1SlNvbE
+J3WkRSNGVyQW9wCjlCSDZhYWFFWEx1UUNQWTdyU3AyNGFNMG5sRGdEdTNWTlp2VmJJcGJjTFhtYW5wbk9DVHdqSlo4Q2s2QldrM2kKb2paS0VucisyUXdwOXFtRHo4WDNiNG12NndJREFRQUJvMEl3UURB
+T0JnTlZIUThCQWY4RUJBTUNBcVF3RHdZRApWUjBUQVFIL0JBVXdBd0VCL3pBZEJnTlZIUTRFRmdRVXV1QkQrZVJXZy9lRXNKZDZDKy9MazV2UC85VXdEUVlKCktvWklodmNOQVFFTEJRQURnZ0VCQUY0ZG
+Fwcm9Icm8vVXdkRHhCakwxamdnWkVwU3JBZ0U2azhqZmYrMmRRejgKdEF1a3ROZldSWFV0c3RSR0FEYk1nazV5cGFSVUZZL3ZPVld3b1VLRVIvZzR0OVpxdHZaOUlJY0ZHc25rUTNjTQplL0cxYjNha28v
+WjYwbU4yM2w0ZWRXcWovMndVNWhTakd6K2hkbGlUTGhlOHdVbWxZd25vaWhycTcrWlAzMjFpClZEVTg3YTNHUjBOY3dKRkxoZC9tdk9mYm1QYTQwNWIxZE5UOHNWKy9ZbWRJL1Z5S1ZYbGwyL3F3WnlBcm
+hPSG0KeFczcG54b3pwdHB3a1lpbEkzT2VTZTJHSFExaXcrcUtadEEwNEIwME4wZ2hjNWtvR2JXaUVGVllOaGs1QmRZTQpWcHdReWF0dWcxZ1RFVHlLVTg0RWJXY1pKTFZEVElPek50L0pPaTFROGJBPQot
+LS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCi0tLS0tQkVHSU4gQ0VSVElGSUNBVEUtLS0tLQpNSUlETWpDQ0FocWdBd0lCQWdJSUVLcFFOM0JaQkhjd0RRWUpLb1pJaHZjTkFRRUxCUUF3TnpFU01CQUdBMV
+VFCkN4TUpiM0JsYm5Ob2FXWjBNU0V3SHdZRFZRUURFeGhyZFdKbExXRndhWE5sY25abGNpMXNZaTF6YVdkdVpYSXcKSGhjTk1qQXdNVEE1TURNeU5qTXdXaGNOTXpBd01UQTJNRE15TmpNd1dqQTNNUkl3
+RUFZRFZRUUxFd2x2Y0dWdQpjMmhwWm5ReElUQWZCZ05WQkFNVEdHdDFZbVV0WVhCcGMyVnlkbVZ5TFd4aUxYTnBaMjVsY2pDQ0FTSXdEUVlKCktvWklodmNOQVFFQkJRQURnZ0VQQURDQ0FRb0NnZ0VCQU
+1rYkdXY0ZPRWhPWXY2eXQwRlJHY0xQV0JtcHU2WWUKdFBqVWxCZnJPbnBqUTBIUzliSHJxaDhZYWlXSnFVWnorOFBOc09OMUI3cmxkelhqOGs3bGZJWEtxL1VJME90RgpHV25nRHhmc1BYVk0rR1pIUnRJ
+SmVNSmVEYnJ5MEN3NTFrbkp0VXJRbWVyc1U5L2lFZEJsUGtuUVVHUk9NN0JRCkZuV0hSdy9aOHpseXR5eFlFelBsSmd0dXBLVnNsbXpnckhHWmZKa202bkozelc0ajV6RUVwOFhvanBzbFpaTFYKd2V2NH
+hySGc1cXNUc0p6b2xhMU10Tkx5RGhIN3dDWEY2L1JCZWJJYndyek0xaGNEMDQ1aEx1YWlJZ25TZUdYdgpKS2UvaGJkNWdSVDEvWm80Sldlb2ljSzkyYnFuNVFIWThBblV4QjZzUnFHTW1GNUw0L1BNM0RF
+Q0F3RUFBYU5DCk1FQXdEZ1lEVlIwUEFRSC9CQVFEQWdLa01BOEdBMVVkRXdFQi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZKNFgKejZBYUtrTGU4MFIvQnlqdVJHZU9CN2N6TUEwR0NTcUdTSWIzRFFFQk
+N3VUFBNElCQVFDRjczTEsyODk0bVg5Rwp6aGJOUkpyekFWdnNRNzRoTldIeU0yUkZvaHE0UTl2OS9neFZFay9uMlFhekZmQlFMU29tZU10a0NDdVhHMktECmJzTzlIRHJ3SDFNaTVsam1SZDgrT2lkT1hn
+VzBKUkQrZFI3L2c3dlpQWDFVUE5Ld282dTY3TzZxUVA0aWJpN28KRlJmRUVYV1RrOFNoMUUwODZDbngyYzNPVVZMU3RZcjJRcktBR0kxcXlJTVcrUE1TSEs1UHliTUNPWjVjd3gyQwozZEozZ1o1a1RRdG
+1zNkZNUUd3d3dsUFlNcWk2dTU2NXV5M0ZJalJJYWhNZldnNGVLK20xVGl5clowc2dJY2RnCm1wWHV6OFBhTnMvczRUNjB6WmdkVlFNTkhzeWNVRjI1QUlkUWtSQlNNQlJuVGh2a1IrZHk5OW5GQ1hlSFRB
+dVMKVzB6dGh2eDIKLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    server: https://api.ocp4.nfv.com:6443
+  name: ocp4
+contexts:
+- context:
+    cluster: ocp4
+    user: admin
+  name: admin
+current-context: admin
+kind: Config
+preferences: {}
+users:
+- name: admin
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURaekNDQWsrZ0F3SUJBZ0lJYnZkZ2xaUUtiOW93RFFZSktvWklodmNOQVFFTEJRQXdOakVTTUJBR0ExVUUKQ
+3hNSmIzQmxibk5vYVdaME1TQXdIZ1lEVlFRREV4ZGhaRzFwYmkxcmRXSmxZMjl1Wm1sbkxYTnBaMjVsY2pBZQpGdzB5TURBeE1Ea3dNekkyTWpoYUZ3MHpNREF4TURZd016STJNamxhTURBeEZ6QVZCZ05
+WQkFvVERuTjVjM1JsCmJUcHRZWE4wWlhKek1SVXdFd1lEVlFRREV3eHplWE4wWlcwNllXUnRhVzR3Z2dFaU1BMEdDU3FHU0liM0RRRUIKQVFVQUE0SUJEd0F3Z2dFS0FvSUJBUURPYzhtZHNZVzJ2b2dqc
+XBmWDE3UVdRbE1QZHAzblZnRG1YT3RLSThpWgpsY05XMHpmOG5CSlpUVDZ3N2V3L0hURWd4aHhrVUV1UWg4MjRsdE16UlpUVE41ZmJGK00vZWFodnNDOWhMVDhlCmEzYmRwK3BoUXpXOFArcm5tNUpkdHp
+tZmtVK1J3SlQwekM0UUtNWWJydE9lSVlYM2dCSHhuQWVyU2Q0VFFranYKbUJGY2d4T1RVelpidzBLU0g4K0tsTG1oODNzSVNndTcrVFpqc0pLSXZLTThkN2wxZHVMR2Jsd25jQnN6OUt0Zgp1SUQrQlErd
+TF5RWJtKzdEWS9ONldOeENYSEgveXoydlJVbjBMSk1Rajd3cTdmT2QyVjNiS3pWTGRsZmdhRXNHCjY3V1J3amN1cEx2RVFkOXZwVlVwZm5GY0trekN0T09zSEdJMTVuMkk2ZW1oQWdNQkFBR2pmekI5TUE
+0R0ExVWQKRHdFQi93UUVBd0lGb0RBZEJnTlZIU1VFRmpBVUJnZ3JCZ0VGQlFjREFRWUlLd1lCQlFVSEF3SXdEQVlEVlIwVApBUUgvQkFJd0FEQWRCZ05WSFE0RUZnUVVma3B3QnRQUVF1ZFR6bDR4bHNod
+DZERDNlcGt3SHdZRFZSMGpCQmd3CkZvQVVma3B3QnRQUVF1ZFR6bDR4bHNodDZERDNlcGt3RFFZSktvWklodmNOQVFFTEJRQURnZ0VCQUpqMWdLeVcKeUF5Vjg1RWs1VUxGazlEYURUd2RaZjRLUm92dDB
+VWlVDaGtXYm9TTTl4alUxWTlwdlNHTWFyandnOUIvVExqQwpmbGpBNEFXU00vcUJXNkZYdG9zUDlSL1FzbUluRTI2eVJkTmQ1eks2T0FHL3NKQ3dYNmw4a3QydUV4NnpvWkh6Cmp5Zy9wcVZXUk1obzdiN
+k1JaHVhbC94Um1DejA4dVd6bG9YdGQ1eVh0bjFGZE9QRFJ5WDZiRjU1VUhybGhPM2gKd2F3WGxnU2hIeHU2dUVFeHZBVFZxR2pHTWpkTGZPWHpiTDNvMkZrMHlxeWR4bmY0cGpSSURHOG80YjBEVlhhbQp
+QaG50ZlMzM1ZzRkwyWjBCWTlCYllPMk9HcmhUcFFZSm53eWxHWVdHQVZxcXQ2cHRxbWpCSjVIV0JCRHREVEhpCmFqU1YwcUdQN2c0OEl4cz0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
+    client-key-data: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFcEFJQkFBS0NBUUVBem5QSm5iR0Z0cjZJSTZxWDE5ZTBGa0pURDNhZDUxWUE1bHpyU2lQSW1aWERWdE0zCi9Kd
+1NXVTArc08zc1B4MHhJTVljWkZCTGtJZk51SmJUTTBXVTB6ZVgyeGZqUDNtb2I3QXZZUzAvSG10MjNhZnEKWVVNMXZEL3E1NXVTWGJjNW41RlBrY0NVOU13dUVDakdHNjdUbmlHRjk0QVI4WndIcTBuZUU
+wSkk3NWdSWElNVAprMU0yVzhOQ2toL1BpcFM1b2ZON0NFb0x1L2syWTdDU2lMeWpQSGU1ZFhiaXhtNWNKM0FiTS9Tclg3aUEvZ1VQCnJ0Y2hHNXZ1dzJQemVsamNRbHh4LzhzOXIwVko5Q3lURUkrOEt1M
+3puZGxkMnlzMVMzWlg0R2hMQnV1MWtjSTMKTHFTN3hFSGZiNlZWS1g1eFhDcE13clRqckJ4aU5lWjlpT25wb1FJREFRQUJBb0lCQUFqSktxcFlWSzFyUEZYdwpPNWdHNlBZTmlvVmM4ZWxYWXFCckVlUk0
+wNHVkc1B0djc3RURYMUNIbGdSbmk2Yy84Y2hJUmdzSzA3eHAyeHBnCjZNb0V5d21XRXhOUzErdnFuSDFzVFFmZ3FnLzhXTW1rRExobzZNK0RGTmNZYXNrc00vcVRiNFJ2WXFkc1RRV0oKQnExRTZtS1BZS
+2tndlNMQUZoOTIvRWxyaDdrU2R3d3ZNVlhiZmNTV1RjdDVDYW1WTFBXUmFld1lNb1JDN2pqWgpZcWJ6U216eGc4WXB2cXlJSEtoOHRidWQ4Ri8vM3lsL0g0ZFNublhTQndwZDVSdzQ4SlFhRFdkam5Xc21
+acklTCklvQW9pZm1TcDVUd2FZKzFTMnZ3SXVRNzZsZ0J1WFBjVUNka0RGV0Q0Wjh5SXhVZW55T0dVdzhrKzdUdXh1S0gKcldwYTY5VUNnWUVBMjVDOWpmVE1WUlNLTXlGT3ovbGxHNXZyTURQajZXMGtDW
+EZhTGdKVWdkaWpVL1Z5NlhTcQo4Q1VTMGNxTkRIQ1VCbXlvZVhGR0dIT2tiTTE2U1l5d0FDUXRMUUxYTDdIaUs3MHdWNG0vWVpyZTJDTkRrQ0V6CjNPU2N0V2tDa3hldnN5MkE2NExtMjRiYmk3eWNjSTZ
+rTEkyT2RzOHhBdjc4aVNScUxybVI3NzhDZ1lFQThMWCsKMTZ5V0pzRmpQNDhIeUxaSW9FQUNSL0FFT3d5RkYwMzZwamNiTFRXU3l3eG53NEZyN2UxK2xnYVQ5S3UvSVBLaAp5eWx6ZjJRWEFRMXFyUEpXR
+lpMNWIwTXJtdERpejVtVkdkQW1XUlYyY3AvQ3BJQ0U5czc2eVVKY1pRNVlQUDIvCmdSNk5LVUNYc21zdm1qdHJSWjZtK3YyekthZ0lGMTF2ZGw0NmZwOENnWUVBblgwVWVkNDlNa21wVjBOczVJQmUKcFk
+4UkEySTArQm53MzFVTytqRnhyREZYOWNENHk3dURZUDAyb29SRzU4VllaOE5JbE5OTEUvN2UwYXdSS3ZCZQp6YnNsTEVQOVZaaWlRZjFSejNoZWJnUklFNEEzMWduNnlWYXhrTzNoaXVCU2hwTDlCZkMrN
+W5lMHdtWm5UOVVBCnJYUmIyNXlCNjBRNm42UWZCYVRWcU1FQ2dZRUFtV1lTS3hYa2RueEZxSXFaRmxMOFE0dW5LSHNQNXlXYVozaWQKWkhHMzB2N1NOcTRJTG5KNitweWdVREdPOXB6QTU5bFlQR1dGSWt
+rQjAvemQzNnRzS3NHSVRseUxIRlZFUmJLRgpiM2JVQ1crQkZaazBiS3N1a1M3a2FYL3Q2OFRSZk1UazF2OUdUR1RLaDd5QkVKUVBUOFhFZWkxVmtSVnhXcHFECjN2WTc1dGNDZ1lBK1MxQXMxT1lGYVhON
+WYrQXNPamxRYmNCNlV5bUlsak5CUk9BRTd0andwSUc3bXBOVmZDQXQKdyt5Vno1eEVNMnpjaGR2a2RBMkhORHJjQkZUUHNkZnArY05Oc3NBbEd4b0ZJMTRIcW1tWitLTy9YcE9nUVBYVQo3cGUwS004QnI
+xdGZYZnNJOU5ueXlITHVhZzJST2lPZTc4UjNIRmQ4TndGdnBsS0ZWTG12MGc9PQotLS0tLUVORCBSU0EgUFJJVkFURSBLRVktLS0tLQo=
+[root@registry scale_out]#
+
+
+
+
+[root@registry scale_out]# curl https://api.ocp4.nfv.com:22623/config/worker
+curl: (7) Failed connect to api.ocp4.nfv.com:22623; Connection refused
+[root@registry scale_out]# curl https://api.ocp4.nfv.com:22623/config/worker -kv
+* About to connect() to api.ocp4.nfv.com port 22623 (#0)
+*   Trying 10.7.45.101...
+* Connection refused
+* Failed connect to api.ocp4.nfv.com:22623; Connection refused
+* Closing connection 0
+curl: (7) Failed connect to api.ocp4.nfv.com:22623; Connection refused
+[root@registry scale_out]#
+
+
+[core@master-0 ~]$ curl https://api.ocp4.nfv.com:22623/config/worker -kv
+*   Trying 10.7.45.101...
+* TCP_NODELAY set
+* connect to 10.7.45.101 port 22623 failed: Connection refused
+* Failed to connect to api.ocp4.nfv.com port 22623: Connection refused
+* Closing connection 0
+curl: (7) Failed to connect to api.ocp4.nfv.com port 22623: Connection refused
+[core@master-0 ~]$
+
+
+
+root@bastion:~# ssh core@worker-0.ocp4.nfv.com
+Red Hat Enterprise Linux CoreOS 42.81.20191223.0
+WARNING: Direct SSH access to machines is not recommended.
+
+---
+Last login: Mon Jan 13 03:57:57 2020 from 10.7.45.108
+[core@worker-0 ~]$ curl https://api.ocp4.nfv.com:22623/config/worker -kv
+*   Trying 10.7.45.101...
+* TCP_NODELAY set
+* connect to 10.7.45.101 port 22623 failed: Connection refused
+* Failed to connect to api.ocp4.nfv.com port 22623: Connection refused
+* Closing connection 0
+curl: (7) Failed to connect to api.ocp4.nfv.com port 22623: Connection refused
+[core@worker-0 ~]$ sudo su
+[root@worker-0 core]# curl https://api.ocp4.nfv.com:22623/config/worker -kv
+*   Trying 10.7.45.101...
+* TCP_NODELAY set
+* connect to 10.7.45.101 port 22623 failed: Connection refused
+* Failed to connect to api.ocp4.nfv.com port 22623: Connection refused
+* Closing connection 0
+curl: (7) Failed to connect to api.ocp4.nfv.com port 22623: Connection refused
+[root@worker-0 core]#
+
+
+
+
+root@bastion:~# curl https://api.ocp4.nfv.com:22623/config/worker -kv
+* Expire in 0 ms for 6 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 1 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 2 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 2 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 2 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 2 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 2 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 2 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+* Expire in 0 ms for 1 (transfer 0x5557a5f1e5c0)
+*   Trying 10.7.45.101...
+* TCP_NODELAY set
+* Expire in 200 ms for 4 (transfer 0x5557a5f1e5c0)
+* connect to 10.7.45.101 port 22623 failed: Connection refused
+* Failed to connect to api.ocp4.nfv.com port 22623: Connection refused
+* Closing connection 0
+curl: (7) Failed to connect to api.ocp4.nfv.com port 22623: Connection refused
+root@bastion:~#
+

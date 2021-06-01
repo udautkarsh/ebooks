@@ -1,0 +1,113 @@
+uday@bastion:~/sanity/images$ cd new-app/
+uday@bastion:~/sanity/images/new-app$ ls
+Dockerfile  index.html
+uday@bastion:~/sanity/images/new-app$ more Dockerfile
+FROM centos:centos7
+
+EXPOSE 8080
+
+COPY index.html /var/run/web/index.html
+
+CMD cd /var/run/web && python -m SimpleHTTPServer 8080
+uday@bastion:~/sanity/images/new-app$
+uday@bastion:~/sanity/images/new-app$
+uday@bastion:~/sanity/images/new-app$
+uday@bastion:~/sanity/images/new-app$
+uday@bastion:~/sanity/images/new-app$
+uday@bastion:~/sanity/images/new-app$ more index.html
+<html>
+  <head>
+    <title>My local app</title>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    <p>This is my local application</p>
+  </body>
+</html>
+uday@bastion:~/sanity/images/new-app$
+uday@bastion:~/sanity/images/new-app$
+uday@bastion:~/sanity/images/new-app$
+uday@bastion:~/sanity/images/new-app$ oc whoami
+kube:admin
+uday@bastion:~/sanity/images/new-app$ oc project
+Using project "openshift-image-registry" on server "https://api.ocp4.nfv.com:6443".
+uday@bastion:~/sanity/images/new-app$ oc project sanity
+Now using project "sanity" on server "https://api.ocp4.nfv.com:6443".
+uday@bastion:~/sanity/images/new-app$ oc new-build --strategy docker --binary --docker-image centos:centos7 --name myapp
+--> Found container image 5e35e35 (2 weeks old) from Docker Hub for "centos:centos7"
+
+    * An image stream tag will be created as "centos:centos7" that will track the source image
+    * A Docker build using binary input will be created
+      * The resulting image will be pushed to image stream tag "myapp:latest"
+      * A binary build was created, use 'oc start-build --from-dir' to trigger a new build
+
+--> Creating resources with label build=myapp ...
+    imagestream.image.openshift.io "myapp" created
+    buildconfig.build.openshift.io "myapp" created
+--> Success
+uday@bastion:~/sanity/images/new-app$ oc start-build myapp --from-dir . --follow
+Uploading directory "." as binary input for the build ...
+.........
+Uploading finished
+build.build.openshift.io/myapp-1 started
+Receiving source from STDIN as archive ...
+Replaced Dockerfile FROM image centos:centos7
+Caching blobs under "/var/cache/blobs".
+
+Pulling image centos@sha256:285bc3161133ec01d8ca8680cd746eecbfdbc1faa6313bd863151c4b26d7e5a5 ...
+Getting image source signatures
+Copying blob sha256:ab5ef0e5819490abe86106fd9f4381123e37a03e80e650be39f7938d30ecb530
+Copying config sha256:5e35e350aded98340bc8fcb0ba392d809c807bc3eb5c618d4a0674d98d88bccd
+Writing manifest to image destination
+Storing signatures
+STEP 1: FROM centos@sha256:285bc3161133ec01d8ca8680cd746eecbfdbc1faa6313bd863151c4b26d7e5a5
+STEP 2: EXPOSE 8080
+9e0c006e524ca1dde27caec579a7f54cbf58061889256d79aafe72472208d3a1
+STEP 3: COPY index.html /var/run/web/index.html
+ae4cf70321cc600c4bcdb97beabcebdd33ec97113e5365061db9529ba8122d22
+STEP 4: CMD cd /var/run/web && python -m SimpleHTTPServer 8080
+d3bc5571614c511e09df9d5c8362f2af7ff6b43d2af29284780197d711874a43
+STEP 5: ENV "OPENSHIFT_BUILD_NAME"="myapp-1" "OPENSHIFT_BUILD_NAMESPACE"="sanity"
+27a0fb183ef89bd260c3c3636de795bdefa9232a45a75d8922e09752cc530e08
+STEP 6: LABEL "io.openshift.build.name"="myapp-1" "io.openshift.build.namespace"="sanity"
+STEP 7: COMMIT temp.builder.openshift.io/sanity/myapp-1:60ebb2c8
+c7c33d454fcdea4f4e3b9df80fceb42441d1504c3cf6f66b73f7c8ade803df05
+
+Pushing image image-registry.openshift-image-registry.svc:5000/sanity/myapp:latest ...
+Getting image source signatures
+Copying blob sha256:ab5ef0e5819490abe86106fd9f4381123e37a03e80e650be39f7938d30ecb530
+Copying blob sha256:c3a8e43d6bc75dbae231cd68462a0a73b605edddcf3daa72acfd1e65a39f6995
+Copying config sha256:c7c33d454fcdea4f4e3b9df80fceb42441d1504c3cf6f66b73f7c8ade803df05
+Writing manifest to image destination
+Storing signatures
+Successfully pushed image-registry.openshift-image-registry.svc:5000/sanity/myapp@sha256:566ec34c3e4cf7bef9f1bbd9d8c4a3ec4ccfb83d74339a82e0607412ded45367
+Push successful
+
+
+
+
+uday@bastion:~/sanity/images/new-app$ oc new-app mycustomimage
+--> Found image 2c30fb2 (Less than a second old) in image stream "sanity/mycustomimage" under tag "latest" for "mycustomimage"
+
+    * This image will be deployed in deployment config "mycustomimage"
+    * Port 8080/tcp will be load balanced by service "mycustomimage"
+      * Other containers can access this service through the hostname "mycustomimage"
+    * WARNING: Image "sanity/mycustomimage:latest" runs as the 'root' user which may not be permitted by your cluster administrator
+
+--> Creating resources ...
+    deploymentconfig.apps.openshift.io "mycustomimage" created
+    service "mycustomimage" created
+--> Success
+    Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
+     'oc expose svc/mycustomimage'
+    Run 'oc status' to view your app.
+
+
+uday@bastion:~/sanity/images/new-app$ oc get pods
+NAME                       READY   STATUS      RESTARTS   AGE
+hello-openshift-1-76hsn    1/1     Running     0          18h
+hello-openshift-1-deploy   0/1     Completed   0          18h
+mycustomimage-1-4mnph      1/1     Running     0          2m40s
+mycustomimage-1-build      0/1     Completed   0          7m56s
+mycustomimage-1-deploy     0/1     Completed   0          3m40s
+uday@bastion:~/sanity/images/new-app$

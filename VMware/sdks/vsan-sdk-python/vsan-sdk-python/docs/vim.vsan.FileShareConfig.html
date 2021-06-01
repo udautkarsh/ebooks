@@ -1,0 +1,219 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script type="text/javascript" src="./commonRes.js" language="JavaScript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vsan.FileShareConfig" name="vim.vsan.FileShareConfig"></a>
+<h1>Data Object - VsanFileShareConfig(vim.vsan.FileShareConfig)</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.vsan.FileShare.html#field_detail">VsanFileShare</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.vsan.VsanFileServiceSystem.html#createFileShare">VsanCreateFileShare</a>, <a href="vim.vsan.VsanFileServiceSystem.html#reconfigureFileShare">VsanReconfigureFileShare</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.KeyValue.html">KeyValue</a>, <a href="vim.vm.ProfileSpec.html">VirtualMachineProfileSpec</a>, <a href="vim.vsan.FileShareNetPermission.html">VsanFileShareNetPermission</a>, <a href="vim.vsan.FileShareSmbOptions.html">VsanFileShareSmbOptions</a>
+</dd>
+<dt>Since </dt>
+<dd>vSAN API 7.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Configurations of a file share. A file share is a root folder that
+    is created in file service domain and provide file sharing access
+    under the root folder. Multiple users can have remote access to those
+    files using protocols like Server Message Block (SMB) or Network File
+    System (NFS) protocol.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="domainName" name="domainName"></a><strong>domainName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The name of the file service domain the file share belongs to. This
+    configuration is required for file share creation.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="labels" name="labels"></a><strong>labels</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.KeyValue.html">KeyValue[]</a></td><td>
+<p></p>
+         The labels attached to the file share.
+    The label key cannot exceed 250 bytes, cannot be '.' or '..', and cannot
+    contain '/' or non-printable characters.
+    The label value cannot exceed 1024 bytes.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="name" name="name"></a><strong>name</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The name of the file share. Must be unique within the file service domain.
+    The share name cannot exceed 80 characters, and can only contain
+    alphabets (A-Z, a-z), numbers (0-9) and '-' character. Every '-' character
+    must be immediately preceded and followed by a number or alphabet.
+    Consecutive '-'s are not allowed. This configuration is required for file
+    share creation.
+ 
+    This is the visible name in the URL of the file share. For example, a
+    SMB file share can be like this: <br/>
+      smb://host-address/file-share-name
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="nfsSecType" name="nfsSecType"></a><strong>nfsSecType</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Security type possible values are krb5, krb5i, krb5p and sys.
+    Only used for NFS shares. Default value is 'sys'.
+    For SMB share this should remain unset.<br>See <a href="vim.vsan.FileShareNfsSecType.html">VsanFileShareNfsSecType</a><br>
+      <p></p>
+<B><I>Since </I></B>vSAN API vSAN 7.0U1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="permission" name="permission"></a><strong>permission</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vsan.FileShareNetPermission.html">VsanFileShareNetPermission[]</a></td><td>
+<p></p>
+         The permission parameters set for this file share. If this field is not set,
+    for NFS then no user can access this file share.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="protocols" name="protocols"></a><strong>protocols</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         File Share protocols supported on the share.
+    Default value is [ NFSv3, NFSv4 ], if protocols is not specified or empty.<br>See <a href="vim.vsan.FileShareProtocol.html">VsanFileProtocol</a><br>
+      <p></p>
+<B><I>Since </I></B>vSAN API vSAN 7.0U1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="quota" name="quota"></a><strong>quota</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The hard quota configuration at the file share level. This will be defined in
+    nearest MB/GB/TB terms in integer (no space allowed between the number and
+    the unit). A valid quota string could be "10GB", "10G", "10g", "100m",
+    "100M", "1000MB", etc.
+ 
+    This will be the hard quota for the file share. A hard quota will fail the
+    write I/O right away when the write is exceeding the quota.
+ 
+    To set an unlimited hard quota for the file share, set the quota value to 0.
+    Note that the file share size is still limited by the vSAN datastore size.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="smbOptions" name="smbOptions"></a><strong>smbOptions</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vsan.FileShareSmbOptions.html">VsanFileShareSmbOptions</a></td><td>
+<p></p>
+         The options of the SMB file share.
+      <p></p>
+<B><I>Since </I></B>vSAN API vSAN 7.0U1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="softQuota" name="softQuota"></a><strong>softQuota</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The soft quota configuration at the file share level. This will be defined in
+    nearest MB/GB/TB terms in integer (no space allowed between the number and
+    the unit). A valid quota string could be "10GB", "10G", "10g", "100m",
+    "100M", "1000MB", etc.
+ 
+    This will be the soft quota for the file share. A soft quota will raise
+    alerts which is detected by periodically checks. To set an unlimited soft
+    quota for the file share, set the soft quota value to 0.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="storagePolicy" name="storagePolicy"></a><strong>storagePolicy</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vm.ProfileSpec.html">VirtualMachineProfileSpec</a></td><td>
+<p></p>
+         vSAN storage policy for all the vSAN objects that are created
+    to back this file share. vSAN datastore default policy is used
+    when this field is not set.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="VsanFileShareConfig">
+            <complexContent>
+               <extension base="vsan:DynamicData">
+                  <sequence>
+                     <element name="name" type="xsd:string" minOccurs="0"/>
+                     <element name="domainName" type="xsd:string" minOccurs="0"/>
+                     <element name="quota" type="xsd:string" minOccurs="0"/>
+                     <element name="softQuota" type="xsd:string" minOccurs="0"/>
+                     <element name="labels" type="vsan:KeyValue" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="storagePolicy" type="vsan:VirtualMachineProfileSpec" minOccurs="0"/>
+                     <element name="permission" type="vsan:VsanFileShareNetPermission" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="protocols" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="smbOptions" type="vsan:VsanFileShareSmbOptions" minOccurs="0"/>
+                     <element name="nfsSecType" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

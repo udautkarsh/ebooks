@@ -1,0 +1,21 @@
+Nimble OS $ array --info FTC-NIMBLE-01
+Model: AF60
+Extended Model: AF60-2QP-46T
+Serial: AF-200533
+Version: 5.0.8.0-677726-opt
+All-Flash: Yes
+Array name: FTC-NIMBLE-01
+Supported configuration: Yes
+Link-local IP address:
+Group ID: 321608588107629940
+Member GID: 1
+Group Management IP: 10.100.0.111
+1G/10G_T/SFP/FC NIC: 0/0/8/0
+Total array capacity (MiB): 32122014
+Total array usage (MiB): 2209
+Total array cache capacity (MiB): N/A
+Volume usage (MiB): 6452
+Volume compression: 1.77X
+Volume space saved (MiB): 4989
+Snapshot usage including pending deletes (MiB): 0 Snapshot compression: 1.00X Snapshot space reduction: 1.00X Snapshot space saved (MiB): 3072 Pending Deletes (MiB): 0 Available space (MiB): 32119805 Dedupe capacity (MiB): N/A Dedupe usage (MiB): N/A Member of pool: default
+Status: reachable

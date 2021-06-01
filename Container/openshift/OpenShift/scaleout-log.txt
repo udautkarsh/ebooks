@@ -1,0 +1,176 @@
+[root@3af9e10754f5 ~]# ansible-playbook -i hosts /usr/share/ansible/openshift-ansible/playbooks/scaleup.yml
+
+PLAY [Pre-scaleup checks] *****************************************************************************************
+
+TASK [openshift_node : Ensure [new_workers] group is populated] ***************************************************
+skipping: [localhost]
+
+TASK [openshift_node : Get cluster nodes] *************************************************************************
+changed: [localhost]
+
+TASK [openshift_node : Check for nodes which are already part of the cluster] *************************************
+skipping: [localhost] => (item=ud-wor-4.ocp4.lab.com.)
+
+TASK [openshift_node : Fail if new_workers group contains active nodes] *******************************************
+skipping: [localhost]
+
+PLAY [install nodes] **********************************************************************************************
+
+TASK [Gathering Facts] ********************************************************************************************
+ok: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : include_tasks] *****************************************************************************
+included: /usr/share/ansible/openshift-ansible/roles/openshift_node/tasks/install.yml for ud-wor-4.ocp4.lab.com.
+
+TASK [openshift_node : Install openshift support packages] ********************************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Create CNI dirs for crio] ******************************************************************
+changed: [ud-wor-4.ocp4.lab.com.] => (item=/var/lib/cni/bin)
+changed: [ud-wor-4.ocp4.lab.com.] => (item=/etc/kubernetes/cni/net.d/)
+changed: [ud-wor-4.ocp4.lab.com.] => (item=/opt/cni/bin/)
+
+TASK [openshift_node : Get cluster version] ***********************************************************************
+changed: [ud-wor-4.ocp4.lab.com. -> localhost]
+
+TASK [openshift_node : Set fact l_cluster_version] ****************************************************************
+ok: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Override version when running CI] **********************************************************
+skipping: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Install openshift packages] ****************************************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Enable the CRI-O service] ******************************************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : include_tasks] *****************************************************************************
+included: /usr/share/ansible/openshift-ansible/roles/openshift_node/tasks/config.yml for ud-wor-4.ocp4.lab.com.
+
+TASK [openshift_node : Disable swap] ******************************************************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Enable IP Forwarding] **********************************************************************
+[WARNING]: The value 1 (type int) in a string field was converted to u'1' (type string). If this does not look
+like what you expect, quote the entire value to ensure it does not change.
+
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Disable firewalld service] *****************************************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Setting sebool container_manage_cgroup] ****************************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Create temp directory] *********************************************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Wait for bootstrap endpoint to show up] ****************************************************
+ok: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Fetch bootstrap ignition file locally] *****************************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Extract the last registries.conf file from bootstrap.ign] **********************************
+ok: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Check data URL encoding and extract source data] *******************************************
+ok: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Write /etc/containers/registries.conf] *****************************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Restart the CRI-O service] *****************************************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Get cluster pull-secret] *******************************************************************
+changed: [ud-wor-4.ocp4.lab.com. -> localhost]
+
+TASK [openshift_node : Write pull-secret to file] *****************************************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Get cluster release image] *****************************************************************
+changed: [ud-wor-4.ocp4.lab.com. -> localhost]
+
+TASK [openshift_node : Set l_release_image fact] ******************************************************************
+ok: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Check for cluster http proxy] **************************************************************
+changed: [ud-wor-4.ocp4.lab.com. -> localhost]
+
+TASK [openshift_node : Set http proxy] ****************************************************************************
+ok: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Check for cluster https proxy] *************************************************************
+changed: [ud-wor-4.ocp4.lab.com. -> localhost]
+
+TASK [openshift_node : Set https proxy] ***************************************************************************
+ok: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Check for cluster no proxy] ****************************************************************
+changed: [ud-wor-4.ocp4.lab.com. -> localhost]
+
+TASK [openshift_node : Set no proxy] ******************************************************************************
+ok: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Check for additional trust bundle] *********************************************************
+changed: [ud-wor-4.ocp4.lab.com. -> localhost]
+
+TASK [openshift_node : Set additional trust bundle] ***************************************************************
+skipping: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Copy additional trust bundle to system CA trust] *******************************************
+skipping: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Update CA trust] ***************************************************************************
+skipping: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Pull release image] ************************************************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Get machine controller daemon image from release image] ************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Pull MCD image] ****************************************************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Apply ignition manifest] *******************************************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Remove temp directory] *********************************************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Reboot the host and wait for it to come back] **********************************************
+changed: [ud-wor-4.ocp4.lab.com.]
+
+TASK [openshift_node : Approve node-bootstrapper CSR] *************************************************************
+changed: [ud-wor-4.ocp4.lab.com. -> localhost] => (item=ud-wor-4.ocp4.lab.com.)
+
+TASK [openshift_node : Approve node CSR] **************************************************************************
+FAILED - RETRYING: Approve node CSR (6 retries left).
+FAILED - RETRYING: Approve node CSR (5 retries left).
+changed: [ud-wor-4.ocp4.lab.com. -> localhost] => (item=ud-wor-4.ocp4.lab.com.)
+
+TASK [openshift_node : Wait for nodes to report ready] ************************************************************
+FAILED - RETRYING: Wait for nodes to report ready (36 retries left).
+FAILED - RETRYING: Wait for nodes to report ready (35 retries left).
+FAILED - RETRYING: Wait for nodes to report ready (34 retries left).
+FAILED - RETRYING: Wait for nodes to report ready (33 retries left).
+FAILED - RETRYING: Wait for nodes to report ready (32 retries left).
+FAILED - RETRYING: Wait for nodes to report ready (31 retries left).
+FAILED - RETRYING: Wait for nodes to report ready (30 retries left).
+FAILED - RETRYING: Wait for nodes to report ready (29 retries left).
+FAILED - RETRYING: Wait for nodes to report ready (28 retries left).
+FAILED - RETRYING: Wait for nodes to report ready (27 retries left).
+FAILED - RETRYING: Wait for nodes to report ready (26 retries left).
+FAILED - RETRYING: Wait for nodes to report ready (25 retries left).
+FAILED - RETRYING: Wait for nodes to report ready (24 retries left).
+FAILED - RETRYING: Wait for nodes to report ready (23 retries left).
+changed: [ud-wor-4.ocp4.lab.com. -> localhost] => (item=ud-wor-4.ocp4.lab.com.)
+
+PLAY RECAP ********************************************************************************************************
+localhost                  : ok=1    changed=1    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0 
+ud-wor-4.ocp4.lab.com.     : ok=40   changed=29   unreachable=0    failed=0    skipped=4    rescued=0    ignored=0 
+
+[root@3af9e10754f5 ~]#

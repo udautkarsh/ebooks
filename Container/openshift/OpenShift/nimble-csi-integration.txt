@@ -1,0 +1,216 @@
+1) Login to OCP clsuetr:
+	oc login -u kubeadmin -p LIKju-yjM5q-oJqPE-redfv --server=https://api.ocp4.nfv.com:6443
+	
+2) Switch to porject "kube-system":
+    oc project kube-system
+
+3) Create secret with platform details:
+
+root@bastion:~/ocp/disconnected_install/csi# more secret.yaml
+	apiVersion: v1
+	kind: Secret
+	metadata:
+	  name: nimble-secret
+	  namespace: kube-system
+	stringData:
+	  serviceName: nimble-csp-svc
+	  servicePort: "8080"
+	  backend: 10.100.0.111
+	  username: admin
+	data:
+	  # echo -n "admin" | base64
+	  password: YWRtaW4=
+
+  
+	root@bastion:~/ocp/disconnected_install/csi# oc create -f secret.yaml
+	secret/nimble-secret created
+	root@bastion:~/ocp/disconnected_install/csi# kubectl -n kube-system get secret/nimble-secret
+	NAME            TYPE     DATA   AGE
+	nimble-secret   Opaque   5      15s
+
+4)  Start creating configmap, deployment set and services 
+
+	oc create -f https://raw.githubusercontent.com/hpe-storage/co-deployments/master/yaml/csi-driver/hpe-linux-config.yaml
+	oc create -f https://raw.githubusercontent.com/hpe-storage/co-deployments/master/yaml/csi-driver/nimble-csp.yaml
+	oc create -f https://raw.githubusercontent.com/hpe-storage/co-deployments/master/yaml/csi-driver/hpe-csi-k8s-1.14.yaml
+
+	Note:- Modify file "hpe-csi-k8s-1.14.yaml" as following before creating resource out of it.
+      tolerations:
+        - effect: NoExecute
+          operator: Exists
+          #- effect: NoSchedule
+          #operator: Exists
+      containers:
+
+
+5) Create storage class:
+
+	root@bastion# vim storage_class.yaml:
+	
+		apiVersion: storage.k8s.io/v1
+		kind: StorageClass
+		metadata:
+		  name: my-sc-1
+		provisioner: csi.hpe.com
+		parameters:
+		  csi.storage.k8s.io/fstype: xfs
+		  csi.storage.k8s.io/provisioner-secret-name: nimble-secret
+		  csi.storage.k8s.io/provisioner-secret-namespace: kube-system
+		  csi.storage.k8s.io/controller-publish-secret-name: nimble-secret
+		  csi.storage.k8s.io/controller-publish-secret-namespace: kube-system
+		  csi.storage.k8s.io/node-stage-secret-name: nimble-secret
+		  csi.storage.k8s.io/node-stage-secret-namespace: kube-system
+		  csi.storage.k8s.io/node-publish-secret-name: nimble-secret
+		  csi.storage.k8s.io/node-publish-secret-namespace: kube-system
+		  description: "Volume provisioned by the HPE CSI Driver"
+		  dedupeEnabled: "false"
+		  performancePolicy: "SQL Server"
+		  limitIops: "76800"
+
+	root@bastion# oc create -f storage_class.yaml
+	root@bastion:# oc get sc
+		NAME      PROVISIONER   AGE
+		my-sc-1   csi.hpe.com   30m
+ 
+6) Create a PersistentVolumeClaim to verify if volume is created.
+
+	root@bastion# vim pvc.yaml:
+	
+	apiVersion: v1
+	kind: PersistentVolumeClaim
+	metadata:
+	  name: my-pvc-1
+	spec:
+	  accessModes:
+	  - ReadWriteOnce
+	  resources:
+		requests:
+		  storage: 10Gi
+	  storageClassName: my-sc-1
+	  
+	root@bastion# oc create -f pvc.yaml
+	
+	root@bastion:# oc get pvc
+		NAME       STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+		my-pvc-1   Pending                                      my-sc-1        31m
+
+7) Create pod and attach the volume:
+	+++++++pending++++++++++
+Cleanup:
+========
+oc delete -f <*.yaml>
+oc delete svc nimble-csp-svc
+oc delete ds hpe-csi-node
+oc delete deployment csp-service
+
+Quickers:
+==========
+oc create -f secret.yaml
+oc create -f nimble-csp.yaml
+oc create -f hpe-linux-config.yaml
+oc create -f hpe-csi-k8s-1.14.yaml
+
+
+oc create -f storage_class.yaml
+oc create -f pvc.yaml
+oc get pvc
+
+
+
+oc delete -f pod_with_volume.yaml
+oc delete -f pod.yaml
+
+oc delete -f secret.yaml
+oc delete -f nimble-csp.yaml
+oc delete -f hpe-linux-config.yaml
+oc delete -f hpe-csi-k8s-1.14.yaml
+
+oc delete -f storage_class.yaml
+oc delete -f pvc.yaml
+
+
+
+oc delete -f secret.yaml
+oc delete -f nimble-csp.yaml
+oc delete -f hpe-linux-config.yaml
+oc delete -f hpe-csi-k8s-latest.yaml
+
+
+
+offline:
+========
+ocp 4.2
+========
+[root@bastion csi]# grep -i 'image:' nimble-csp.yaml
+          image: hpestorage/nimble-csp:v1.0.0
+[root@bastion csi]# grep -i 'image:' hpe-csi-k8s-1.14.yaml
+          image: quay.io/k8scsi/csi-provisioner:v1.4.0
+          image: quay.io/k8scsi/csi-attacher:v1.2.0
+          image: hpestorage/csi-driver:v1.0.0
+          image: quay.io/k8scsi/csi-node-driver-registrar:v1.1.0
+          image: hpestorage/csi-driver:v1.0.0
+
+OCP 4.3		  
+========
+[root@bastion nimble]# grep -i 'image:' nimble-csp.yaml
+          image: hpestorage/nimble-csp:v1.0.0
+[root@bastion nimble]# grep -i 'image:' hpe-csi-k8s-1.16.yaml
+          image: quay.io/k8scsi/csi-provisioner:v1.4.0
+          image: quay.io/k8scsi/csi-attacher:v1.2.0
+          image: quay.io/k8scsi/csi-resizer:v0.3.0
+          image: hpestorage/csi-driver:v1.0.1
+          image: quay.io/k8scsi/csi-node-driver-registrar:v1.1.0
+          image: hpestorage/csi-driver:v1.0.1
+
+		  
+docker login docker.io -u udayutkarsh -p us@WL5649
+docker login registry.redhat.io -u uday-singh -p us@HPE5649
+docker login quay.io -u udayutkarsh -p us@WL5649
+
+
+
+oc image mirror quay.io/k8scsi/csi-provisioner:v1.4.0 bastion.lab.com:5000/ocp4/openshift4/k8scsi/csi-provisioner:v1.4.0
+oc image mirror quay.io/k8scsi/csi-attacher:v1.2.0 bastion.lab.com:5000/ocp4/openshift4/k8scsi/csi-attacher:v1.2.0
+oc image mirror quay.io/k8scsi/csi-node-driver-registrar:v1.1.0 bastion.lab.com:5000/ocp4/openshift4/k8scsi/csi-node-driver-registrar:v1.1.0
+oc image mirror docker.io/hpestorage/csi-driver:v1.0.0 bastion.lab.com:5000/ocp4/openshift4/hpestorage/csi-driver:v1.0.0
+oc image mirror docker.io/hpestorage/nimble-csp:v1.0.0 bastion.lab.com:5000/ocp4/openshift4/hpestorage/nimble-csp:v1.0.0
+
+
+Automation:
+===========
+
+{
+    "apiVersion": "v1",
+    "data": {
+        "backend": "MTAuMTAwLjAuMTEx",  ====== base64 of IP address
+        "password": "SFAxbnZlbnQ=",     ======  
+        "serviceName": "bmltYmxlLWNzcC1zdmM=",
+        "servicePort": "ODA4MA==",
+        "username": "YWRtaW4="
+    },
+    "kind": "Secret",
+    "metadata": {
+        "creationTimestamp": "2020-01-29T11:04:20Z",
+        "name": "nimble-secret",
+        "namespace": "kube-system",
+        "resourceVersion": "3391157",
+        "selfLink": "/api/v1/namespaces/kube-system/secrets/nimble-secret",
+        "uid": "19d2c67e-4287-11ea-851c-3ca82afc2980"
+    },
+    "type": "Opaque"
+}
+
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nimble-secret
+  namespace: kube-system
+stringData:
+  serviceName: nimble-csp-svc
+  servicePort: "8080"
+  backend: 10.100.0.111
+  username: admin
+data:
+  # echo -n "admin" | base64
+  password: SFAxbnZlbnQ=

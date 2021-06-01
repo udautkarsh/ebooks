@@ -1,0 +1,211 @@
+root@bastion:~/ocp/disconnected_install# ./login.sh
+Login successful.
+
+You have access to 51 projects, the list has been suppressed. You can list all projects with 'oc projects'
+
+Using project "openshift".
+root@bastion:~/ocp/disconnected_install#
+root@bastion:~/ocp/disconnected_install# oc whoami
+kube:admin
+root@bastion:~/ocp/disconnected_install# oc get co
+NAME                                       VERSION   AVAILABLE   PROGRESSING   DEGRADED   SINCE
+authentication                             4.2.13    True        True          False      4d1h
+cloud-credential                           4.2.13    True        False         False      4d2h
+cluster-autoscaler                         4.2.13    True        False         False      4d2h
+console                                    4.2.13    True        False         False      4d1h
+dns                                        4.2.13    True        False         False      4d2h
+image-registry                             4.2.13    True        False         False      4d1h
+ingress                                    4.2.13    True        False         False      4d1h
+insights                                   4.2.13    True        False         False      4d2h
+kube-apiserver                             4.2.13    True        False         False      4d2h
+kube-controller-manager                    4.2.13    True        False         False      4d2h
+kube-scheduler                             4.2.13    True        False         False      4d2h
+machine-api                                4.2.13    True        False         False      4d2h
+machine-config                             4.2.13    True        False         False      4d2h
+marketplace                                4.2.13    True        False         False      4d2h
+monitoring                                 4.2.13    True        False         False      3d7h
+network                                    4.2.13    True        False         False      4d2h
+node-tuning                                4.2.13    True        False         False      4d2h
+openshift-apiserver                        4.2.13    True        False         False      3d7h
+openshift-controller-manager               4.2.13    True        False         False      4d2h
+openshift-samples                          4.2.13    True        True          True       4d2h
+operator-lifecycle-manager                 4.2.13    True        False         False      4d2h
+operator-lifecycle-manager-catalog         4.2.13    True        False         False      4d2h
+operator-lifecycle-manager-packageserver   4.2.13    True        False         False      3h20m
+service-ca                                 4.2.13    True        False         False      4d2h
+service-catalog-apiserver                  4.2.13    True        False         False      4d2h
+service-catalog-controller-manager         4.2.13    True        False         False      4d2h
+storage                                    4.2.13    True        False         False      4d2h
+root@bastion:~/ocp/disconnected_install#
+root@bastion:~/ocp/disconnected_install# oc get nodes
+NAME                    STATUS   ROLES    AGE    VERSION
+master-0.ocp4.nfv.com   Ready    master   4d2h   v1.14.6+8e46c0036
+master-1.ocp4.nfv.com   Ready    master   4d2h   v1.14.6+8e46c0036
+master-2.ocp4.nfv.com   Ready    master   4d2h   v1.14.6+8e46c0036
+worker-0.ocp4.nfv.com   Ready    worker   4d1h   v1.14.6+8e46c0036
+worker-1.ocp4.nfv.com   Ready    worker   4d1h   v1.14.6+8e46c0036
+root@bastion:~/ocp/disconnected_install# ssh core@master-0.ocp4.nfv.com
+Red Hat Enterprise Linux CoreOS 42.81.20191223.0
+WARNING: Direct SSH access to machines is not recommended.
+
+---
+Last login: Mon Jan 13 04:58:58 2020 from 10.7.45.2
+[core@master-0 ~]$ oc get co
+error: You must be logged in to the server (Unauthorized)
+[core@master-0 ~]$ dig api.ocp4.nfv.com
+
+; <<>> DiG 9.11.4-P2-RedHat-9.11.4-26.P2.el8 <<>> api.ocp4.nfv.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 8348
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 1, ADDITIONAL: 2
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+;; QUESTION SECTION:
+;api.ocp4.nfv.com.              IN      A
+
+;; ANSWER SECTION:
+api.ocp4.nfv.com.       86400   IN      CNAME   lb-ext.ocp4.nfv.com.
+lb-ext.ocp4.nfv.com.    86400   IN      A       10.7.45.101
+
+;; AUTHORITY SECTION:
+nfv.com.                86400   IN      NS      infra.ocp4.nfv.com.
+
+;; ADDITIONAL SECTION:
+infra.ocp4.nfv.com.     86400   IN      A       10.7.45.3
+
+;; Query time: 0 msec
+;; SERVER: 10.7.45.3#53(10.7.45.3)
+;; WHEN: Mon Jan 13 06:35:40 UTC 2020
+;; MSG SIZE  rcvd: 118
+
+[core@master-0 ~]$
+[core@master-0 ~]$
+[core@master-0 ~]$
+[core@master-0 ~]$
+[core@master-0 ~]$ dig api-int.ocp4.nfv.com
+
+; <<>> DiG 9.11.4-P2-RedHat-9.11.4-26.P2.el8 <<>> api-int.ocp4.nfv.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 1854
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 1, ADDITIONAL: 2
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+;; QUESTION SECTION:
+;api-int.ocp4.nfv.com.          IN      A
+
+;; ANSWER SECTION:
+api-int.ocp4.nfv.com.   86400   IN      CNAME   lb-int.ocp4.nfv.com.
+lb-int.ocp4.nfv.com.    86400   IN      A       10.7.45.100
+
+;; AUTHORITY SECTION:
+nfv.com.                86400   IN      NS      infra.ocp4.nfv.com.
+
+;; ADDITIONAL SECTION:
+infra.ocp4.nfv.com.     86400   IN      A       10.7.45.3
+
+;; Query time: 0 msec
+;; SERVER: 10.7.45.3#53(10.7.45.3)
+;; WHEN: Mon Jan 13 06:36:00 UTC 2020
+;; MSG SIZE  rcvd: 122
+
+[core@master-0 ~]$
+[core@master-0 ~]$
+[core@master-0 ~]$
+[core@master-0 ~]$ curl https://api.ocp4.nfv.com:6443 -kv
+* Rebuilt URL to: https://api.ocp4.nfv.com:6443/
+*   Trying 10.7.45.101...
+* TCP_NODELAY set
+* Connected to api.ocp4.nfv.com (10.7.45.101) port 6443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*   CAfile: /etc/pki/tls/certs/ca-bundle.crt
+  CApath: none
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.2 (IN), TLS handshake, Certificate (11):
+* TLSv1.2 (IN), TLS handshake, Server key exchange (12):
+* TLSv1.2 (IN), TLS handshake, Request CERT (13):
+* TLSv1.2 (IN), TLS handshake, Server finished (14):
+* TLSv1.2 (OUT), TLS handshake, Certificate (11):
+* TLSv1.2 (OUT), TLS handshake, Client key exchange (16):
+* TLSv1.2 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.2 (OUT), TLS handshake, Finished (20):
+* TLSv1.2 (IN), TLS handshake, Finished (20):
+* SSL connection using TLSv1.2 / ECDHE-RSA-AES256-GCM-SHA384
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=api.ocp4.nfv.com
+*  start date: Jan  9 04:24:02 2020 GMT
+*  expire date: Feb  8 04:24:03 2020 GMT
+*  issuer: OU=openshift; CN=kube-apiserver-lb-signer
+*  SSL certificate verify result: self signed certificate in certificate chain (19), continuing anyway.
+* Using HTTP2, server supports multi-use
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* Using Stream ID: 1 (easy handle 0x558def71d700)
+> GET / HTTP/2
+> Host: api.ocp4.nfv.com:6443
+> User-Agent: curl/7.61.1
+> Accept: */*
+>
+* Connection state changed (MAX_CONCURRENT_STREAMS == 2000)!
+< HTTP/2 403
+< audit-id: a49dcb48-2c34-435b-8339-24aedaa4db6a
+< cache-control: no-cache, private
+< content-type: application/json
+< x-content-type-options: nosniff
+< content-length: 233
+< date: Mon, 13 Jan 2020 06:36:12 GMT
+<
+{
+  "kind": "Status",
+  "apiVersion": "v1",
+  "metadata": {
+
+  },
+  "status": "Failure",
+  "message": "forbidden: User \"system:anonymous\" cannot get path \"/\"",
+  "reason": "Forbidden",
+  "details": {
+
+  },
+  "code": 403
+* Connection #0 to host api.ocp4.nfv.com left intact
+}[core@master-0 ~]$
+[core@master-0 ~]$
+[core@master-0 ~]$ dig worker-2.ocp4.nfv.com
+
+; <<>> DiG 9.11.4-P2-RedHat-9.11.4-26.P2.el8 <<>> worker-2.ocp4.nfv.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 61556
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 1, ADDITIONAL: 2
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 4096
+
+;; QUESTION SECTION:
+;worker-2.ocp4.nfv.com.         IN      A
+
+;; ANSWER SECTION:
+worker-2.ocp4.nfv.com.  86400   IN      A       10.7.45.110
+
+;; AUTHORITY SECTION:
+nfv.com.                86400   IN      NS      infra.ocp4.nfv.com.
+
+;; ADDITIONAL SECTION:
+infra.ocp4.nfv.com.     86400   IN      A       10.7.45.3
+
+;; Query time: 0 msec
+;; SERVER: 10.7.45.3#53(10.7.45.3)
+;; WHEN: Mon Jan 13 06:36:21 UTC 2020
+;; MSG SIZE  rcvd: 102
+
+[core@master-0 ~]$
+[core@master-0 ~]$
+[core@master-0 ~]$

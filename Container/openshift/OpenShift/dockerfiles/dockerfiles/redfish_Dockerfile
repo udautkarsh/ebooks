@@ -1,0 +1,44 @@
+######################################################################################
+# Copyright (c) 2018 Hewlett Packard Enterprise Development LP.                      #
+# Valid license from HPE required for possession, use, or copying.                   #
+# The use of this file is subject to the terms and conditions defined in the file    #
+# 'HPE NPS LICENSE.txt',  which is part of this source code package.                 #
+######################################################################################
+
+FROM ubuntu:16.04
+
+RUN apt-get update && apt-get install -y --allow-unauthenticated python3>=3.5.1-3 python3-pip>=8.1.1-2ubuntu0.4 iputils-ping>=3:20121221-5ubuntu2 && pip3 install python-ilorest-library==2.3.0 && rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install requests==2.19.1
+
+RUN mkdir -p /home/hw_prep/common
+RUN mkdir -p  /home/hw_prep/deploy
+RUN mkdir -p /home/hw_prep/lib
+
+RUN touch /home/hw_prep/__init__.py
+
+RUN touch /home/hw_prep/common/__init__.py
+COPY src/main/common/central_log.py /home/hw_prep/common/central_log.py
+
+RUN touch /home/hw_prep/deploy/__init__.py
+COPY src/main/deploy/raid_profile.py /home/hw_prep/deploy/
+COPY src/main/deploy/main.py /home/hw_prep/deploy/
+COPY src/main/deploy/bios_profile.py /home/hw_prep/deploy/
+COPY src/main/deploy/bios_profile.json /home/hw_prep/deploy/
+COPY src/main/deploy/profile_validate.py /home/hw_prep/deploy/
+COPY src/main/deploy/hw_prep.py /home/hw_prep/deploy/
+COPY src/main/deploy/nic_settings.py /home/hw_prep/deploy/
+COPY src/main/deploy/amd_bios_profile.json /home/hw_prep/deploy/
+COPY src/main/deploy/raid_delete.py /home/hw_prep/deploy/
+
+RUN touch /home/hw_prep/lib/__init__.py
+COPY src/main/lib/restapi_utility.py /home/hw_prep/lib/
+COPY src/main/lib/redfish_utils.py /home/hw_prep/lib/
+COPY src/main/lib/_redfishobject.py /home/hw_prep/lib/
+
+RUN mkdir -p /home/Redfish_logs/Redfish
+
+ENV PYTHONPATH='/home/hw_prep'
+
+COPY src/../NFVBP_Version.txt /etc/nfvbp-release.txt
+COPY ["HPE NPS LICENSE.txt", "/"]

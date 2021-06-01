@@ -1,0 +1,14 @@
+yum install tmux -y
+
+tmux
+
+tmux ls
+tmux a -t <session number>
+
+
+if [[ $TERM = "screen" ]] && [[ $(ps -p $PPID -o comm=) = "tmux" ]]; then
+mkdir $HOME/logs 2> /dev/null
+logname="$(date '+%d%m%Y%H%M%S').tmux.log"
+script -f $HOME/logs/${logname}
+exit
+fi

@@ -1,0 +1,51 @@
+frontend openshift-api-server
+bind *:6443
+default_backend openshift-api-server
+mode tcp
+option tcplog
+
+backend openshift-api-server
+balance source
+mode tcp
+server bootstrap 192.168.1.96:6443 check
+server master0 192.168.1.97:6443 check
+server master1 192.168.1.98:6443 check
+server master2 192.168.1.99:6443 check
+
+frontend machine-config-server
+bind *:22623
+default_backend machine-config-server
+mode tcp
+option tcplog
+
+backend machine-config-server
+balance source
+mode tcp
+server bootstrap 192.168.1.96:22623 check
+server master0 192.168.1.97:22623 check
+server master1 192.168.1.98:22623 check
+server master2 192.168.1.99:22623 check
+
+frontend ingress-http
+bind *:80
+default_backend ingress-http
+mode tcp
+option tcplog
+
+backend ingress-http
+balance source
+mode tcp
+server worker-0 192.168.122.206:80 check
+server worker-1 192.168.122.207:80 check
+
+frontend ingress-https
+bind *:443
+default_backend ingress-https
+mode tcp
+option tcplog
+
+backend ingress-https
+balance source
+mode tcp
+server worker-0 192.168.122.206:443 check
+server worker-1 192.168.122.207:443 check

@@ -1,0 +1,25 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: image-registry-storage-class
+  namespace: openshift-image-registry
+parameters:
+  accessProtocol: iscsi
+  csi.storage.k8s.io/controller-publish-secret-name: nimble-secret
+  csi.storage.k8s.io/controller-publish-secret-namespace: kube-system
+  csi.storage.k8s.io/fstype: xfs
+  csi.storage.k8s.io/node-publish-secret-name: nimble-secret
+  csi.storage.k8s.io/node-publish-secret-namespace: kube-system
+  csi.storage.k8s.io/node-stage-secret-name: nimble-secret
+  csi.storage.k8s.io/node-stage-secret-namespace: kube-system
+  csi.storage.k8s.io/provisioner-secret-name: nimble-secret
+  csi.storage.k8s.io/provisioner-secret-namespace: kube-system
+  dedupeEnabled: 'False'
+  destroyOnDelete: 'True'
+  limitIops: '76800'
+  limitMbps: '76000'
+  performancePolicy: Backup Repository
+  protectionTemplate: Retain-30Daily
+  thick: 'false'
+provisioner: csi.hpe.com
+

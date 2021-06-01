@@ -1,0 +1,110 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script type="text/javascript" src="./commonRes.js" language="JavaScript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vmodl.fault.InvalidArgument" name="vmodl.fault.InvalidArgument"></a>
+<h1>Fault - InvalidArgument(vmodl.fault.InvalidArgument)</h1>
+<dl>
+<dt>Thrown by</dt>
+<dd>
+<a href="vim.vm.check.CompatibilityChecker.html#checkCompatibility">CheckCompatibility_Task</a>, <a href="vim.vm.check.CompatibilityChecker.html#checkPowerOn">CheckPowerOn_Task</a>, <a href="vim.vm.check.CompatibilityChecker.html#checkVmConfig">CheckVmConfig_Task</a>, <a href="vim.cns.VolumeManager.html#attach">CnsAttachVolume</a>, <a href="vim.cns.VolumeManager.html#create">CnsCreateVolume</a>, <a href="vim.cns.VolumeManager.html#delete">CnsDeleteVolume</a>, <a href="vim.cns.VolumeManager.html#detach">CnsDetachVolume</a>, <a href="vim.cns.VolumeManager.html#query">CnsQueryVolume</a>, <a href="vim.cns.VolumeManager.html#updateVolumeMetadata">CnsUpdateVolumeMetadata</a>, <a href="vim.cluster.VsanIoInsightManager.html#deleteIoInsightInstance">DeleteIoInsightInstance</a>, <a href="vim.host.VirtualNicManager.html#deselectVnic">DeselectVnicForNicType</a>, <a href="vim.OverheadMemoryManager.html#lookupVmOverheadMemory">LookupVmOverheadMemory</a>, <a href="vim.cluster.VsanIoInsightManager.html#queryIoInsightInstances">QueryIoInsightInstances</a>, <a href="vim.host.VirtualNicManager.html#queryNetConfig">QueryNetConfig</a>, <a href="vim.cluster.VsanPerformanceManager.html#queryRemoteServerClusters">QueryRemoteServerClusters</a>, <a href="vim.VsanPhoneHomeSystem.html#queryVsanCloudHealthStatus">QueryVsanCloudHealthStatus</a>, <a href="vim.cluster.VsanSpaceReportSystem.html#queryVsanManagedStorageSpaceUsage">QueryVsanManagedStorageSpaceUsage</a>, <a href="vim.StorageResourceManager.html#refreshRecommendationsForPod">RefreshStorageDrsRecommendationsForPod_Task</a>, <a href="vim.cluster.VsanIoInsightManager.html#renameIoInsightInstance">RenameIoInsightInstance</a>, <a href="vim.host.VirtualNicManager.html#selectVnic">SelectVnicForNicType</a>, <a href="vim.cluster.VsanIoInsightManager.html#startIoInsight">StartIoInsight</a>, <a href="vim.cluster.VsanIoInsightManager.html#stopIoInsight">StopIoInsight</a>, <a href="vim.HostSystem.html#updateProductLockerLocation">UpdateProductLockerLocation_Task</a>, <a href="vim.cluster.VsanObjectSystem.html#queryVsanObjectInformation">VosQueryVsanObjectInformation</a>, <a href="vim.cluster.VsanObjectSystem.html#setVsanObjectPolicy">VosSetVsanObjectPolicy</a>, <a href="vim.vsan.VsanFileServiceSystem.html#createFileServiceDomain">VsanClusterCreateFsDomain</a>, <a href="vim.cluster.VsanVcClusterHealthSystem.html#queryFileServiceHealthSummary">VsanClusterQueryFileServiceHealthSummary</a>, <a href="vim.vsan.VsanFileServiceSystem.html#queryFileShares">VsanClusterQueryFileShares</a>, <a href="vim.vsan.VsanFileServiceSystem.html#reconfigureFileServiceDomain">VsanClusterReconfigureFsDomain</a>, <a href="vim.vsan.VsanFileServiceSystem.html#removeFileServiceDomain">VsanClusterRemoveFsDomain</a>, <a href="vim.vsan.VsanFileServiceSystem.html#removeFileShare">VsanClusterRemoveShare</a>, <a href="vim.vsan.VsanFileServiceSystem.html#createFileShare">VsanCreateFileShare</a>, <a href="vim.cluster.VsanObjectSystem.html#deleteObjects">VsanDeleteObjects_Task</a>, <a href="vim.vsan.VsanFileServiceSystem.html#downloadFileServiceOvf">VsanDownloadFileServiceOvf</a>, <a href="vim.vsan.VsanResourceCheckSystem.html#getResourceCheckStatus">VsanGetResourceCheckStatus</a>, <a href="vim.cluster.VsanPerformanceManager.html#deleteTimeRange">VsanPerfDeleteTimeRange</a>, <a href="vim.cluster.VsanPerformanceManager.html#vsanPerfDiagnose">VsanPerfDiagnose</a>, <a href="vim.cluster.VsanPerformanceManager.html#vsanPerfDiagnoseTask">VsanPerfDiagnoseTask</a>, <a href="vim.VsanPhoneHomeSystem.html#vsanPerformOnlineHealthCheck">VsanPerformOnlineHealthCheck</a>, <a href="vim.vsan.VsanResourceCheckSystem.html#performResourceCheck">VsanPerformResourceCheck</a>, <a href="vim.cluster.VsanPerformanceManager.html#queryVsanPerf">VsanPerfQueryPerf</a>, <a href="vim.cluster.VsanPerformanceManager.html#queryTimeRanges">VsanPerfQueryTimeRanges</a>, <a href="vim.cluster.VsanPerformanceManager.html#saveTimeRanges">VsanPerfSaveTimeRanges</a>, <a href="vim.cluster.VsanPerformanceManager.html#setStatsObjectPolicy">VsanPerfSetStatsObjectPolicy</a>, <a href="vim.cluster.VsanPerformanceManager.html#toggleVerboseMode">VsanPerfToggleVerboseMode</a>, <a href="vim.cluster.VsanSpaceReportSystem.html#queryEntitySpaceUsage">VsanQueryEntitySpaceUsage</a>, <a href="vim.cluster.VsanSpaceReportSystem.html#querySpaceUsage">VsanQuerySpaceUsage</a>, <a href="vim.cluster.VsanVcClusterHealthSystem.html#queryClusterCreateVmHealthTest">VsanQueryVcClusterCreateVmHealthTest</a>, <a href="vim.cluster.VsanVcClusterHealthSystem.html#queryClusterNetworkPerfTask">VsanQueryVcClusterNetworkPerfTask</a>, <a href="vim.vsan.VsanFileServiceSystem.html#reconfigureFileShare">VsanReconfigureFileShare</a>, <a href="vim.VsanMassCollector.html#vsanRetrieveProperties">VsanRetrieveProperties</a>, <a href="vim.cluster.VsanVcStretchedClusterSystem.html#addWitnessHost">VSANVcAddWitnessHost</a>, <a href="vim.cluster.VsanVcStretchedClusterSystem.html#addWitnessHostForClusters">VsanVcAddWitnessHostForClusters</a>, <a href="vim.cluster.VsanVcStretchedClusterSystem.html#convertToStretchedCluster">VSANVcConvertToStretchedCluster</a>, <a href="vim.cluster.VsanVcStretchedClusterSystem.html#removeWitnessHost">VSANVcRemoveWitnessHost</a>, <a href="vim.cluster.VsanVcStretchedClusterSystem.html#replaceWitnessHostForClusters">VsanVcReplaceWitnessHostForClusters</a>, <a href="vim.vsan.VsanVdsSystem.html#vsanVdsGetMigrationPlan">VsanVdsGetMigrationPlan</a>, <a href="vim.vsan.VsanVdsSystem.html#vsanVdsMigrateVss">VsanVdsMigrateVss</a>
+</dd>
+<dt>Extended by</dt>
+<dd>
+<a href="vim.fault.IncompatibleSetting.html">IncompatibleSetting</a>, <a href="vim.fault.InvalidDasConfigArgument.html">InvalidDasConfigArgument</a>, <a href="vim.fault.InvalidDasRestartPriorityForFtVm.html">InvalidDasRestartPriorityForFtVm</a>, <a href="vim.fault.InvalidDrsBehaviorForFtVm.html">InvalidDrsBehaviorForFtVm</a>, <a href="vim.fault.InvalidIndexArgument.html">InvalidIndexArgument</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.RuntimeFault.html">RuntimeFault</a>
+</dd>
+<dt>Since </dt>
+<dd>vmodl.version.version0</dd>
+<p></p>
+</dl>
+<H2>Fault 
+                  Description</H2>
+<p></p>
+         An InvalidArgument exception is thrown if the
+  set of arguments passed to the function is not
+  specified correctly.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="invalidProperty" name="invalidProperty"></a><strong>invalidProperty</strong><span title="May not be present" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Optional name of the invalid property.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.RuntimeFault.html">RuntimeFault</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">None</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.MethodFault.html">MethodFault</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3"><a href="vmodl.MethodFault.html#faultCause">faultCause</a>, <a href="vmodl.MethodFault.html#faultMessage">faultMessage</a></td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">May not be present</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="InvalidArgument">
+            <complexContent>
+               <extension base="vsan:RuntimeFault">
+                  <sequence>
+                     <element name="invalidProperty" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

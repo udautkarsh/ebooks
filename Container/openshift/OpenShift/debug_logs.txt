@@ -1,0 +1,150 @@
+[root@master-0 ~]# history
+    1  podman ps
+    2  podman ps --all
+    3  podman images
+    4  ls /var/lib/kubelet/config.json
+    5  cat /var/lib/kubelet/config.json
+    6  cd
+    7  ls
+    8  #podman login -u
+    9  cp /var/lib/kubelet/config.json /root/config-backup.json
+   10  podman login -u uday-singh https://registry.redhat.io
+   11*
+   12  ls
+   13  cd
+   14  ls
+   15  podman login -u uday-singh https://registry.redhat.io --authfile /var/lib/kubelet/config.json
+   16  podman login -u uday-singh https://registry.redhat.io --authfile /var/lib/kubelet/config.json
+   17  ls
+   18  ls
+   19  export https_proxy=http://16.85.88.10:8080
+   20  export http_proxy=http://16.85.88.10:8080
+   21  export no_proxy=nfv.com
+   22  wget googlecom
+   23  wget google.com
+   24  curl google.com
+   25  podman login -u uday-singh https://registry.redhat.io --authfile /var/lib/kubelet/config.json
+   26  podman login -u uday-singh https://registry.redhat.io --authfile /var/lib/kubelet/config.json
+   27  cat /var/lib/kubelet/config.json
+   28  oc project openshift
+   29  oc get secret
+   30  oc login -u kubeadmin -p LIKju-yjM5q-oJqPE-redfv --server=https://api.ocp4.nfv.com:6443
+   31  oc project openshift
+   32  oc get secret
+   33  oc get secret samples-registry-credentials -o yaml
+   34  echo "eyJhdXRocyI6eyJyZWdpc3RyeS5vY3A0Lm5mdi5jb206NTAwMCI6IHsiYXV0aCI6ICJZV1J0YVc0NlNGQXhiblpsYm5SQU1USXoiLCJlbWFpbCI6ICJyZWdpc3RyeUBuZnYuY29tIn19fQ==" | base64 -D
+   35  echo "eyJhdXRocyI6eyJyZWdpc3RyeS5vY3A0Lm5mdi5jb206NTAwMCI6IHsiYXV0aCI6ICJZV1J0YVc0NlNGQXhiblpsYm5SQU1USXoiLCJlbWFpbCI6ICJyZWdpc3RyeUBuZnYuY29tIn19fQ==" | base64 -d
+   36  oc get secret samples-registry-credentials -o yaml > secret-samples-registry-credentials.yaml
+   37  cp secret-samples-registry-credentials.yaml  secret-samples-registry-credentials-1.yaml
+   38  vi secret-samples-registry-credentials-1.yaml
+   39  cat /var/lib/kubelet/config.json | base64 -w0
+   40  echo "ewoJImF1dGhzIjogewoJCSJyZWdpc3RyeS5vY3A0Lm5mdi5jb206NTAwMCI6IHsKCQkJImF1dGgiOiAiWVdSdGFXNDZTRkF4Ym5abGJuUkFNVEl6IgoJCX0sCgkJInJlZ2lzdHJ5LnJlZGhhdC5pbyI6IHsKCQkJImF1dGgiOiAiZFdSaGVTMXphVzVuYURwMWMwQklVRVUxTmpRNSIKCQl9Cgl9Cn0=" | base64 -D
+   41  echo "ewoJImF1dGhzIjogewoJCSJyZWdpc3RyeS5vY3A0Lm5mdi5jb206NTAwMCI6IHsKCQkJImF1dGgiOiAiWVdSdGFXNDZTRkF4Ym5abGJuUkFNVEl6IgoJCX0sCgkJInJlZ2lzdHJ5LnJlZGhhdC5pbyI6IHsKCQkJImF1dGgiOiAiZFdSaGVTMXphVzVuYURwMWMwQklVRVUxTmpRNSIKCQl9Cgl9Cn0=" | base64 -d
+   42  vi secret-samples-registry-credentials-1.yaml
+   43  vi secret-samples-registry-credentials-1.yaml
+   44  vi secret-samples-registry-credentials-1.yaml
+   45  echo "ewoJImF1dGhzIjogewoJCSJyZWdpc3RyeS5vY3A0Lm5mdi5jb206NTAwMCI6IHsKCQkJImF1dGgiOiAiWVdSdGFXNDZTRkF4Ym5abGJuUkFNVEl6IgoJCX0sCgkJInJlZ2lzdHJ5LnJlZGhhdC5pbyI6IHsKCQkJImF1dGgiOiAiZFdSaGVTMXphVzVuYURwMWMwQklVRVUxTmpRNSIKCQl9Cgl9Cn0=" | base64 -d
+   46  vi secret-samples-registry-credentials-1.yaml
+   47  oc create -f secret-samples-registry-credentials-1.yaml
+   48  oc get secret
+   49  podman login -u admin -p HP1nvent@123 registry.ocp4.nfv.com:5000
+   50  nslookup "registry.ocp4.nfv.com
+   51  nslookup registry.ocp4.nfv.com
+   52   curl -u admin:HP1nvent@123 -k https://registry.ocp4.nfv.com:5000/v2/_catalog
+   53  podman login -u admin -p HP1nvent@123 registry.ocp4.nfv.com:5000
+   54  unset http_proxy
+   55  unset https_proxy
+   56  unset no_proxy
+   57  podman login -u admin -p HP1nvent@123 registry.ocp4.nfv.com:5000
+   58  podman login -u admin -p HP1nvent@123 registry.ocp4.nfv.com:5000
+   59  oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:stable
+   60  export https_proxy=http://16.85.88.10:8080
+   61  export http_proxy=http://16.85.88.10:8080
+   62  export no_proxy=nfv.com
+   63  curl -u admin:HP1nvent@123 -k https://registry.ocp4.nfv.com:5000/v2/_catalog
+   64  oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:stable
+   65  podman login -u uday-singh https://registry.redhat.io
+   66  oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:stable
+   67  oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:latest
+   68  oc get secret
+   69  oc get secret samples-registry-credentials-1 -o yaml
+   70  echo "ewoJImF1dGhzIjogewoJCSJyZWdpc3RyeS5vY3A0Lm5mdi5jb206NTAwMCI6IHsKCQkJImF1dGgiOiAiWVdSdGFXNDZTRkF4Ym5abGJuUkFNVEl6IgoJCX0sCgkJInJlZ2lzdHJ5LnJlZGhhdC5pbyI6IHsKCQkJImF1dGgiOiAiZFdSaGVTMXphVzVuYURwMWMwQklVRVUxTmpRNSIKCQl9Cgl9Cn0=" | base64 -d
+   71  echo "dWRheS1zaW5naDp1c0BIUEU1NjQ5" | base64 -d
+   72  podman login -u uday-singh https://registry.redhat.io
+   73  echo "dWRheS1zaW5naDp1c0BIUEU1NjQ5" | base64 -d
+   74  podman login -u uday-singh https://registry.redhat.io
+   75  oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:latest
+   76  env
+   77  podman login -u admin -p HP1nvent@123 registry.ocp4.nfv.com:5000
+   78  oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:latest
+   79  podman login -u uday-singh https://registry.redhat.io
+   80  oc get secret
+   81  oc get secret samples-registry-credentials -o yaml
+   82  echo "eyJhdXRocyI6eyJyZWdpc3RyeS5vY3A0Lm5mdi5jb206NTAwMCI6IHsiYXV0aCI6ICJZV1J0YVc0NlNGQXhiblpsYm5SQU1USXoiLCJlbWFpbCI6ICJyZWdpc3RyeUBuZnYuY29tIn19fQ==" | base64 -d
+   83  oc get secret samples-registry-credentials-1 -o yamal
+   84  oc get secret samples-registry-credentials-1 -o yaml
+   85  oc edit secret samples-registry-credentials
+   86  oc get secret
+   87  oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:latest
+   88  oc get secret samples-registry-credentials -o yaml
+   89  echo "ewoJImF1dGhzIjogewoJCSJyZWdpc3RyeS5vY3A0Lm5mdi5jb206NTAwMCI6IHsKCQkJImF1dGgiOiAiWVdSdGFXNDZTRkF4Ym5abGJuUkFNVEl6IgoJCX0sCgkJInJlZ2lzdHJ5LnJlZGhhdC5pbyI6IHsKCQkJImF1dGgiOiAiZFdSaGVTMXphVzVuYURwMWMwQklVRVUxTmpRNSIKCQl9Cgl9Cn0=" | base64 -d
+   90  podman login -u uday-singh https://registry.redhat.io
+   91  oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:latest
+   92  oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:latest --log-level debug
+   93  oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:latest --loglevel=7
+   94  #oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:latest
+   95  cat /var/lib/kubelet/config.json
+   96  #podman login -u uday-singh https://registry.redhat.io --authfile /var/lib/kubelet/config.json
+   97  vi /var/lib/kubelet/config.json
+   98  cat /var/lib/kubelet/config.json | base64 -w0
+   99  oc edit secret samples-registry-credentials
+  100  oc edit secret samples-registry-credentials-1
+  101  echo "ewoJImF1dGhzIjogewoJCSJyZWdpc3RyeS5yZWRoYXQuaW8iOiB7CgkJCSJhdXRoIjogImRXUmhlUzF6YVc1bmFEcDFjMEJJVUVVMU5qUTUiCiAgICAgICAgICAgICAgICB9LAoJCSJyZWdpc3RyeS5vY3A0Lm5mdi5jb206NTAwMCI6IHsKCQkJImF1dGgiOiAiWVdSdGFXNDZTRkF4Ym5abGJuUkFNVEl6IgoJCX0KCX0KfQo=" |base64 -d
+  102  oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:latest
+  103  podman login -u uday-singh https://registry.redhat.io --authfile /var/lib/kubelet/config.json
+  104  podman login -h
+  105  #podman login -u uday-singh https://registry.redhat.io --authfile /run/user/0/containers/config.json
+  106  cat /run/user/0/containers/config.json
+  107  ls /run/user/1000/containers/
+  108  cat  /run/user/1000/containers/auth.json
+  109  ##podman login -u uday-singh https://registry.redhat.io --authfile /run/user/0/containers/config.json
+  110  podman login -u uday-singh https://registry.redhat.io --authfile /run/user/1000/containers/auth.json
+  111  cat /run/user/1000/containers/auth.json
+  112  oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:latest
+  113  ###podman login -u uday-singh https://registry.redhat.io --authfile /run/user/0/containers/config.json
+  114  cat /var/lib/kubelet/config.json
+  115  oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:latest --loglevel=7
+  116  ll
+  117  cat config-backup.json
+  118  cat secret-samples-registry-credentials.yaml
+  119  oc get secret
+  120  oc delete secret samples-registry-credentials-1
+  121  ll
+  122  cat secret-samples-registry-credentials.yaml
+  123  cat /var/lib/kubelet/config.json | base64 -w0
+  124  vi secret-samples-registry-credentials.yaml
+  125  oc create -f secret--registry-credentials.yaml
+  126  oc get secret
+  127  oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:latest --loglevel=7
+  128  oc project
+  129  ls /root/.docker/
+  130  mkdir /root/.docker/
+  131  cp /var/lib/kubelet/config.json /root/.docker/config.json
+  132  oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:latest --loglevel=7
+  133  oc describe  is dotnet-22-runtime-rhel7
+  134  oc describe  is dotnet-22-runtime-rhel7 -n openshift
+  135  oc get is
+  136  oc get is | grep dot -i
+  137  oc describe  is dotnet-runtime
+  138  podman pull registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest --log-level debug
+  139  #oc image mirror registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/dotnet/dotnet-22-runtime-rhel7:latest --loglevel=7
+  140  history
+  141  history | grep podman
+  142  oc describe is -n openshift
+  143  oc get is
+  144  oc describe co openshift-samples
+  145  oc describe co openshift-samples | grep "Samples installed at 4.2.13, with image import failures for these imagestreams:"
+  146  oc descibe is dotnet-runtime
+  147  oc describe is dotnet-runtime
+  148  history
+[root@master-0 ~]#

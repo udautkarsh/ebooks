@@ -1,0 +1,135 @@
+Docker-Compose:
+================
+curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+
+HELP Contents:
+==============
+
+[root@management compose]# docker-compose --help
+Define and run multi-container applications with Docker.
+
+Usage:
+  docker-compose [-f <arg>...] [options] [COMMAND] [ARGS...]
+  docker-compose -h|--help
+
+Options:
+  -f, --file FILE             Specify an alternate compose file
+                              (default: docker-compose.yml)
+  -p, --project-name NAME     Specify an alternate project name
+                              (default: directory name)
+  --verbose                   Show more output
+  --log-level LEVEL           Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+  --no-ansi                   Do not print ANSI control characters
+  -v, --version               Print version and exit
+  -H, --host HOST             Daemon socket to connect to
+
+  --tls                       Use TLS; implied by --tlsverify
+  --tlscacert CA_PATH         Trust certs signed only by this CA
+  --tlscert CLIENT_CERT_PATH  Path to TLS certificate file
+  --tlskey TLS_KEY_PATH       Path to TLS key file
+  --tlsverify                 Use TLS and verify the remote
+  --skip-hostname-check       Don't check the daemon's hostname against the
+                              name specified in the client certificate
+  --project-directory PATH    Specify an alternate working directory
+                              (default: the path of the Compose file)
+  --compatibility             If set, Compose will attempt to convert keys
+                              in v3 files to their non-Swarm equivalent
+  --env-file PATH             Specify an alternate environment file
+
+Commands:
+  build              Build or rebuild services
+  config             Validate and view the Compose file
+  create             Create services
+  down               Stop and remove containers, networks, images, and volumes
+  events             Receive real time events from containers
+  exec               Execute a command in a running container
+  help               Get help on a command
+  images             List images
+  kill               Kill containers
+  logs               View output from containers
+  pause              Pause services
+  port               Print the public port for a port binding
+  ps                 List containers
+  pull               Pull service images
+  push               Push service images
+  restart            Restart services
+  rm                 Remove stopped containers
+  run                Run a one-off command
+  scale              Set number of containers for a service
+  start              Start services
+  stop               Stop services
+  top                Display the running processes
+  unpause            Unpause services
+  up                 Create and start containers
+  version            Show the Docker-Compose version information
+[root@management compose]#
+
+COMMANDS:
+=========
+
+docker-compose -f <filename/yaml or json> up/down [-d]
+docker-compose create/rm 
+docker-compose start/stop
+docker-compose kill
+docker-compose ps
+docker-compose pause/unpause
+docker-compose port <service name > <port>
+docker-compose logs -f
+docker-compose exec <comands>
+docker-compose restart
+docker-compose pull
+
+
+
+YAML Structure
+==============
+version: '3'
+services:
+	dns:
+		container_name: dns
+		build: .
+		ports:
+			-	'8080:80'
+		image: "image-name:latest"
+		networks:
+			-	network1
+networks:
+	network1:
+	network2:
+volumes:
+	mysharedata1:
+	mysharedata2:
+	
+environment:
+	-	Name: uday
+	-	Address: Bihar
+env_file:
+	-	env_file1.txt
+
+
+
+
+version: '3'
+services:
+	dns:
+		build:
+			context: .
+			dockerfile: Dockerfile
+			args:
+				- 	PYTHON_VERSION=3.4-alpine
+		image: <>
+		ports:
+			-	"8080:80"
+		networks:
+            testing_net:
+                ipv4_address: 172.28.1.1
+				
+			
+		ports:
+			-	'8080:80'
+			image: "image-name:latest"
+
+
+
+

@@ -1,0 +1,104 @@
+docker concepts:
+===============
+
+Docker engine:
+=============
+- modular in design
+	Barrteries included but replacable
+- Based on OCI
+- Major components:
+	Docker client 
+	Docker engine:
+		-	Docker daemon (API etc)
+		-	containerd
+		-	runc
+
+- History:
+	Initial release of docker consists of 2 major components:
+		- Daemon (a big monolithic)
+			Docker client
+			Docker daemon
+			Monolithic binary
+			Docker api
+			contianer runtime
+			Build image
+			much more...			
+		- LXC Brought following native linux feature
+			Namespaces
+			cgroups
+			But LXC is Linux Specific means its platform specific, and can only run on Linux.
+	Docker .inc went on to develop libcontainer, aiming to replace LXC. Libcontainer was designed to be platfom agnostic. This allowd docker to run on any platform.
+	But still docker engine was big monolithic and posed following issues:
+		Harder to innovate 
+		slow
+		not what the ecosystem wanted.
+	Later docker engine was made more modular:
+		Smaller more specialized tool
+		Pluggable architectutre (Third party tools can been plugged and used)
+		And hence OCI (Open container initiative came along)
+
+OCI (Open container initiative):: Docker .inc is a huge contributor.
+	The purpose of OCI is to provide light weight, open in governance structure formed on the auspices of Linux foundation. Its purpose is to create open statndard industry around container formats and runtime.
+	Currently 2 specs are followed:
+		Image spec
+		Container runtime specs.
+	Docker daemon no longer contains any container runtime code. All container runtime code is implimented on OCI compliant layer (runc)
+	
+runc:
+	Implimentation of the OCI container runtime spec.
+	This is a lightweight CLI wrapper for libcontainer
+	its sole purpose is to create containers
+	
+containerd:
+	As part of refactor, all logic to manage life cycle of container was taken out from daemon and implimented in containerd. This sits b/w daemon and runc
+		-	start
+		-	stop
+		-	pause
+		-	delete
+		-	image management
+shims:
+	A container runtime shim is a piece of software that resides in between a container manager (containerd, cri-o, podman) and a container runtime (runc, crun) solving the integration problem of these counterparts.
+	Used to decouple running containers from the deamon: implimentation of deamonless containers
+	When a new container is created, containerd forks an instance of runc (for each new container)
+	Once container is created, runc process exits and then shims becomes the container parent.
+	This allows to run 100s of container without runnig same number of runc.
+	This is alos responsible for keeping STDIN and STDOUT streams open, this means if daemon is restarted, the container does not terminate due to close pipes.
+
+Container creation workflow:
+	docker container run -it --name <NAME> --image <IMAGE>:<TAG>
+	Workflow:
+		Use cli to execute command
+		Based on the instruction/type of command, docker client goes on to formulate correct API payload
+		Then that paylod is POSTed to correct API endpoint.
+		The docker daemon recevied these instructions.
+		Daemon forwards the instruction to containerd to start new container.
+		The daemon used gRPC, a CRUD style API. Create Read Update Delete =====> CRUD.
+		Containerd creates OCI bundle form the image used.
+		Tells runc to create container container using OCI bundle.
+		runc interfaces with OS kernel to get the constructs needed to create container.
+		The constructs includes, namespaces, cgroups etc.
+		runc start container as child process.
+		Once containers comes online, runc exits and shim becomes the new parent
+		This completes the process.
+		
+		docker client ===> Docker daemon ===> containerd ===> runc ===> container
+		                                                       ^^
+		                                                       ||
+															   ||
+															  Shim
+
+		
+		
+		
+Concepts:
+=========
+
+Docker components:
+	1) Docker Client
+	2) Docker engine
+		- Docker Daemon
+		- containerd
+		- runc
+Free time excercise: Connect docker client of one server to multiple remote docker engines
+	https://www.kevinkuszyk.com/2016/11/28/connect-your-docker-client-to-a-remote-docker-host/
+		

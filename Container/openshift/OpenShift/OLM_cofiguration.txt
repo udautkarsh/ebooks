@@ -1,0 +1,6 @@
+docker login -u admin -p HP1nvent@123 registry.lab.com:5000
+oc adm catalog build --appregistry-org redhat-operators --to=registry.lab.com:5000/olm/redhat-operators:v1
+oc patch OperatorHub cluster --type json -p '[{"op": "add", "path": "/spec/disableAllDefaultSources", "value": true}]'
+    
+docker login -u uday-singh -p us@HPE5649 registry.redhat.io
+oc adm catalog mirror registry.lab.com:5000/olm/redhat-operators:v1 registry.lab.com:5000

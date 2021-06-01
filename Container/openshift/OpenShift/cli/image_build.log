@@ -1,0 +1,45 @@
+uday@bastion:~/sanity/images/custom1$ ls
+Dockerfile  Dockerfile.sample  build.sh
+uday@bastion:~/sanity/images/custom1$ oc get build.config.openshift.io/cluster
+NAME      AGE
+cluster   21d
+uday@bastion:~/sanity/images/custom1$ oc get build.config.openshift.io/cluster -o yaml
+apiVersion: config.openshift.io/v1
+kind: Build
+metadata:
+  annotations:
+    release.openshift.io/create-only: "true"
+  creationTimestamp: "2019-11-19T06:14:02Z"
+  generation: 2
+  name: cluster
+  resourceVersion: "9829296"
+  selfLink: /apis/config.openshift.io/v1/builds/cluster
+  uid: c8396322-0a93-11ea-8dc5-525400840eb0
+spec:
+  buildDefaults:
+    defaultProxy:
+      httpProxy: http://16.85.88.10:8080
+      httpsProxy: http://16.85.88.10:8080
+      noProxy: 10.7.45.0/24,nfv.com
+uday@bastion:~/sanity/images/custom1$
+uday@bastion:~/sanity/images/custom1$
+uday@bastion:~/sanity/images/custom1$ ls
+Dockerfile  Dockerfile.sample  build.sh
+uday@bastion:~/sanity/images/custom1$ oc new-build --binary --strategy=docker --name myimage123
+    * A Docker build using binary input will be created
+      * The resulting image will be pushed to image stream tag "myimage123:latest"
+      * A binary build was created, use 'oc start-build --from-dir' to trigger a new build
+
+--> Creating resources with label build=myimage123 ...
+    imagestream.image.openshift.io "myimage123" created
+    buildconfig.build.openshift.io "myimage123" created
+--> Success
+uday@bastion:~/sanity/images/custom1$ oc start-build myimage123 --from-dir . -F
+Uploading directory "." as binary input for the build ...
+..
+Uploading finished
+build.build.openshift.io/myimage123-1 started
+Receiving source from STDIN as archive ...
+Failed to stream the build logs - to view the logs, run oc logs build/myimage123-1
+Error: unable to stream the build logs; caused by: unexpected EOF
+uday@bastion:~/sanity/images/custom1$

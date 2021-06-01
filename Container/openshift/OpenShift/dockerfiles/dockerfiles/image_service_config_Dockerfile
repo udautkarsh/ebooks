@@ -1,0 +1,36 @@
+######################################################################################
+# Copyright (c) 2018 Hewlett Packard Enterprise Development LP.                      #
+# Valid license from HPE required for possession, use, or copying.                   #
+# The use of this file is subject to the terms and conditions defined in the file    #
+# 'HPE NPS LICENSE.txt',  which is part of this source code package.                 #
+######################################################################################
+
+FROM ubuntu:16.04
+
+RUN apt-get update && apt-get install -y --allow-unauthenticated python3>=3.5.1-3 python3-pip>=8.1.1-2ubuntu0.4 python3-cryptography>=1.2.3-1ubuntu0.1 python3-pycparser>=2.14+dfsg-2build1 libpq-dev>=9.5.14-0ubuntu0.16.04 iputils-ping>=3:20121221-5ubuntu2 && rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install paramiko==2.1.1 requests==2.19.1 netaddr==0.7.19 python-ilorest-library==2.3.0
+
+RUN mkdir -p /home/nps/
+RUN mkdir -p /home/nps/deploy
+RUN mkdir -p /home/nps/lib
+RUN mkdir -p /home/nps/common
+RUN mkdir -p /home/nps/logs
+RUN mkdir -p /home/nps/driver
+
+RUN touch /home/nps/common/__init__.py
+COPY src/main/common/central_log.py /home/nps/common/central_log.py
+
+RUN touch /home/nps/deploy/__init__.py
+COPY src/main/deploy/baremetal_config.py /home/nps/deploy/
+COPY src/main/deploy/esxi_configuration.py /home/nps/deploy/
+
+RUN touch /home/nps/lib/__init__.py
+COPY src/main/lib/restapi_utility.py /home/nps/lib/
+COPY src/main/lib/redfish_utils.py /home/nps/lib/
+COPY src/main/lib/_redfishobject.py /home/nps/lib/
+
+ENV PYTHONPATH='/home/nps'
+
+COPY src/../NFVBP_Version.txt /etc/nfvbp-release.txt
+COPY ["HPE NPS LICENSE.txt", "/"] 

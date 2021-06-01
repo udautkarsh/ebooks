@@ -1,0 +1,103 @@
+########## pods from master-1  ##############
+
+[root@master-1 core]# crictl pods
+POD ID              CREATED             STATE               NAME                                                            NAMESPACE                                      ATTEMPT
+23d7bc72c5c7d       18 hours ago        Ready               authentication-operator-546d87f796-2s2s8                        openshift-authentication-operator              0
+ba0852b2ccb40       21 hours ago        Ready               packageserver-66bd5fc767-zjn7f                                  openshift-operator-lifecycle-manager           0
+579a6bfa6ec3c       45 hours ago        Ready               console-56b674b94b-cft2p                                        openshift-console                              0
+a56b4f3faf356       2 days ago          Ready               prometheus-operator-6584955c55-g2zs7                            openshift-monitoring                           0
+a75cfa791a5bd       2 days ago          Ready               network-operator-75d9ff9f94-l58xf                               openshift-network-operator                     0
+003bdc9a9d714       2 days ago          Ready               ingress-operator-6c8cd6cfd8-crzlz                               openshift-ingress-operator                     0
+827f2d95c737a       2 days ago          Ready               cluster-samples-operator-66cdd79f5f-kbqvq                       openshift-cluster-samples-operator             0
+796ccde34f28f       2 days ago          Ready               marketplace-operator-64fb875796-t6mw4                           openshift-marketplace                          0
+1d362f7eec0d9       2 days ago          Ready               console-operator-566bf94bbd-6nwp4                               openshift-console-operator                     0
+414a3c1fff4e7       2 days ago          Ready               apiservice-cabundle-injector-7c87bcf775-ssk2t                   openshift-service-ca                           0
+89eb76c4f88bd       13 days ago         NotReady            revision-pruner-9-master-1.ocp4.nfv.com                         openshift-kube-apiserver                       0
+187b2dbe4e01e       13 days ago         Ready               kube-apiserver-master-1.ocp4.nfv.com                            openshift-kube-apiserver                       0
+58459b44d0930       13 days ago         NotReady            installer-9-master-1.ocp4.nfv.com                               openshift-kube-apiserver                       0
+424694ef8f649       13 days ago         Ready               prometheus-adapter-7c47559489-7v8zr                             openshift-monitoring                           0
+47605c9040241       13 days ago         NotReady            revision-pruner-8-master-1.ocp4.nfv.com                         openshift-kube-apiserver                       0
+d516aeff32c29       13 days ago         NotReady            installer-8-master-1.ocp4.nfv.com                               openshift-kube-apiserver                       0
+00976e424e2d6       13 days ago         NotReady            revision-pruner-8-master-1.ocp4.nfv.com                         openshift-kube-controller-manager              0
+f07cd289cd841       13 days ago         Ready               kube-controller-manager-master-1.ocp4.nfv.com                   openshift-kube-controller-manager              0
+9bba636bb3d91       13 days ago         NotReady            installer-8-master-1.ocp4.nfv.com                               openshift-kube-controller-manager              0
+13f789539dd5e       13 days ago         NotReady            revision-pruner-7-master-1.ocp4.nfv.com                         openshift-kube-apiserver                       0
+99d1bdfa79a9b       13 days ago         NotReady            installer-7-master-1.ocp4.nfv.com                               openshift-kube-apiserver                       0
+6c0f0d620bc73       13 days ago         Ready               controller-manager-bkm2f                                        openshift-controller-manager                   0
+d1ebad6c9424e       13 days ago         NotReady            revision-pruner-6-master-1.ocp4.nfv.com                         openshift-kube-apiserver                       0
+f778809f20fc6       13 days ago         NotReady            installer-6-master-1.ocp4.nfv.com                               openshift-kube-apiserver                       0
+cceb17f850d54       13 days ago         Ready               apiserver-pghsh                                                 openshift-apiserver                            0
+7ebfcfce58019       13 days ago         Ready               node-ca-8ngkq                                                   openshift-image-registry                       0
+f83ca9eb408f5       13 days ago         NotReady            revision-pruner-5-master-1.ocp4.nfv.com                         openshift-kube-apiserver                       0
+3cdf6aea362f5       13 days ago         NotReady            installer-5-master-1.ocp4.nfv.com                               openshift-kube-apiserver                       0
+a2c5039cd292c       13 days ago         NotReady            revision-pruner-6-master-1.ocp4.nfv.com                         openshift-kube-scheduler                       0
+eb86943353e3f       13 days ago         NotReady            revision-pruner-7-master-1.ocp4.nfv.com                         openshift-kube-controller-manager              0
+c6fa4ac2c7de2       13 days ago         NotReady            installer-7-master-1.ocp4.nfv.com                               openshift-kube-controller-manager              0
+10a42a1e49298       13 days ago         Ready               openshift-kube-scheduler-master-1.ocp4.nfv.com                  openshift-kube-scheduler                       0
+227f69499becd       13 days ago         NotReady            installer-6-master-1.ocp4.nfv.com                               openshift-kube-scheduler                       0
+738e0b0189f8b       13 days ago         Ready               alertmanager-main-1                                             openshift-monitoring                           0
+ae57c7202bfc9       13 days ago         Ready               prometheus-k8s-1                                                openshift-monitoring                           0
+70c7f000063aa       13 days ago         Ready               cluster-autoscaler-operator-b5d75596f-wkcvf                     openshift-machine-api                          0
+0afb602660700       13 days ago         Ready               node-exporter-gghdk                                             openshift-monitoring                           0
+4cd076dd02c59       13 days ago         Ready               tuned-7fjvf                                                     openshift-cluster-node-tuning-operator         0
+0a50d4d99acdb       13 days ago         Ready               cluster-storage-operator-7547f476d7-gzqtm                       openshift-cluster-storage-operator             0
+c443558ed36d5       13 days ago         Ready               openshift-service-catalog-apiserver-operator-69d8b48889-qwlg2   openshift-service-catalog-apiserver-operator   0
+380239f3b74b2       13 days ago         Ready               cluster-monitoring-operator-84cd9df668-ct7p6                    openshift-monitoring                           0
+96969cf3e4969       13 days ago         Ready               cluster-image-registry-operator-7bc4c64fd4-9r28k                openshift-image-registry                       0
+caa4bd63636e8       13 days ago         Ready               downloads-588595db58-fw6gx                                      openshift-console                              0
+d63781877077e       13 days ago         NotReady            revision-pruner-5-master-1.ocp4.nfv.com                         openshift-kube-scheduler                       0
+24aaad3485d3e       13 days ago         NotReady            revision-pruner-3-master-1.ocp4.nfv.com                         openshift-kube-apiserver                       0
+1590a89f44c48       13 days ago         NotReady            revision-pruner-5-master-1.ocp4.nfv.com                         openshift-kube-controller-manager              0
+eb91cca9f8a8f       13 days ago         NotReady            installer-3-master-1.ocp4.nfv.com                               openshift-kube-apiserver                       0
+bc0a411f44b2b       13 days ago         NotReady            installer-5-master-1.ocp4.nfv.com                               openshift-kube-scheduler                       0
+e5f747a7fb7eb       13 days ago         NotReady            installer-5-master-1.ocp4.nfv.com                               openshift-kube-controller-manager              0
+4a7d0bea1d5a6       13 days ago         Ready               multus-admission-controller-cxnbl                               openshift-multus                               0
+19d47baccebcb       13 days ago         Ready               catalog-operator-66bbfcb8c6-vrg8x                               openshift-operator-lifecycle-manager           0
+725a3ff6b26e6       13 days ago         Ready               olm-operator-56bf56ffcd-k4drd                                   openshift-operator-lifecycle-manager           0
+49b698eab039d       13 days ago         Ready               etcd-quorum-guard-845d699494-bcp7p                              openshift-machine-config-operator              0
+0d37c34f0b5fe       13 days ago         Ready               configmap-cabundle-injector-f9f4b5fd7-n86bk                     openshift-service-ca                           0
+276e63673bc48       13 days ago         Ready               dns-default-mjf7d                                               openshift-dns                                  0
+ed0bc7c331b0d       13 days ago         Ready               machine-config-server-r8kmd                                     openshift-machine-config-operator              0
+04f9511e60f90       13 days ago         Ready               machine-config-controller-5549cd89f6-jgvx8                      openshift-machine-config-operator              0
+c0d2b97da0e61       13 days ago         Ready               machine-config-daemon-lgk5j                                     openshift-machine-config-operator              0
+76628ae33fa8a       13 days ago         Ready               service-ca-operator-7fb8bb4b59-ltp97                            openshift-service-ca-operator                  0
+48bbb7dd9cf6c       13 days ago         Ready               machine-api-operator-5d6ffffff8-vfbzq                           openshift-machine-api                          0
+8a55c3f902456       13 days ago         Ready               kube-apiserver-operator-664f449f96-8qwj9                        openshift-kube-apiserver-operator              0
+0c36f66f435ee       13 days ago         Ready               cluster-version-operator-8d787d646-vpn7q                        openshift-cluster-version                      0
+f78c6bb2b988d       13 days ago         Ready               kube-controller-manager-operator-559cb6679b-r472f               openshift-kube-controller-manager-operator     0
+7b0141a154b85       13 days ago         Ready               openshift-kube-scheduler-operator-566bbd9cf4-ksqsc              openshift-kube-scheduler-operator              0
+041174cd2e6db       13 days ago         Ready               openshift-apiserver-operator-9bcf9dc8-wwsdw                     openshift-apiserver-operator                   0
+73b88cd1c2826       13 days ago         Ready               openshift-controller-manager-operator-6d9dccf54-5p54d           openshift-controller-manager-operator          0
+d7af8261e6d91       13 days ago         Ready               insights-operator-5655cb46dc-c6vwh                              openshift-insights                             0
+bca107228c52b       13 days ago         Ready               cloud-credential-operator-6c6fdb4d98-k89fz                      openshift-cloud-credential-operator            0
+11083a3dfc977       13 days ago         Ready               machine-config-operator-5f47db78bb-jn65f                        openshift-machine-config-operator              0
+e402947ea5d06       13 days ago         Ready               machine-approver-557b48d579-wvw2t                               openshift-cluster-machine-approver             0
+9b471044f62f0       13 days ago         Ready               dns-operator-75c9d649dd-tfh6v                                   openshift-dns-operator                         0
+0a6f0767d668d       13 days ago         Ready               sdn-2mn4r                                                       openshift-sdn                                  0
+d54612f3b9bf5       13 days ago         Ready               ovs-bx9j4                                                       openshift-sdn                                  0
+9bb7a95da72aa       13 days ago         Ready               sdn-controller-5f7pp                                            openshift-sdn                                  0
+ecd3018d9b54b       13 days ago         Ready               multus-ntphf                                                    openshift-multus                               0
+8379d4b66fbd6       13 days ago         Ready               etcd-member-master-1.ocp4.nfv.com                               openshift-etcd                                 0
+[root@master-1 core]#
+
+
+################### All pods from worker node  #################
+
+[root@worker-0 ~]# crictl pods
+POD ID              CREATED             STATE               NAME                                   NAMESPACE                                ATTEMPT
+41ce51ee0d6a8       8 minutes ago       Ready               multi-container-pod                    sanity                                   0
+e15eb9ab66c06       20 minutes ago      Ready               mc1                                    sanity                                   0
+2079562207af5       3 hours ago         Ready               nginx-pod                              sanity                                   0
+0cff70c70e252       4 hours ago         Ready               community-operators-659fd99484-p2g67   openshift-marketplace                    0
+3782d1f3fe3eb       8 hours ago         Ready               redhat-operators-fb7c748c5-jx459       openshift-marketplace                    0
+205302397d4a0       14 hours ago        Ready               certified-operators-7cfc5fb78b-xsvrf   openshift-marketplace                    0
+c32f45b2943ea       18 hours ago        Ready               router-default-f986dfdfd-njgk5         openshift-ingress                        0
+63d2dcf6a65bd       13 days ago         Ready               node-ca-86tcv                          openshift-image-registry                 0
+d2e0367e91c96       13 days ago         Ready               machine-config-daemon-272bk            openshift-machine-config-operator        0
+07881d6fe5826       13 days ago         Ready               dns-default-66j94                      openshift-dns                            0
+f25f454e573ce       13 days ago         Ready               sdn-g7vv7                              openshift-sdn                            0
+5e5cbee01ada9       13 days ago         Ready               ovs-g79gb                              openshift-sdn                            0
+cef9c35a6e942       13 days ago         Ready               node-exporter-mj5t4                    openshift-monitoring                     0
+76d46a49b3515       13 days ago         Ready               tuned-jppgg                            openshift-cluster-node-tuning-operator   0
+32585b5f45126       13 days ago         Ready               multus-cwdps                           openshift-multus                         0
+[root@worker-0 ~]#

@@ -1,0 +1,82 @@
+2021-02-15T17:57:43Z ESXShell: ESXi Shell available
+2021-02-16T08:39:06Z shell[2315677]: Interactive shell session started
+2021-02-16T08:39:19Z shell[2315677]: [root]: esxcli vsan cluster list
+2021-02-24T08:01:08Z shell[5278969]: Interactive shell session started
+2021-02-24T08:01:24Z shell[5278969]: [root]: esxcli hardware
+2021-02-24T08:02:27Z shell[5278969]: [root]: esxcli hardware
+2021-02-24T08:02:50Z shell[5278969]: [root]: esxcli hardware ipmi
+2021-02-24T08:02:56Z shell[5278969]: [root]: esxcli hardware ipmi sdr
+2021-02-24T08:03:04Z shell[5278969]: [root]: esxcli hardware ipmi sdr list | less
+2021-02-24T08:05:47Z shell[5280042]: Interactive shell session started
+2021-02-24T08:06:16Z shell[5280042]: [root]: esxcli hardware ipmi sdr list > 1.txt
+2021-02-24T08:06:56Z shell[5280402]: Interactive shell session started
+2021-02-24T08:07:03Z shell[5280402]: [root]: esxcli hardware ipmi sdr list
+2021-02-24T08:07:49Z shell[5280645]: Interactive shell session started
+2021-02-24T08:07:57Z shell[5280645]: [root]: esxcli hardware ipmi
+2021-02-24T08:08:18Z shell[5280645]: [root]: localcli esxcli hardware ipmi sdr list
+2021-02-24T08:08:41Z shell[5280645]: [root]: localcli hardware ipmi sdr list
+2021-02-24T08:13:07Z shell[5281279]: Interactive shell session started
+2021-02-24T08:13:14Z shell[5281279]: [root]: cd var
+2021-02-24T08:13:16Z shell[5281279]: [root]: cd run/log
+2021-02-24T08:13:21Z shell[5281279]: [root]: vdf -h
+2021-02-24T08:13:35Z shell[5281279]: [root]: less vmkernel.log
+2021-02-24T08:14:21Z shell[5281279]: [root]: less hostd.log | grep -i sensor
+2021-02-24T08:14:30Z shell[5281279]: [root]: less hostd.log | grep -i sensor  | less
+2021-02-24T08:15:33Z shell[5281279]: [root]: hostnamd -f
+2021-02-24T08:15:37Z shell[5281279]: [root]: hostname -f
+2021-02-24T08:15:45Z shell[5281279]: [root]: esxcfg-scsidevs -a
+2021-02-24T08:16:01Z shell[5281279]: [root]: esxcfg-scsidevs -c | less
+2021-02-24T08:17:40Z shell[5281279]: [root]: esxcfg-mpath -l | less
+2021-02-24T08:25:04Z shell[5281279]: [root]: ls
+2021-02-24T08:27:28Z shell[5281279]: [root]: clear
+2021-02-24T08:27:36Z shell[5281279]: [root]: esxcli storage core device
+2021-02-24T08:27:52Z shell[5281279]: [root]: esxcli storage core device raid list | less
+2021-02-24T08:28:07Z shell[5281279]: [root]: esxcli storage core device raid
+2021-02-24T08:28:29Z shell[5281279]: [root]: esxcli storage core device raid list -d naa.5000c500d2f1023b
+2021-02-24T08:29:25Z shell[5281279]: [root]: esxcli storage core device raid list -d sas.5000c500d2f10239
+2021-02-24T08:30:39Z shell[5281279]: [root]: esxcli storage core devive physical get -d naa.5000c500d2f1023b
+2021-02-24T08:30:59Z shell[5281279]: [root]: esxcli storage core device physical get -d naa.5000c500d2f1023b
+2021-02-24T08:31:24Z shell[5281279]: [root]: esxcli storage core device physical get -d naa.5000c500d2f39e33
+2021-02-24T08:31:34Z shell[5281279]: [root]: esxcli storage core device physical get -d 5000c500d2f3cc3b
+2021-02-24T08:31:46Z shell[5281279]: [root]: esxcli storage core device physical get -d naa.5000c500d2f3cc3b
+2021-02-24T08:32:09Z shell[5281279]: [root]: esxcli storage core device physical get -d naa.5000c500d2f3e15b
+2021-02-24T08:32:32Z shell[5281279]: [root]: esxcli storage core device physical get -d naa.58ce38ee20677635
+2021-02-24T08:33:52Z shell[5281279]: [root]: zcat vmkernel.*.gz | grep -i naa.5000c500d2f1023b
+2021-02-24T08:34:02Z shell[5281279]: [root]: zcat vmkernel.*.gz | grep -i naa.5000c500d2f39e33
+2021-02-24T08:34:15Z shell[5281279]: [root]: zcat vmkernel.*.gz | grep -i naa.5000c500d2f3cc3b
+2021-02-24T08:34:25Z shell[5281279]: [root]: zcat vmkernel.*.gz | grep -i naa.5000c500d2f3e15b
+2021-02-24T08:34:34Z shell[5281279]: [root]: zcat vmkernel.*.gz | grep -i naa.58ce38ee20677635
+2021-02-24T08:35:01Z shell[5281279]: [root]: less hostd.log | grep -i sensor
+2021-02-24T08:37:48Z shell[5281279]: [root]: vmware -vl
+2021-02-24T08:44:49Z shell[5281279]: [root]: clear
+2021-02-24T08:49:38Z shell[5281279]: [root]: localcli hardware ipmi sel clear
+2021-02-24T08:50:04Z shell[5281279]: [root]: cd /etc
+2021-02-24T08:50:10Z shell[5281279]: [root]: cd init.d
+2021-02-24T08:50:12Z shell[5281279]: [root]: ls
+2021-02-24T08:50:22Z shell[5281279]: [root]: ./sfcbd-watchdog restart
+2021-02-24T08:51:16Z shell[5281279]: [root]: ./hostd restart
+2021-02-24T08:51:29Z shell[5281279]: [root]: ./vpxa restart
+2021-02-24T08:51:37Z shell[5281279]: [root]: vim-cmd vmsvc/getallvms '
+2021-02-24T08:59:33Z shell[5280645]: [root]: esxcli software wbem provider list
+2021-02-24T08:59:46Z shell[5280645]: [root]: esxcli software wbem get
+2021-02-24T09:00:11Z shell[5280645]: [root]: esxcli system wbem provider list
+2021-02-24T09:00:29Z shell[5280645]: [root]: esxcli system wbem get
+2021-02-24T09:22:46Z shell[5301045]: Interactive shell session started
+2021-02-24T09:33:09Z SSH: SSH login disabled
+2021-02-24T09:33:09Z ESXShell: ESXi shell login disabled
+2021-02-24T09:38:00Z ESXShell: ESXi Shell available
+2021-02-24T09:39:16Z shell[2105903]: Interactive shell session started
+2021-02-24T09:43:29Z shell[2105903]: [root]: cd /var/run/log
+2021-02-24T09:43:40Z shell[2105903]: [root]: /etc/init.d/sfcbd-watchdog status
+2021-02-24T09:43:50Z shell[2105903]: [root]: /etc/init.d/sfcbd-watchdog restart
+2021-02-24T09:44:00Z shell[2105903]: [root]: cd /var
+2021-02-24T09:44:02Z shell[2105903]: [root]: ls -la
+2021-02-24T09:44:04Z shell[2105903]: [root]: cd core
+2021-02-24T09:44:05Z shell[2105903]: [root]: ls -la
+2021-02-24T09:44:19Z shell[2105903]: [root]: cd ..
+2021-02-24T09:44:22Z shell[2105903]: [root]: cd run/log
+2021-02-24T09:44:31Z shell[2105903]: [root]: less hostd.log
+2021-02-24T09:47:10Z shell[2105903]: [root]: ls
+2021-02-24T09:47:14Z shell[2105903]: [root]: history
+2021-02-24T09:47:21Z shell[2105903]: [root]: cat shell.log
+[root@mgmt-esxi-0:/vmfs/volumes/60250675-235ca785-e1ea-b49691a5ca42/.locker/log]

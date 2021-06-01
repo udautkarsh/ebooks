@@ -1,0 +1,4 @@
+yum install haproxy -y
+setsebool -P haproxy_connect_any=1
+
+vim /etc/haproxy/haproxy.cfg

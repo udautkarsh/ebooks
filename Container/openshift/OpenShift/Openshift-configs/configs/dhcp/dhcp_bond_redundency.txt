@@ -1,0 +1,127 @@
+[root@infra ~]# more /etc/dhcp/dhcpd.conf
+authoritative;
+ddns-update-style interim;
+default-lease-time      14400;
+max-lease-time          14400;
+option domain-name      "lab.com";
+
+#+++++++++++++++++
+# OAM network
+#+++++++++++++++++
+
+subnet 192.168.10.0 netmask 255.255.255.0 {
+        option routers                  192.168.10.1;
+        option broadcast-address        192.168.10.255;
+        option subnet-mask              255.255.255.0;
+        option domain-name-servers      192.168.10.10;
+        next-server                     192.168.10.10;
+
+        pool {
+                range 192.168.10.100 192.168.10.110;
+                # Static entries
+                host bootstrap-00   {
+                        hardware ethernet 52:54:00:00:11:00; fixed-address 192.168.10.102;
+                        if exists user-class and option user-class = "iPXE" {
+                                filename "http://192.168.10.10/bond/install_bootstrap.ipxe";
+                        }else{
+                                   filename "ipxe.efi";
+                        }
+                }
+                host bootstrap-01   {
+                        hardware ethernet 52:54:00:00:11:01; fixed-address 192.168.10.102;
+                        if exists user-class and option user-class = "iPXE" {
+                                filename "http://192.168.10.10/bond/install_bootstrap.ipxe";
+                        }else{
+                                   filename "ipxe.efi";
+                        }
+                }
+                ############################################################################################
+
+                host master-00  {
+                        hardware ethernet 52:54:00:00:22:00; fixed-address 192.168.10.103;
+                        if exists user-class and option user-class = "iPXE" {
+                                filename "http://192.168.10.10/bond/install_master.ipxe";
+                        }else{
+                                   filename "ipxe.efi";
+                        }
+                }
+                host master-01  {
+                        hardware ethernet 52:54:00:00:22:01; fixed-address 192.168.10.103;
+                        if exists user-class and option user-class = "iPXE" {
+                                filename "http://192.168.10.10/bond/install_master.ipxe";
+                        }else{
+                                   filename "ipxe.efi";
+                        }
+                }
+                host master-10   {
+                        hardware ethernet 52:54:00:00:22:10; fixed-address 192.168.10.104;
+                        if exists user-class and option user-class = "iPXE" {
+                                filename "http://192.168.10.10/bond/install_master.ipxe";
+                        }else{
+                                   filename "ipxe.efi";
+                        }
+                }
+                host master-11   {
+                        hardware ethernet 52:54:00:00:22:11; fixed-address 192.168.10.104;
+                        if exists user-class and option user-class = "iPXE" {
+                                filename "http://192.168.10.10/bond/install_master.ipxe";
+                        }else{
+                                   filename "ipxe.efi";
+                        }
+                }
+                host master-20   {
+                        hardware ethernet 52:54:00:00:22:20; fixed-address 192.168.10.105;
+                        if exists user-class and option user-class = "iPXE" {
+                                filename "http://192.168.10.10/bond/install_master.ipxe";
+                        }else{
+                                   filename "ipxe.efi";
+                        }
+                }
+                host master-21   {
+                        hardware ethernet 52:54:00:00:22:21; fixed-address 192.168.10.105;
+                        if exists user-class and option user-class = "iPXE" {
+                                filename "http://192.168.10.10/bond/install_master.ipxe";
+                        }else{
+                                   filename "ipxe.efi";
+                        }
+                }
+
+                #############################################################################
+
+                host worker-00   {
+                        hardware ethernet 52:54:00:00:33:00; fixed-address 192.168.10.106;
+                        if exists user-class and option user-class = "iPXE" {
+                                filename "http://192.168.10.10/bond/install_worker.ipxe";
+                        }else{
+                                   filename "ipxe.efi";
+                        }
+                }
+                host worker-01   {
+                        hardware ethernet 52:54:00:00:33:01; fixed-address 192.168.10.106;
+                        if exists user-class and option user-class = "iPXE" {
+                                filename "http://192.168.10.10/bond/install_worker.ipxe";
+                        }else{
+                                   filename "ipxe.efi";
+                        }
+                }
+                host worker-10  {
+                        hardware ethernet 52:54:00:00:33:10; fixed-address 192.168.10.107;
+                        if exists user-class and option user-class = "iPXE" {
+                                filename "http://192.168.10.10/bond/install_worker.ipxe";
+                        }else{
+                                   filename "ipxe.efi";
+                        }
+                }
+                host worker-11  {
+                        hardware ethernet 52:54:00:00:33:11; fixed-address 192.168.10.107;
+                        if exists user-class and option user-class = "iPXE" {
+                                filename "http://192.168.10.10/bond/install_worker.ipxe";
+                        }else{
+                                   filename "ipxe.efi";
+                        }
+                }
+                # this will not give out addresses to hosts not listed above
+                deny unknown-clients;
+
+        }
+}

@@ -1,0 +1,88 @@
+[root@c9npsvm uday]# oc get pods -owide
+NAME         READY   STATUS              RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+uday-pod-1   1/1     Running             0          2m16s   10.133.2.5    worker-03.ocp4.qac.com   <none>           <none>
+uday-pod-2   1/1     Running             0          96s     10.135.0.65   worker-01.ocp4.qac.com   <none>           <none>
+uday-pod-3   1/1     Running             0          81s     10.133.2.6    worker-03.ocp4.qac.com   <none>           <none>
+uday-pod-4   0/1     ContainerCreating   0          25s     <none>        worker-02.ocp4.qac.com   <none>           <none>
+uday-pod-5   0/1     ContainerCreating   0          17s     <none>        worker-02.ocp4.qac.com   <none>           <none>
+uday-pod-6   0/1     ContainerCreating   0          10s     <none>        worker-01.ocp4.qac.com   <none>           <none>
+[root@c9npsvm uday]# oc get pods -owide -w
+NAME         READY   STATUS              RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+uday-pod-1   1/1     Running             0          2m33s   10.133.2.5    worker-03.ocp4.qac.com   <none>           <none>
+uday-pod-2   1/1     Running             0          113s    10.135.0.65   worker-01.ocp4.qac.com   <none>           <none>
+uday-pod-3   1/1     Running             0          98s     10.133.2.6    worker-03.ocp4.qac.com   <none>           <none>
+uday-pod-4   0/1     ContainerCreating   0          42s     <none>        worker-02.ocp4.qac.com   <none>           <none>
+uday-pod-5   0/1     ContainerCreating   0          34s     <none>        worker-02.ocp4.qac.com   <none>           <none>
+uday-pod-6   0/1     ContainerCreating   0          27s     <none>        worker-01.ocp4.qac.com   <none>           <none>
+NAME         READY   STATUS              RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+uday-pod-6   1/1     Running             0          8m52s   10.135.0.66   worker-01.ocp4.qac.com   <none>           <none>
+uday-pod-5   1/1     Running             0          9m7s    10.132.2.21   worker-02.ocp4.qac.com   <none>           <none>
+uday-pod-4   1/1     Running             0          9m15s   10.132.2.20   worker-02.ocp4.qac.com   <none>           <none>
+[root@c9npsvm uday]# oc get pods
+NAME         READY   STATUS    RESTARTS   AGE
+uday-pod-1   1/1     Running   0          2m56s
+uday-pod-2   1/1     Running   0          2m16s
+uday-pod-3   1/1     Running   0          2m1s
+uday-pod-4   1/1     Running   0          65s
+uday-pod-5   1/1     Running   0          57s
+uday-pod-6   1/1     Running   0          50s
+[root@c9npsvm uday]# oc get nodes
+NAME                     STATUS   ROLES    AGE   VERSION
+master-01.ocp4.qac.com   Ready    master   44h   v1.14.6+47933cbcc
+master-02.ocp4.qac.com   Ready    master   44h   v1.14.6+47933cbcc
+master-03.ocp4.qac.com   Ready    master   44h   v1.14.6+47933cbcc
+worker-01.ocp4.qac.com   Ready    worker   42h   v1.14.6+47933cbcc
+worker-02.ocp4.qac.com   Ready    worker   41h   v1.14.6+47933cbcc
+worker-03.ocp4.qac.com   Ready    worker   24h   v1.14.6+6f6155bd9
+[root@c9npsvm uday]# oc adm cordon worker-02.ocp4.qac.com
+node/worker-02.ocp4.qac.com cordoned
+[root@c9npsvm uday]# oc get nodes
+NAME                     STATUS                     ROLES    AGE   VERSION
+master-01.ocp4.qac.com   Ready                      master   44h   v1.14.6+47933cbcc
+master-02.ocp4.qac.com   Ready                      master   44h   v1.14.6+47933cbcc
+master-03.ocp4.qac.com   Ready                      master   44h   v1.14.6+47933cbcc
+worker-01.ocp4.qac.com   Ready                      worker   42h   v1.14.6+47933cbcc
+worker-02.ocp4.qac.com   Ready,SchedulingDisabled   worker   41h   v1.14.6+47933cbcc
+worker-03.ocp4.qac.com   Ready                      worker   24h   v1.14.6+6f6155bd9
+[root@c9npsvm uday]# oc adm drain worker-02.ocp4.qac.com --force --delete-local-data --ignore-daemonsets
+node/worker-02.ocp4.qac.com already cordoned
+WARNING: deleting Pods not managed by ReplicationController, ReplicaSet, Job, DaemonSet or StatefulSet: default/uday-pod-4, default/uday-pod-5; ignoring DaemonSet-managed Pods: openshift-cluster-node-tuning-operator/tuned-2jldx, openshift-dns/dns-default-gwbll, openshift-image-registry/node-ca-6jffk, openshift-machine-config-operator/machine-config-daemon-5g6vg, openshift-monitoring/node-exporter-rghqf, openshift-multus/multus-vbckz, openshift-sdn/ovs-7vvjk, openshift-sdn/sdn-glc62
+evicting pod "router-default-7f84b88979-w747m"
+evicting pod "uday-pod-4"
+evicting pod "uday-pod-5"
+error when evicting pod "router-default-7f84b88979-w747m" (will retry after 5s): Cannot evict pod as it would violate the pod's disruption budget.
+evicting pod "router-default-7f84b88979-w747m"
+error when evicting pod "router-default-7f84b88979-w747m" (will retry after 5s): Cannot evict pod as it would violate the pod's disruption budget.
+evicting pod "router-default-7f84b88979-w747m"
+error when evicting pod "router-default-7f84b88979-w747m" (will retry after 5s): Cannot evict pod as it would violate the pod's disruption budget.
+pod/uday-pod-5 evicted
+pod/uday-pod-4 evicted
+evicting pod "router-default-7f84b88979-w747m"
+error when evicting pod "router-default-7f84b88979-w747m" (will retry after 5s): Cannot evict pod as it would violate the pod's disruption budget.
+evicting pod "router-default-7f84b88979-w747m"
+error when evicting pod "router-default-7f84b88979-w747m" (will retry after 5s): Cannot evict pod as it would violate the pod's disruption budget.
+evicting pod "router-default-7f84b88979-w747m"
+error when evicting pod "router-default-7f84b88979-w747m" (will retry after 5s): Cannot evict pod as it would violate the pod's disruption budget.
+
+[root@c9npsvm uday]# oc get pods -owide
+NAME         READY   STATUS    RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+uday-pod-1   1/1     Running   0          4m16s   10.133.2.5    worker-03.ocp4.qac.com   <none>           <none>
+uday-pod-2   1/1     Running   0          3m36s   10.135.0.65   worker-01.ocp4.qac.com   <none>           <none>
+uday-pod-3   1/1     Running   0          3m21s   10.133.2.6    worker-03.ocp4.qac.com   <none>           <none>
+uday-pod-6   1/1     Running   0          2m10s   10.135.0.66   worker-01.ocp4.qac.com   <none>           <none>
+[root@c9npsvm uday]# oc get pods -owide
+NAME         READY   STATUS    RESTARTS   AGE     IP            NODE                     NOMINATED NODE   READINESS GATES
+uday-pod-1   1/1     Running   0          4m44s   10.133.2.5    worker-03.ocp4.qac.com   <none>           <none>
+uday-pod-2   1/1     Running   0          4m4s    10.135.0.65   worker-01.ocp4.qac.com   <none>           <none>
+uday-pod-3   1/1     Running   0          3m49s   10.133.2.6    worker-03.ocp4.qac.com   <none>           <none>
+uday-pod-6   1/1     Running   0          2m38s   10.135.0.66   worker-01.ocp4.qac.com   <none>           <none>
+[root@c9npsvm uday]#
+[root@c9npsvm uday]# oc get pods --all-namespaces | grep uday
+default                                                 uday-pod-1                                                        1/1     Running     0          6m23s
+default                                                 uday-pod-2                                                        1/1     Running     0          5m43s
+default                                                 uday-pod-3                                                        1/1     Running     0          5m28s
+default                                                 uday-pod-6                                                        1/1     Running     0          4m17s
+[root@c9npsvm uday]#
+
+
+oc adm taint node worker-03.ocp4.qac.com network.openshift.io/mtu-too-small-

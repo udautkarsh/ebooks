@@ -1,0 +1,42 @@
+######################################################################################
+# Copyright (c) 2018 Hewlett Packard Enterprise Development LP.                      #
+# Valid license from HPE required for possession, use, or copying.                   #
+# The use of this file is subject to the terms and conditions defined in the file    #
+# 'HPE NPS LICENSE.txt',  which is part of this source code package.                 #
+######################################################################################
+
+FROM ubuntu:16.04
+
+RUN apt-get update && apt-get install -y --allow-unauthenticated python3>=3.5.1-3 python3-paramiko>=1.16.0-1ubuntu0.1 python3-pip>=8.1.1-2ubuntu0.4 sshpass>=1.05-1 iputils-ping>=3:20121221-5ubuntu2 logrotate>=3.8.7-2ubuntu2.16.04.2  python3-cryptography>=1.2.3-1ubuntu0.1 python3-pycparser>=2.14+dfsg-2build1 libpq-dev>=9.5.14-0ubuntu0.16.0 && rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install  PyYAML==3.12 kubernetes==6.0.0 xmltodict==0.11.0 ncclient==0.5.3 requests==2.19.1 Fabric3==1.14.post1
+
+RUN mkdir /home/npstools
+
+RUN mkdir /home/npstools/lib
+
+RUN mkdir /home/npstools/common
+
+RUN mkdir /home/operation_logs
+
+RUN touch /home/npstools/__init__.py
+COPY src/main/deploy/operations.py /home/npstools/operations.py
+COPY src/main/deploy/sanity_check.py /home/npstools/sanity_check.py
+COPY src/main/deploy/cleanup_logs.py /home/npstools/cleanup_logs.py
+
+RUN touch /home/npstools/lib/__init__.py
+COPY src/main/lib/utils_sanity_check.py /home/npstools/lib/utils_sanity_check.py
+COPY src/main/lib/utils_vim.py /home/npstools/lib/utils_vim.py
+COPY src/main/lib/switch_utils.py /home/npstools/lib/switch_utils.py
+COPY src/main/lib/restapi_utility.py /home/npstools/lib/restapi_utility.py
+COPY src/main/lib/utils_logs.py /home/npstools/lib/utils_logs.py
+COPY src/main/lib/fab_connect.py /home/npstools/lib/fab_connect.py
+COPY install/utils/vim_sanity.py /home/npstools/lib/vim_sanity.py
+
+RUN touch /home/npstools/common/__init__.py
+COPY src/main/common/central_log.py /home/npstools/common/central_log.py
+
+ENV PYTHONPATH='/home/npstools'
+
+COPY src/../NFVBP_Version.txt /etc/nfvbp-release.txt
+COPY ["HPE NPS LICENSE.txt", "/"]

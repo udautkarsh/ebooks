@@ -1,0 +1,146 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script type="text/javascript" src="./commonRes.js" language="JavaScript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.cns.BlockBackingDetails" name="vim.cns.BlockBackingDetails"></a>
+<h1>Data Object - CnsBlockBackingDetails(vim.cns.BlockBackingDetails)</h1>
+<dl>
+<dt>Extends</dt>
+<dd>
+<a href="vim.cns.BackingObjectDetails.html">CnsBackingObjectDetails</a>
+</dd>
+<dt>Since </dt>
+<dd>vSAN API vSAN 6.7U3</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Details for a block type backing for container volume.
+    <br>
+    This class will be used as input at the time of volume creation and will also
+    be returned as part of query result to give more information about a container volume.
+    <br>
+    Note: In future, for block volumes the disk format, like thin, lazy-zeroed-
+    thick, eager-zeroed-thick, will be made a part of storage policy. Until then,
+    for block volumes, only the thin type of provisioning will be supported.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="backingDiskId" name="backingDiskId"></a><strong>backingDiskId</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         At the time of creation this field would identify the existing disk
+    that should be used to back the container volume.
+    <br>
+    This field is optional and when this and backingDiskPath are not specified,
+    a new disk will be created to back the volume.
+    <br>
+    When this filed is present, capacityInMb and storage policy fields
+    will be ignored.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="backingDiskUrlPath" name="backingDiskUrlPath"></a><strong>backingDiskUrlPath</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         At the time of creation this field would identify the URL path to an
+    existing disk that should be used to back the container volume.
+    This field should be set in create request when the client wants to
+    register an existing disk as a CNS block volume. If this disk is already
+    registered as CNS block volume, then the server will throw
+    CnsAlreadyRegisteredFault CNS fault with the CNS volume ID set.
+    <br>
+    This field is optional and when this and backingDiskId are not specified,
+    a new disk will be created to back the volume.
+    <br>
+    When this field is present, capacityInMb and storage policy fields
+    will be ignored.
+    <br>
+    Note that this field will not be set in the query API result. But in
+    future release of CNS, it may be set.
+    <br> This field must be in the following format:
+    Format:
+    https://<vc_ip>/folder/<vm_vmdk_path>?dcPath=<datacenterPath>&           dsName=<datastoreName>
+    <br>
+    Ex: https://10.192.255.221/folder/34a9c05d-5f03-e254-e692-02004479cb91/               vm2_1.vmdk?dcPath=/Folder-1/Datacenter-1&dsName=vsanDatastore
+    <br>
+    This is for a 34a9c05d-5f03-e254-e692-02004479cb91/vm2_1.vmdk file under
+    datacenter "Datacenter-1" with path "/Folder-1/Datacenter-1" and datastore
+    "vsanDatastore".
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vim.cns.BackingObjectDetails.html">CnsBackingObjectDetails</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3"><a href="vim.cns.BackingObjectDetails.html#capacityInMb">capacityInMb</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="CnsBlockBackingDetails">
+            <complexContent>
+               <extension base="vsan:CnsBackingObjectDetails">
+                  <sequence>
+                     <element name="backingDiskId" type="xsd:string" minOccurs="0"/>
+                     <element name="backingDiskUrlPath" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

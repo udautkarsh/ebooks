@@ -1,0 +1,16 @@
+How to download videos form udemy.com
+======================================
+
+1) 	Download code from github
+
+		git clone https://github.com/r0oth3x49/udemy-dl.git
+	
+2) 	Login using cookie method: (Udemy has robot which detects usual log in using username and password)
+	a)	Open chrome and login to udemy.com (user: udayutkarsh@gmail.com password: us@IBM5649)
+		Make sure you already logged in. Right click anywhere on the udemy website and choose Inspect Element or you can press shortcut button F12
+	b) Choose Application tab, then choose Cookies -> https://www.udemy.com on the left. On the right, type into filter: access_token, double click and copy the value inside Value box.
+	c) Create a text (.txt) file inside your udemy-dl folder, name it whatever you want.
+		vim  cookie.txt ======> content ==> access_token=yourAccessToken
+3) Execute following command:
+   python udemy-dl.py courseUrl -k cookie.txt
+    	

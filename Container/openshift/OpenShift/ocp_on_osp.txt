@@ -1,0 +1,151 @@
+RHOCP on RHOSP instllation:
+===========================
+
+Undercloud Host Machine IP : 10.106.73.11 (root/HP1nvent)
+Undercloud VM : 10.106.73.10 (root/HP1nvent ) (stack/HP1nvent)
+Openstack dashboard :  https://10.106.74.2/dashboard/admin/  (admin/HP1nvent)
+
+In Undercloud Machine    /home/stack /ocp/  folder  you can find the openshift Installer packages, clouds.yaml and install-config.yaml files.
+
+Deployment Document followed : https://docs.openshift.com/container-platform/4.4/installing/installing_openstack/installing-openstack-installer-custom.html
+
+RH Case Details: https://access.redhat.com/support/cases/#/case/02660406 
+
+NPS VM: 10.114.25.18 (root/HPE1nvent@123)
+
+
+Operations:
+============
+
+openstack domain create --description "OpenShift Domain" openshift --or-show
+openstack project create --enable  --domain openshift --description "OpenShift Project" ocp4.4 
+openstack quota set ocp4.4 --cores 28 --floating-ips 3 --instances 7 --ram 114688 --secgroups 3 --secgroup-rules 60 --gigabytes 275 --subnets 1 --ports 15 --routers 1
+openstack user create ocp-user --enable --domain openshift --password HP1nvent --project-domain openshift --project ocp4.4 --email uday-pratap-singh@hpe.com
+openstack role add --project ocp4.4 --user ocp-user _member_
+
+
+#without new domain:
+#===================
+
+IPI mode of installation 
+
+1) CREATE EXTERNAL NETWORK
+
+	openstack network create ocp-external-network --project admin --project-domain default --provider-network-type vlan --external --provider-physical-network PROVIDER-VLAN --provider-segment 721 --share --availability-zone-hint nova
+
+	openstack subnet create  ocp-external-subnet --network ocp-external-network --subnet-range 10.7.21.0/24 --dhcp --gateway 10.7.21.1 --allocation-pool start=10.7.21.10,end=10.7.21.30 --dns-nameserver 10.255.0.10 --dns-nameserver 10.7.12.100
+
+2) ALLOCATE FLOATING IP FOR Public API access
+
+	openstack floating ip create --description "API cluster1.vimlab.com" ocp-external-network
+	
+3) CHANGE MTU SIZE IF NEEDED:
+	set MTU size to 1500 to all internal networks??
+   
+4) CREATE FLAVOR
+	
+	openstack flavor create ocp-clusters-flv --ram 16384 --disk 25 --vcpus 4 --public --project-domain default
+	
+	Or..
+	
+	openstack flavor create ocp-clusters-flv --ram 16384 --disk 50 --vcpus 4 --property hw:mem_page_size=1GB --public --project-domain default
+
+5) Create new project on Openstack:
+	================================
+
+	openstack project create --enable  --domain default --description "OpenShift Project" ocp4.4 
+	openstack quota set ocp4.4 --cores 28 --floating-ips 3 --instances 7 --ram 114688 --secgroups 3 --secgroup-rules 60 --gigabytes 275 --subnets 1 --ports 15 --routers 1
+	openstack user create ocp-user --enable --domain default --password HP1nvent --project-domain default --project ocp4.4 --email uday-pratap-singh@hpe.com
+	openstack role add --project ocp4.4 --user ocp-user _member_
+	openstack role add --project ocp4.4 --user ocp-user swiftoperator
+	openstack role add --project ocp4.4 --user ocp-user admin
+
+6) Download and install oc and openshift-install binaries
+
+
+7) Generate install-config.yaml
+	mkdir ocp44
+	openshift-install create install-config --dir=ocp44
+	
+
+8) Create cluster:
+
+	openshift-install create cluster --dir=ocp44 --log-level=debug
+
+9) VERIFY INSTALLATION:
+   export KUBECONFIG=/root/cloud1/cluster1/auth/kubeconfig
+   
+   OR LOGIN:
+   
+   oc get nodes
+   oc get clusterversion
+   oc get clusteroperator
+   oc get pods -A
+   
+10) Configuring application access with floating IP addresses
+
+    oc get clusterversion -o jsonpath='{.items[].spec.clusterID}{"\n"}' =========> Obtain Cluster ID
+	openstack port list | grep -i  cluster1| grep -i ingress
+	openstack port show <cluster name>-<clusterID>-ingress-port
+	openstack floating ip set --port <ingress port ID> <apps FIP>
+	
+9) Destroy cluster:
+	openshift-install destroy cluster --dir=ocp44 --log-level=debug
+	
+10) Delete projects:
+
+	openstack subnet delete ocp-external-subnet
+	openstack subnet delete ocp-external-network
+	openstack user delete ocp-user
+	openstack project delete ocp4.4
+	
+	
+11) SET UP EXTERNAL ACCESS
+
+	openstack floating ip create --description "API cluster1.vimlab.com" ocp-external-network  ========> already created above
+	openstack floating ip create --description "Ingress cluster1.vimlab.com" ocp-external-network
+
+	DNS ENTRY:
+		api.<cluster_name>.<base_domain>.  IN  A  <API_FIP>
+		*.apps.<cluster_name>.<base_domain>. IN  A <apps_FIP>
+
+		api.ocp44.lab.com.  IN  A  10.106.76.20
+		*.apps.ocp44.lab.com. IN  A 10.106.76.34
+
+
+12) Configuring application access with floating ip:
+
+    source ocp-project-2.rc
+	openstack port list | grep ingress
+	 openstack floating ip set --port 826ea7ef-3a6c-4ae2-a81e-0c9e1071832f  10.7.21.27
+	 
+13) Login to the cluster:
+
+	oc login -u kubeadmin -p Qb6GU-Zt8U5-rgWGw-iB8A8 --server=https://api.cluster2.vimlab.com:6443
+
+
+
+SCALE OUT:
+==========
+
+1) login:
+   oc login -u kubeadmin -p Qb6GU-Zt8U5-rgWGw-iB8A8 --server=https://api.cluster2.vimlab.com:6443
+   or 
+   export KUBECONFIG=/path/to/kubeconfig
+
+2) oc get machinesets -n openshift-machine-api
+3) oc scale --replicas=x machinesets cluster2-xs7s8-worker -n openshift-machine-api   ============> x=number of total desired 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

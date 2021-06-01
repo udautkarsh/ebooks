@@ -1,0 +1,7 @@
+VCD_PRIMARY_IP=10.7.57.30
+BASIC_AUTH_USER=root
+BASIC_AUTH_PASSWORD=HP1nvent@123
+AUTH=$(echo -ne "$BASIC_AUTH_USER:$BASIC_AUTH_PASSWORD" | base64)
+no_proxy=$no_proxy,$VCD_PRIMARY_IP
+curl -k -X POST -H "Accept: application/json" -H "Authorization: Basic $AUTH" "https://$VCD_PRIMARY_IP:5480/api/1.0.0/nodes/failover/automatic"
+#curl -k -X POST -H "Accept: application/json" -H "Authorization: Basic $AUTH" "https://$VCD_PRIMARY_IP:5480/api/1.0.0/nodes/failover/manual"

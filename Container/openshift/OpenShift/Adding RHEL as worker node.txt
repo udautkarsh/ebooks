@@ -1,0 +1,198 @@
+Adding RHEL 7.6 as worker node:
+===============================
+1) Need an additional RHEL 7.6 node to run playbook.
+	subscription-manager register --username=uday-singh --password=us@HPE5649
+	subscription-manager repos --disable="*"
+	subscription-manager refresh
+	subscription-manager list --available --matches '*OpenShift*'
+	subscription-manager attach --pool=<pool_id>
+	subscription-manager repos --disable="*"
+	subscription-manager repos --enable="rhel-7-server-rpms" --enable="rhel-7-server-extras-rpms" --enable="rhel-7-server-ansible-2.8-rpms" --enable="rhel-7-server-ose-4.2-rpms"
+	
+	yum repolist
+	yum install yum-utils createrepo
+	reposync  -nl --repoid=<repo id> --download_path=<path to local directory>
+	example:
+		reposync -nl --repoid=rhel-7-server-extras-rpms --download_path=rhel-scale-out-repo
+	 
+	After all repos are downloaded, transfer this to bastion host's. dir: /var/www/html/<repo dir>
+	
+	[root@worker-2 ~]# vim /etc/yum.repos.d/sclaeout.repo
+		[rhel-scale-out-repo]
+		name=rhel-scale-out-repo
+		baseurl=http://10.7.45.2/rhel-scale-out-repo/
+		gpgcheck=0
+		enabled=1
+	[root@worker-2 ~]#
+
+	yum install openshift-ansible openshift-clients jq -y
+	
+2) On server to be scaled out:
+	Install rhel 7.6(minimal), make dns entry, assign hostsname
+	[root@worker-2 ~]# vim /etc/yum.repos.d/sclaeout.repo
+	
+	[rhel-scale-out-repo]
+	name=rhel-scale-out-repo
+	baseurl=http://10.7.45.2/rhel-scale-out-repo/
+	gpgcheck=0
+	enabled=1
+
+	ssh-copy-id root@worker-3.ocp4.lab.com
+
+
+3) From NPS node: same as step 1
+	[root@registry ~]# more scale-out/hosts
+	[all:vars]
+	ansible_user=root
+	openshift_kubeconfig_path="/root/scale-out/kubeconfig"
+	
+	[new_workers]
+	worker-2.ocp4.lab.com
+
+
+	ansible-playbook -i hosts /usr/share/ansible/openshift-ansible/playbooks/scaleup.yml -vvv | tee logs.txt
+	
+
+4) Scale in RHCOS
+=================
+oc get pods  --all-namespaces -o wide | grep -i worker-0.ocp4.lab.com
+sleep 1
+oc adm cordon worker-0.ocp4.lab.com
+sleep 1
+oc get nodes -o wide
+sleep 1
+oc adm drain worker-0.ocp4.lab.com --force --delete-local-data --ignore-daemonsets
+sleep 5
+oc delete nodes worker-0.ocp4.lab.com
+
+
+
+oc get pods  --all-namespaces -o wide | grep -i worker-1.ocp4.lab.com
+sleep 1
+oc adm cordon  worker-1.ocp4.lab.com
+sleep 1
+oc get nodes -o wide
+sleep 1
+oc adm drain worker-1.ocp4.lab.com --force --delete-local-data --ignore-daemonsets
+sleep 5
+oc delete nodes worker-1.ocp4.lab.com
+
+
+oc get pods  --all-namespaces -o wide | grep -i worker-4.ocp4.lab.com
+oc adm cordon worker-4.ocp4.lab.com
+oc get nodes -o wide
+oc adm drain worker-4.ocp4.lab.com --force --delete-local-data --ignore-daemonsets
+oc delete nodes worker-4.ocp4.lab.com
+
+#ENABLE FIPS MODE ON RHEL POST DEPLOYMENT:
+==========================================
+manually:
+=========
+
+yum install dracut-fips -y
+yum install dracut-fips-aesni -y 
+dracut -v -f
+df /boot | awk '{print $1}' | grep dev | xargs blkid | awk '{print $2}' | cut -d '"' -f 2
+
+PXE boot/Kickstart.cfg:
+=======================
+bootloader --location=mbr --append="rhgb quiet crashkernel=auto fips=1"
+
+
+
+[root@worker-0 core]# crictl ps
+CONTAINER ID        IMAGE                                                                                                                    CREATED             STATE               NAME                         ATTEMPT             POD ID
+2426a04b989ed       c5b144f7eb0478821005ecf1d847e1125c624e8d8b4ae8052f3df592c0411fc5                                                         3 hours ago         Running             registry                     0                   add165dce4cd8
+0d70bb7a2f6b3       be1cc2dab23d3bd54d22f7ed0f6a6e85f43a5bd703eca05c6df77e0a83bb1556                                                         30 hours ago        Running             tuned                        19                  21eaf0cfa10c0
+bcfb095e4b269       973fb63801d950c1c19c2969a9c07f010f4edfa4b4f19a3601202e2db2474e42                                                         4 days ago          Running             prometheus-adapter           0                   45dcca0ae2c39
+3f0f44648b36e       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0d886eeba28432715c936b1619969f3dab33eca4fe5e9781d5e8e8c1c9b74515   5 days ago          Running             node-ca                      0                   35929bbc5d0bf
+8837ee046435e       8b4273a6df8219b96037c30b566a4d3d17a220af6a1ee25bf470319e72944969                                                         5 days ago          Running             alertmanager-proxy           0                   4b2f81a19229f
+bb665f576d24e       f4c5273c8d47ae4dfcc56ee8b93a76564eabac84aeebf3e8258c270f4b1fb7ee                                                         5 days ago          Running             config-reloader              0                   4b2f81a19229f
+b55d190bca989       6d53b5e8e4f12ed5b1b27cc51ddc6578adb106c2284e35f73548a60eb2866134                                                         5 days ago          Running             alertmanager                 0                   4b2f81a19229f
+a68f4ab1133d4       34eb751e41d9c8ad7eb7787c70eebd18ab9d79f0b25f322a9e2deae4b9ade022                                                         5 days ago          Running             prometheus                   1                   b96f4f60a56fa
+63a3a885a2138       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:22b6674db2a9b2ed940dfe9b2c9935bd9eefbad79572d709a4b6740f06590963   5 days ago          Running             prom-label-proxy             0                   b96f4f60a56fa
+ad5bbc7825207       7c6b22a946f4d0aae7b29280babbe24146ff2b65a457cb32baba635e40f72be5                                                         5 days ago          Running             kube-rbac-proxy              0                   b96f4f60a56fa
+3296084c6c786       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:c431caacca88e0d1bccb9197ae672ea48e5056005f09fb88c97e01d0d94da5b3   5 days ago          Running             prometheus-proxy             0                   b96f4f60a56fa
+a095bf36f3ee7       f4c5273c8d47ae4dfcc56ee8b93a76564eabac84aeebf3e8258c270f4b1fb7ee                                                         5 days ago          Running             rules-configmap-reloader     0                   b96f4f60a56fa
+7f9716023c911       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:a49d44ea3704b9532b83a53771252aa6f67ecb4ae95b06c05fe2ed4697d7008c   5 days ago          Running             prometheus-config-reloader   0                   b96f4f60a56fa
+3167c178acb7a       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:d2dd49d6ef61f26585826fda38bb89986003d679ac9f02797d19e9d12a0b5e34   5 days ago          Running             dns-node-resolver            0                   8cc9c870d5352
+408a10197fb14       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:a3a56862905be80325b4c21eee7a6acd5069c42d23b5ff1d52afc607a626adba   5 days ago          Running             router                       0                   2bb29dcc8b513
+1d7496815d121       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:be5569855b4e97f1332c68ef0c6a11e066239f539234510c16f4518e6334aa72   5 days ago          Running             machine-config-daemon        0                   5f013c28fbb2f
+6ec356be950ce       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f11fe5184dc9501bcb842d03d7c8ae2dc5ab6ad3abd2a8f5098b232812035157   5 days ago          Running             dns                          0                   8cc9c870d5352
+8b3766002efd9       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:8ba491c76b3815dcdaaa4ffe88320f75e487ff93ca89bd981d6b1fdc915d6e35   5 days ago          Running             openshift-state-metrics      0                   26132e69d0fd5
+17f49e0c50897       7c6b22a946f4d0aae7b29280babbe24146ff2b65a457cb32baba635e40f72be5                                                         5 days ago          Running             kube-rbac-proxy-self         0                   26132e69d0fd5
+8540958cb8e4e       7c6b22a946f4d0aae7b29280babbe24146ff2b65a457cb32baba635e40f72be5                                                         5 days ago          Running             kube-rbac-proxy-main         0                   26132e69d0fd5
+96bb560510f5b       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6be7c307c59649ae634ebd584af1aaa91280d4c556696ba3334d9adcdaef3954   5 days ago          Running             kube-multus                  0                   6934b22a61237
+d42891f522726       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:2dcf740369982e322de42aa070784d3dd3a4f84cb912ef7004b00a04d8762179   5 days ago          Running             kube-rbac-proxy              0                   2647771f4a4b2
+6b03874a1d9b6       7ea52ced8d2d771014cef865789add572440b3391794da4a7b0e96521f1480a6                                                         5 days ago          Running             sdn                          0                   ee6f1dd06fe18
+9416f9467396e       b946129e4397b45e3285576cefdad938838e6412031bcb6925c41f14dbd6483b                                                         5 days ago          Running             node-exporter                0                   2647771f4a4b2
+ad334af7a26c5       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:020dbe62932b09c7a560c126a12f9b81da5add15b323a75094d346eb9b561252   5 days ago          Running             openvswitch                  0                   8d608573332ca
+
+
+
+[root@registry ~]# oc get pods  --all-namespaces -o wide | grep -i worker-0.ocp4.lab.com
+openshift-cluster-node-tuning-operator                  tuned-db5f4                                                       1/1     Running     19         5d3h    10.7.45.106   worker-0.ocp4.lab.com   <none>           <none>
+openshift-dns                                           dns-default-tz27x                                                 2/2     Running     0          5d3h    10.131.0.3    worker-0.ocp4.lab.com   <none>           <none>
+openshift-image-registry                                image-registry-5fc7bd65b6-xvdmj                                   1/1     Running     0          3h18m   10.131.0.13   worker-0.ocp4.lab.com   <none>           <none>
+openshift-image-registry                                node-ca-fv6mr                                                     1/1     Running     0          5d3h    10.131.0.9    worker-0.ocp4.lab.com   <none>           <none>
+openshift-ingress                                       router-default-76f799d59f-sc9rk                                   1/1     Running     0          5d3h    10.7.45.106   worker-0.ocp4.lab.com   <none>           <none>
+openshift-machine-config-operator                       machine-config-daemon-2dpnp                                       1/1     Running     0          5d3h    10.7.45.106   worker-0.ocp4.lab.com   <none>           <none>
+openshift-monitoring                                    alertmanager-main-0                                               3/3     Running     0          5d3h    10.131.0.7    worker-0.ocp4.lab.com   <none>           <none>
+openshift-monitoring                                    node-exporter-dm7j8                                               2/2     Running     0          5d3h    10.7.45.106   worker-0.ocp4.lab.com   <none>           <none>
+openshift-monitoring                                    openshift-state-metrics-7dcf9bbb9d-jpmbm                          3/3     Running     0          5d3h    10.131.0.2    worker-0.ocp4.lab.com   <none>           <none>
+openshift-monitoring                                    prometheus-adapter-dd4f68d77-mxxvw                                1/1     Running     0          4d4h    10.131.0.12   worker-0.ocp4.lab.com   <none>           <none>
+openshift-monitoring                                    prometheus-k8s-1                                                  6/6     Running     1          5d3h    10.131.0.6    worker-0.ocp4.lab.com   <none>           <none>
+openshift-multus                                        multus-8gwqb                                                      1/1     Running     0          5d3h    10.7.45.106   worker-0.ocp4.lab.com   <none>           <none>
+openshift-sdn                                           ovs-bqvp5                                                         1/1     Running     0          5d3h    10.7.45.106   worker-0.ocp4.lab.com   <none>           <none>
+openshift-sdn                                           sdn-b5z9g                                                         1/1     Running     0          5d3h    10.7.45.106   worker-0.ocp4.lab.com   <none>           <none>
+
+
+
+
+
+
+root@worker-2 ~]# crictl ps
+CONTAINER ID        IMAGE                                                                                                                    CREATED             STATE               NAME                    ATTEMPT             POD ID
+030a2c4ff4f3d       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:d2dd49d6ef61f26585826fda38bb89986003d679ac9f02797d19e9d12a0b5e34   3 minutes ago       Running             dns-node-resolver       0                   5355c5cb4288c
+e3738076b9092       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0d886eeba28432715c936b1619969f3dab33eca4fe5e9781d5e8e8c1c9b74515   3 minutes ago       Running             node-ca                 0                   fd59a754cdb67
+054f47c006022       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f11fe5184dc9501bcb842d03d7c8ae2dc5ab6ad3abd2a8f5098b232812035157   3 minutes ago       Running             dns                     0                   5355c5cb4288c
+b7241f1f54228       0a18eda99bbb9168063c4440b5123e78556ec2080064c92f2dc7f100fc595b9f                                                         4 minutes ago       Running             machine-config-daemon   0                   7ab98103fdc7f
+d50e422086768       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:2dcf740369982e322de42aa070784d3dd3a4f84cb912ef7004b00a04d8762179   4 minutes ago       Running             kube-rbac-proxy         0                   cf4e10245df93
+635901a194185       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6be7c307c59649ae634ebd584af1aaa91280d4c556696ba3334d9adcdaef3954   4 minutes ago       Running             kube-multus             0                   bd9e120ff40ac
+479a7c93e8f2a       7ea52ced8d2d771014cef865789add572440b3391794da4a7b0e96521f1480a6                                                         4 minutes ago       Running             sdn                     0                   5aba7b02d6810
+de4d3a806a882       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:020dbe62932b09c7a560c126a12f9b81da5add15b323a75094d346eb9b561252   4 minutes ago       Running             openvswitch             0                   5b3a7a8a939f1
+719c737d2deac       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:a68e00e9186f08d006766051848b7c18a5723f8815f51c2c3c6cca87a279115d   4 minutes ago       Running             tuned                   0                   c844c9062c767
+68c07612986ea       b946129e4397b45e3285576cefdad938838e6412031bcb6925c41f14dbd6483b                                                         4 minutes ago       Running             node-exporter           0                   cf4e10245df93
+
+
+ery 2.0s: crictl ps                                                                                                                                                                                                                      Tue Jan 14 13:50:22 2020
+
+sh: warning: setlocale: LC_ALL: cannot change locale (C.UTF-8)
+CONTAINER ID        IMAGE                                                                                                                    CREATED             STATE               NAME                         ATTEMPT             POD ID
+8f25d769f9a8f       34eb751e41d9c8ad7eb7787c70eebd18ab9d79f0b25f322a9e2deae4b9ade022                                                         3 minutes ago       Running             prometheus                   1                   d6f29b51af782
+5443c7931cf3c       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:22b6674db2a9b2ed940dfe9b2c9935bd9eefbad79572d709a4b6740f06590963   3 minutes ago       Running             prom-label-proxy             0                   d6f29b51af782
+ecf2b9b655dbf       7c6b22a946f4d0aae7b29280babbe24146ff2b65a457cb32baba635e40f72be5                                                         3 minutes ago       Running             kube-rbac-proxy              0                   d6f29b51af782
+bae8075b1ab0d       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:c431caacca88e0d1bccb9197ae672ea48e5056005f09fb88c97e01d0d94da5b3   3 minutes ago       Running             prometheus-proxy             0                   d6f29b51af782
+63991b22a19f8       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:c431caacca88e0d1bccb9197ae672ea48e5056005f09fb88c97e01d0d94da5b3   3 minutes ago       Running             alertmanager-proxy           0                   390e8e141f468
+328c4a4c3f2d5       f4c5273c8d47ae4dfcc56ee8b93a76564eabac84aeebf3e8258c270f4b1fb7ee                                                         4 minutes ago       Running             rules-configmap-reloader     0                   d6f29b51af782
+9d250808ae787       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:a49d44ea3704b9532b83a53771252aa6f67ecb4ae95b06c05fe2ed4697d7008c   4 minutes ago       Running             prometheus-config-reloader   0                   d6f29b51af782
+ee9cabf59559e       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:9299e9bced07fafc730b738c531d10f2efd04d34517337b11d46dc2274088079   4 minutes ago       Running             config-reloader              0                   390e8e141f468
+a8b1d1c2b39eb       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6988ee4bde521844a84c874ae4511502218412c256c2bbfc79668418c021a5e3   4 minutes ago       Running             alertmanager                 0                   390e8e141f468
+388b2df56ae5d       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:5bfb6eba3b2a22f860f181c483cdf7ee155076f25f4e9f3741345125b47f2576   4 minutes ago       Running             prometheus-adapter           0                   ea4105c2b5a84
+66ab426c670bd       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:8ba491c76b3815dcdaaa4ffe88320f75e487ff93ca89bd981d6b1fdc915d6e35   4 minutes ago       Running             openshift-state-metrics      0                   ead4aa5a25d9a
+101874b78c046       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:a3a56862905be80325b4c21eee7a6acd5069c42d23b5ff1d52afc607a626adba   4 minutes ago       Running             router                       0                   86e36e19ae73b
+f9259353170ce       7c6b22a946f4d0aae7b29280babbe24146ff2b65a457cb32baba635e40f72be5                                                         4 minutes ago       Running             kube-rbac-proxy-self         0                   ead4aa5a25d9a
+a91340ce09d11       7c6b22a946f4d0aae7b29280babbe24146ff2b65a457cb32baba635e40f72be5                                                         4 minutes ago       Running             kube-rbac-proxy-main         0                   ead4aa5a25d9a
+fb4450799e7c1       c5b144f7eb0478821005ecf1d847e1125c624e8d8b4ae8052f3df592c0411fc5                                                         4 minutes ago       Running             registry                     0                   9cb2833f54e12
+030a2c4ff4f3d       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:d2dd49d6ef61f26585826fda38bb89986003d679ac9f02797d19e9d12a0b5e34   25 minutes ago      Running             dns-node-resolver            0                   5355c5cb4288c
+e3738076b9092       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:0d886eeba28432715c936b1619969f3dab33eca4fe5e9781d5e8e8c1c9b74515   25 minutes ago      Running             node-ca                      0                   fd59a754cdb67
+054f47c006022       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:f11fe5184dc9501bcb842d03d7c8ae2dc5ab6ad3abd2a8f5098b232812035157   25 minutes ago      Running             dns                          0                   5355c5cb4288c
+b7241f1f54228       0a18eda99bbb9168063c4440b5123e78556ec2080064c92f2dc7f100fc595b9f                                                         26 minutes ago      Running             machine-config-daemon        0                   7ab98103fdc7f
+d50e422086768       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:2dcf740369982e322de42aa070784d3dd3a4f84cb912ef7004b00a04d8762179   26 minutes ago      Running             kube-rbac-proxy              0                   cf4e10245df93
+635901a194185       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:6be7c307c59649ae634ebd584af1aaa91280d4c556696ba3334d9adcdaef3954   26 minutes ago      Running             kube-multus                  0                   bd9e120ff40ac
+479a7c93e8f2a       7ea52ced8d2d771014cef865789add572440b3391794da4a7b0e96521f1480a6                                                         26 minutes ago      Running             sdn                          0                   5aba7b02d6810
+de4d3a806a882       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:020dbe62932b09c7a560c126a12f9b81da5add15b323a75094d346eb9b561252   26 minutes ago      Running             openvswitch                  0                   5b3a7a8a939f1
+719c737d2deac       quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:a68e00e9186f08d006766051848b7c18a5723f8815f51c2c3c6cca87a279115d   26 minutes ago      Running             tuned                        0                   c844c9062c767
+68c07612986ea       b946129e4397b45e3285576cefdad938838e6412031bcb6925c41f14dbd6483b                                                         26 minutes ago      Running             node-exporter                0                   cf4e10245df93
+
+

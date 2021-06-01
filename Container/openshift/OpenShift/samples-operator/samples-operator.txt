@@ -1,0 +1,1985 @@
+[root@bastion samples-operator]# ./samples-operator.py
+
+
+Total number of ImageStream: 65
+=================================
+
+IMAGESTREAM   :===> openjdk-11-rhel7                          IS Image Status: (1/1)   IS Status: (1/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/openjdk/openjdk-11-rhel7:1.0
+Tagging Image :===> docker tag 781deed5dc9a registry.ocp4.lab.com:5000/openjdk/openjdk-11-rhel7:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/openjdk/openjdk-11-rhel7:1.0
+
+
+
+IMAGESTREAM   :===> jboss-amq-63                              IS Image Status: (1/5)   IS Status: (2/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-amq-6/amq63-openshift:1.0
+Tagging Image :===> docker tag 30b4c7dd1586 registry.ocp4.lab.com:5000/jboss-amq-6/amq63-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-amq-6/amq63-openshift:1.0
+
+
+
+IMAGESTREAM   :===> jboss-amq-63                              IS Image Status: (2/5)   IS Status: (2/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-amq-6/amq63-openshift:1.1
+Tagging Image :===> docker tag 37721cbb02cc registry.ocp4.lab.com:5000/jboss-amq-6/amq63-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-amq-6/amq63-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-amq-63                              IS Image Status: (3/5)   IS Status: (2/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-amq-6/amq63-openshift:1.2
+Tagging Image :===> docker tag 84eba24388a0 registry.ocp4.lab.com:5000/jboss-amq-6/amq63-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-amq-6/amq63-openshift:1.2
+
+
+
+IMAGESTREAM   :===> jboss-amq-63                              IS Image Status: (4/5)   IS Status: (2/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-amq-6/amq63-openshift:1.3
+Tagging Image :===> docker tag 94a6255fa789 registry.ocp4.lab.com:5000/jboss-amq-6/amq63-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-amq-6/amq63-openshift:1.3
+
+
+
+IMAGESTREAM   :===> jboss-amq-63                              IS Image Status: (5/5)   IS Status: (2/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-amq-6/amq63-openshift:1.4
+Tagging Image :===> docker tag f0771bd2ca03 registry.ocp4.lab.com:5000/jboss-amq-6/amq63-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-amq-6/amq63-openshift:1.4
+
+
+
+IMAGESTREAM   :===> rhpam74-kieserver-openshift               IS Image Status: (1/2)   IS Status: (3/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhpam-7/rhpam74-kieserver-openshift:1.0
+Tagging Image :===> docker tag 9dbf9526d625 registry.ocp4.lab.com:5000/rhpam-7/rhpam74-kieserver-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhpam-7/rhpam74-kieserver-openshift:1.0
+
+
+
+IMAGESTREAM   :===> rhpam74-kieserver-openshift               IS Image Status: (2/2)   IS Status: (3/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhpam-7/rhpam74-kieserver-openshift:1.1
+Tagging Image :===> docker tag 5a2a305deedf registry.ocp4.lab.com:5000/rhpam-7/rhpam74-kieserver-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhpam-7/rhpam74-kieserver-openshift:1.1
+
+
+
+IMAGESTREAM   :===> modern-webapp                             IS Image Status: (1/1)   IS Status: (4/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhoar-nodejs-tech-preview/rhoar-nodejs-10-webapp
+Tagging Image :===> docker tag 422a455bb50a registry.ocp4.lab.com:5000/rhoar-nodejs-tech-preview/rhoar-nodejs-10-webapp
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhoar-nodejs-tech-preview/rhoar-nodejs-10-webapp
+
+
+
+IMAGESTREAM   :===> fis-java-openshift                        IS Image Status: (1/2)   IS Status: (5/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-fuse-6/fis-java-openshift:1.0
+Tagging Image :===> docker tag 6cc5c0779dd7 registry.ocp4.lab.com:5000/jboss-fuse-6/fis-java-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-fuse-6/fis-java-openshift:1.0
+
+
+
+IMAGESTREAM   :===> fis-java-openshift                        IS Image Status: (2/2)   IS Status: (5/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-fuse-6/fis-java-openshift:2.0
+Tagging Image :===> docker tag 5a49a4bb115d registry.ocp4.lab.com:5000/jboss-fuse-6/fis-java-openshift:2.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-fuse-6/fis-java-openshift:2.0
+
+
+
+IMAGESTREAM   :===> jboss-datagrid71-client-openshift         IS Image Status: (1/1)   IS Status: (6/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-7/datagrid71-client-openshift:1.0
+Tagging Image :===> docker tag a3a8ace986ab registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid71-client-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid71-client-openshift:1.0
+
+
+
+IMAGESTREAM   :===> perl                                      IS Image Status: (1/2)   IS Status: (7/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/perl-524-rhel7:latest
+Tagging Image :===> docker tag 4afd853b5aca registry.ocp4.lab.com:5000/rhscl/perl-524-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/perl-524-rhel7:latest
+
+
+
+IMAGESTREAM   :===> perl                                      IS Image Status: (2/2)   IS Status: (7/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/perl-526-rhel7:latest
+Tagging Image :===> docker tag 01ecd232cd80 registry.ocp4.lab.com:5000/rhscl/perl-526-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/perl-526-rhel7:latest
+
+
+
+IMAGESTREAM   :===> php                                       IS Image Status: (1/3)   IS Status: (8/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/php-70-rhel7:latest
+Tagging Image :===> docker tag 2d5706ee4645 registry.ocp4.lab.com:5000/rhscl/php-70-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/php-70-rhel7:latest
+
+
+
+IMAGESTREAM   :===> php                                       IS Image Status: (2/3)   IS Status: (8/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/php-71-rhel7:latest
+Tagging Image :===> docker tag 8e01e80b2412 registry.ocp4.lab.com:5000/rhscl/php-71-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/php-71-rhel7:latest
+
+
+
+IMAGESTREAM   :===> php                                       IS Image Status: (3/3)   IS Status: (8/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/php-72-rhel7:latest
+Tagging Image :===> docker tag 6d3878fbf897 registry.ocp4.lab.com:5000/rhscl/php-72-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/php-72-rhel7:latest
+
+
+
+IMAGESTREAM   :===> jboss-eap64-openshift                     IS Image Status: (1/10)   IS Status: (9/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-6/eap64-openshift:1.1
+Tagging Image :===> docker tag a7857bceabed registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-eap64-openshift                     IS Image Status: (2/10)   IS Status: (9/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-6/eap64-openshift:1.2
+Tagging Image :===> docker tag 08f23baa2e2a registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.2
+
+
+
+IMAGESTREAM   :===> jboss-eap64-openshift                     IS Image Status: (3/10)   IS Status: (9/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-6/eap64-openshift:1.3
+Tagging Image :===> docker tag fc9d30458bdb registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.3
+
+
+
+IMAGESTREAM   :===> jboss-eap64-openshift                     IS Image Status: (4/10)   IS Status: (9/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-6/eap64-openshift:1.4
+Tagging Image :===> docker tag d0da75344966 registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.4
+
+
+
+IMAGESTREAM   :===> jboss-eap64-openshift                     IS Image Status: (5/10)   IS Status: (9/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-6/eap64-openshift:1.5
+Tagging Image :===> docker tag 8d9878143e27 registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.5
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.5
+
+
+
+IMAGESTREAM   :===> jboss-eap64-openshift                     IS Image Status: (6/10)   IS Status: (9/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-6/eap64-openshift:1.6
+Tagging Image :===> docker tag 69f67c6aa5b8 registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.6
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.6
+
+
+
+IMAGESTREAM   :===> jboss-eap64-openshift                     IS Image Status: (7/10)   IS Status: (9/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-6/eap64-openshift:1.7
+Tagging Image :===> docker tag 7db7732418fa registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.7
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.7
+
+
+
+IMAGESTREAM   :===> jboss-eap64-openshift                     IS Image Status: (8/10)   IS Status: (9/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-6/eap64-openshift:1.8
+Tagging Image :===> docker tag 94264b98cc44 registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.8
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.8
+
+
+
+IMAGESTREAM   :===> jboss-eap64-openshift                     IS Image Status: (9/10)   IS Status: (9/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-6/eap64-openshift:1.9
+Tagging Image :===> docker tag 9aee162d7882 registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.9
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:1.9
+
+
+
+IMAGESTREAM   :===> jboss-eap64-openshift                     IS Image Status: (10/10)   IS Status: (9/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-6/eap64-openshift:latest
+Tagging Image :===> docker tag 9aee162d7882 registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-6/eap64-openshift:latest
+
+
+
+IMAGESTREAM   :===> mongodb                                   IS Image Status: (1/3)   IS Status: (10/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/mongodb-32-rhel7:latest
+Tagging Image :===> docker tag 85aba29987d4 registry.ocp4.lab.com:5000/rhscl/mongodb-32-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/mongodb-32-rhel7:latest
+
+
+
+IMAGESTREAM   :===> mongodb                                   IS Image Status: (2/3)   IS Status: (10/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/mongodb-34-rhel7:latest
+Tagging Image :===> docker tag d0b980162d9b registry.ocp4.lab.com:5000/rhscl/mongodb-34-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/mongodb-34-rhel7:latest
+
+
+
+IMAGESTREAM   :===> mongodb                                   IS Image Status: (3/3)   IS Status: (10/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/mongodb-36-rhel7:latest
+Tagging Image :===> docker tag 16060b4144bb registry.ocp4.lab.com:5000/rhscl/mongodb-36-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/mongodb-36-rhel7:latest
+
+
+
+IMAGESTREAM   :===> redhat-sso71-openshift                    IS Image Status: (1/4)   IS Status: (11/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-sso-7/sso71-openshift:1.0
+Tagging Image :===> docker tag 395cb118c678 registry.ocp4.lab.com:5000/redhat-sso-7/sso71-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-sso-7/sso71-openshift:1.0
+
+
+
+IMAGESTREAM   :===> redhat-sso71-openshift                    IS Image Status: (2/4)   IS Status: (11/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-sso-7/sso71-openshift:1.1
+Tagging Image :===> docker tag 3660628de907 registry.ocp4.lab.com:5000/redhat-sso-7/sso71-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-sso-7/sso71-openshift:1.1
+
+
+
+IMAGESTREAM   :===> redhat-sso71-openshift                    IS Image Status: (3/4)   IS Status: (11/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-sso-7/sso71-openshift:1.2
+Tagging Image :===> docker tag a442baf1abe7 registry.ocp4.lab.com:5000/redhat-sso-7/sso71-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-sso-7/sso71-openshift:1.2
+
+
+
+IMAGESTREAM   :===> redhat-sso71-openshift                    IS Image Status: (4/4)   IS Status: (11/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-sso-7/sso71-openshift:1.3
+Tagging Image :===> docker tag c059c9d163bb registry.ocp4.lab.com:5000/redhat-sso-7/sso71-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-sso-7/sso71-openshift:1.3
+
+
+
+IMAGESTREAM   :===> jboss-datagrid73-openshift                IS Image Status: (1/2)   IS Status: (12/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-7/datagrid73-openshift:1.0
+Tagging Image :===> docker tag d4b11285c6b7 registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid73-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid73-openshift:1.0
+
+
+
+IMAGESTREAM   :===> jboss-datagrid73-openshift                IS Image Status: (2/2)   IS Status: (12/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-7/datagrid73-openshift:1.1
+Tagging Image :===> docker tag 611247135e7a registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid73-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid73-openshift:1.1
+
+
+
+IMAGESTREAM   :===> dotnet                                    IS Image Status: (1/3)   IS Status: (13/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/dotnet/dotnet-21-rhel7:2.1
+Tagging Image :===> docker tag 5531e807bee5 registry.ocp4.lab.com:5000/dotnet/dotnet-21-rhel7:2.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/dotnet/dotnet-21-rhel7:2.1
+
+
+
+IMAGESTREAM   :===> dotnet                                    IS Image Status: (2/3)   IS Status: (13/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/dotnet/dotnet-22-rhel7:2.2
+Tagging Image :===> docker tag a815ce10f90c registry.ocp4.lab.com:5000/dotnet/dotnet-22-rhel7:2.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/dotnet/dotnet-22-rhel7:2.2
+
+
+
+IMAGESTREAM   :===> dotnet                                    IS Image Status: (3/3)   IS Status: (13/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/dotnet/dotnet-30-rhel7:3.0
+Tagging Image :===> docker tag a1ead0b0eaff registry.ocp4.lab.com:5000/dotnet/dotnet-30-rhel7:3.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/dotnet/dotnet-30-rhel7:3.0
+
+
+
+IMAGESTREAM   :===> rhdm74-decisioncentral-openshift          IS Image Status: (1/2)   IS Status: (14/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhdm-7/rhdm74-decisioncentral-openshift:1.0
+Tagging Image :===> docker tag 19b937ab3eeb registry.ocp4.lab.com:5000/rhdm-7/rhdm74-decisioncentral-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhdm-7/rhdm74-decisioncentral-openshift:1.0
+
+
+
+IMAGESTREAM   :===> rhdm74-decisioncentral-openshift          IS Image Status: (2/2)   IS Status: (14/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhdm-7/rhdm74-decisioncentral-openshift:1.1
+Tagging Image :===> docker tag 9bd1e5ab45d0 registry.ocp4.lab.com:5000/rhdm-7/rhdm74-decisioncentral-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhdm-7/rhdm74-decisioncentral-openshift:1.1
+
+
+
+IMAGESTREAM   :===> apicurito-ui                              IS Image Status: (1/3)   IS Status: (15/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-apicurito:1.2
+Tagging Image :===> docker tag dfd78b3c6098 registry.ocp4.lab.com:5000/fuse7/fuse-apicurito:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-apicurito:1.2
+
+
+
+IMAGESTREAM   :===> apicurito-ui                              IS Image Status: (2/3)   IS Status: (15/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-apicurito:1.3
+Tagging Image :===> docker tag 5e594debea8d registry.ocp4.lab.com:5000/fuse7/fuse-apicurito:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-apicurito:1.3
+
+
+
+IMAGESTREAM   :===> apicurito-ui                              IS Image Status: (3/3)   IS Status: (15/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-apicurito:1.4
+Tagging Image :===> docker tag a5e220662d08 registry.ocp4.lab.com:5000/fuse7/fuse-apicurito:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-apicurito:1.4
+
+
+
+IMAGESTREAM   :===> jboss-eap72-openshift                     IS Image Status: (1/3)   IS Status: (16/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7/eap72-openshift:1.0
+Tagging Image :===> docker tag 6189c3b5431e registry.ocp4.lab.com:5000/jboss-eap-7/eap72-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7/eap72-openshift:1.0
+
+
+
+IMAGESTREAM   :===> jboss-eap72-openshift                     IS Image Status: (2/3)   IS Status: (16/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7/eap72-openshift:1.1
+Tagging Image :===> docker tag 0ca741317311 registry.ocp4.lab.com:5000/jboss-eap-7/eap72-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7/eap72-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-eap72-openshift                     IS Image Status: (3/3)   IS Status: (16/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7/eap72-openshift:latest
+Tagging Image :===> docker tag f2cdc931fb38 registry.ocp4.lab.com:5000/jboss-eap-7/eap72-openshift:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7/eap72-openshift:latest
+
+
+
+IMAGESTREAM   :===> jboss-datagrid65-client-openshift         IS Image Status: (1/2)   IS Status: (17/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-6/datagrid65-client-openshift:1.0
+Tagging Image :===> docker tag 15cfba9e76b2 registry.ocp4.lab.com:5000/jboss-datagrid-6/datagrid65-client-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-6/datagrid65-client-openshift:1.0
+
+
+
+IMAGESTREAM   :===> jboss-datagrid65-client-openshift         IS Image Status: (2/2)   IS Status: (17/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-6/datagrid65-client-openshift:1.1
+Tagging Image :===> docker tag c44dd4023b60 registry.ocp4.lab.com:5000/jboss-datagrid-6/datagrid65-client-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-6/datagrid65-client-openshift:1.1
+
+
+
+IMAGESTREAM   :===> dotnet-runtime                            IS Image Status: (1/3)   IS Status: (18/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/dotnet/dotnet-21-runtime-rhel7:2.1
+Tagging Image :===> docker tag 81dee1795f95 registry.ocp4.lab.com:5000/dotnet/dotnet-21-runtime-rhel7:2.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/dotnet/dotnet-21-runtime-rhel7:2.1
+
+
+
+IMAGESTREAM   :===> dotnet-runtime                            IS Image Status: (2/3)   IS Status: (18/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/dotnet/dotnet-22-runtime-rhel7:2.2
+Tagging Image :===> docker tag 742cfbc930f4 registry.ocp4.lab.com:5000/dotnet/dotnet-22-runtime-rhel7:2.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/dotnet/dotnet-22-runtime-rhel7:2.2
+
+
+
+IMAGESTREAM   :===> dotnet-runtime                            IS Image Status: (3/3)   IS Status: (18/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/dotnet/dotnet-30-runtime-rhel7:3.0
+Tagging Image :===> docker tag 0831bdd52001 registry.ocp4.lab.com:5000/dotnet/dotnet-30-runtime-rhel7:3.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/dotnet/dotnet-30-runtime-rhel7:3.0
+
+
+
+IMAGESTREAM   :===> postgresql                                IS Image Status: (1/2)   IS Status: (19/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/postgresql-10-rhel7:latest
+Tagging Image :===> docker tag 40d2ad96e52a registry.ocp4.lab.com:5000/rhscl/postgresql-10-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/postgresql-10-rhel7:latest
+
+
+
+IMAGESTREAM   :===> postgresql                                IS Image Status: (2/2)   IS Status: (19/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/postgresql-96-rhel7:latest
+Tagging Image :===> docker tag 640b64017758 registry.ocp4.lab.com:5000/rhscl/postgresql-96-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/postgresql-96-rhel7:latest
+
+
+
+IMAGESTREAM   :===> fuse7-java-openshift                      IS Image Status: (1/5)   IS Status: (20/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-java-openshift:1.0
+Tagging Image :===> docker tag f01a081e1d1c registry.ocp4.lab.com:5000/fuse7/fuse-java-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-java-openshift:1.0
+
+
+
+IMAGESTREAM   :===> fuse7-java-openshift                      IS Image Status: (2/5)   IS Status: (20/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-java-openshift:1.1
+Tagging Image :===> docker tag 1398678780b6 registry.ocp4.lab.com:5000/fuse7/fuse-java-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-java-openshift:1.1
+
+
+
+IMAGESTREAM   :===> fuse7-java-openshift                      IS Image Status: (3/5)   IS Status: (20/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-java-openshift:1.2
+Tagging Image :===> docker tag 62f2af090f78 registry.ocp4.lab.com:5000/fuse7/fuse-java-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-java-openshift:1.2
+
+
+
+IMAGESTREAM   :===> fuse7-java-openshift                      IS Image Status: (4/5)   IS Status: (20/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-java-openshift:1.3
+Tagging Image :===> docker tag 7ef3a2c26dbf registry.ocp4.lab.com:5000/fuse7/fuse-java-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-java-openshift:1.3
+
+
+
+IMAGESTREAM   :===> fuse7-java-openshift                      IS Image Status: (5/5)   IS Status: (20/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-java-openshift:1.4
+Tagging Image :===> docker tag ad4d6e5244e8 registry.ocp4.lab.com:5000/fuse7/fuse-java-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-java-openshift:1.4
+
+
+
+IMAGESTREAM   :===> jboss-webserver30-tomcat7-openshift       IS Image Status: (1/3)   IS Status: (21/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver30-tomcat7-openshift:1.1
+Tagging Image :===> docker tag 1c1a6448585f registry.ocp4.lab.com:5000/jboss-webserver-3/webserver30-tomcat7-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver30-tomcat7-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-webserver30-tomcat7-openshift       IS Image Status: (2/3)   IS Status: (21/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver30-tomcat7-openshift:1.2
+Tagging Image :===> docker tag 51d374102a9e registry.ocp4.lab.com:5000/jboss-webserver-3/webserver30-tomcat7-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver30-tomcat7-openshift:1.2
+
+
+
+IMAGESTREAM   :===> jboss-webserver30-tomcat7-openshift       IS Image Status: (3/3)   IS Status: (21/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver30-tomcat7-openshift:1.3
+Tagging Image :===> docker tag 8d9c9e1e75fd registry.ocp4.lab.com:5000/jboss-webserver-3/webserver30-tomcat7-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver30-tomcat7-openshift:1.3
+
+
+
+IMAGESTREAM   :===> mysql                                     IS Image Status: (1/2)   IS Status: (22/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/mysql-57-rhel7:latest
+Tagging Image :===> docker tag 60726b33a00a registry.ocp4.lab.com:5000/rhscl/mysql-57-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/mysql-57-rhel7:latest
+
+
+
+IMAGESTREAM   :===> mysql                                     IS Image Status: (2/2)   IS Status: (22/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/mysql-80-rhel7:latest
+Tagging Image :===> docker tag d677fd5dbbb6 registry.ocp4.lab.com:5000/rhscl/mysql-80-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/mysql-80-rhel7:latest
+
+
+
+IMAGESTREAM   :===> redhat-sso72-openshift                    IS Image Status: (1/5)   IS Status: (23/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-sso-7/sso72-openshift:1.0
+Tagging Image :===> docker tag ea59ab6fba63 registry.ocp4.lab.com:5000/redhat-sso-7/sso72-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-sso-7/sso72-openshift:1.0
+
+
+
+IMAGESTREAM   :===> redhat-sso72-openshift                    IS Image Status: (2/5)   IS Status: (23/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-sso-7/sso72-openshift:1.1
+Tagging Image :===> docker tag 8eba387b5037 registry.ocp4.lab.com:5000/redhat-sso-7/sso72-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-sso-7/sso72-openshift:1.1
+
+
+
+IMAGESTREAM   :===> redhat-sso72-openshift                    IS Image Status: (3/5)   IS Status: (23/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-sso-7/sso72-openshift:1.2
+Tagging Image :===> docker tag e0ed9dce2572 registry.ocp4.lab.com:5000/redhat-sso-7/sso72-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-sso-7/sso72-openshift:1.2
+
+
+
+IMAGESTREAM   :===> redhat-sso72-openshift                    IS Image Status: (4/5)   IS Status: (23/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-sso-7/sso72-openshift:1.3
+Tagging Image :===> docker tag 91cba4538e97 registry.ocp4.lab.com:5000/redhat-sso-7/sso72-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-sso-7/sso72-openshift:1.3
+
+
+
+IMAGESTREAM   :===> redhat-sso72-openshift                    IS Image Status: (5/5)   IS Status: (23/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-sso-7/sso72-openshift:1.4
+Tagging Image :===> docker tag 72f890570298 registry.ocp4.lab.com:5000/redhat-sso-7/sso72-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-sso-7/sso72-openshift:1.4
+
+
+
+IMAGESTREAM   :===> rhpam74-smartrouter-openshift             IS Image Status: (1/2)   IS Status: (24/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhpam-7/rhpam74-smartrouter-openshift:1.0
+Tagging Image :===> docker tag 8871cd7c9708 registry.ocp4.lab.com:5000/rhpam-7/rhpam74-smartrouter-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhpam-7/rhpam74-smartrouter-openshift:1.0
+
+
+
+IMAGESTREAM   :===> rhpam74-smartrouter-openshift             IS Image Status: (2/2)   IS Status: (24/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhpam-7/rhpam74-smartrouter-openshift:1.1
+Tagging Image :===> docker tag 5a80d92f2331 registry.ocp4.lab.com:5000/rhpam-7/rhpam74-smartrouter-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhpam-7/rhpam74-smartrouter-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-datagrid72-openshift                IS Image Status: (1/3)   IS Status: (25/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-7/datagrid72-openshift:1.0
+Tagging Image :===> docker tag 1403fc3a606b registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid72-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid72-openshift:1.0
+
+
+
+IMAGESTREAM   :===> jboss-datagrid72-openshift                IS Image Status: (2/3)   IS Status: (25/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-7/datagrid72-openshift:1.1
+Tagging Image :===> docker tag 6d54b048fbfa registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid72-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid72-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-datagrid72-openshift                IS Image Status: (3/3)   IS Status: (25/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-7/datagrid72-openshift:1.2
+Tagging Image :===> docker tag f9a29ab9fc3b registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid72-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid72-openshift:1.2
+
+
+
+IMAGESTREAM   :===> redis                                     IS Image Status: (1/1)   IS Status: (26/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/redis-32-rhel7:latest
+Tagging Image :===> docker tag a00c397427d3 registry.ocp4.lab.com:5000/rhscl/redis-32-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/redis-32-rhel7:latest
+
+
+
+IMAGESTREAM   :===> rhdm74-kieserver-openshift                IS Image Status: (1/2)   IS Status: (27/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhdm-7/rhdm74-kieserver-openshift:1.0
+Tagging Image :===> docker tag bc219dd4823d registry.ocp4.lab.com:5000/rhdm-7/rhdm74-kieserver-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhdm-7/rhdm74-kieserver-openshift:1.0
+
+
+
+IMAGESTREAM   :===> rhdm74-kieserver-openshift                IS Image Status: (2/2)   IS Status: (27/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhdm-7/rhdm74-kieserver-openshift:1.1
+Tagging Image :===> docker tag d53eecb513c1 registry.ocp4.lab.com:5000/rhdm-7/rhdm74-kieserver-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhdm-7/rhdm74-kieserver-openshift:1.1
+
+
+
+IMAGESTREAM   :===> java                                      IS Image Status: (1/2)   IS Status: (28/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/openjdk/openjdk-11-rhel7:latest
+Tagging Image :===> docker tag 084490c9716c registry.ocp4.lab.com:5000/openjdk/openjdk-11-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/openjdk/openjdk-11-rhel7:latest
+
+
+
+IMAGESTREAM   :===> java                                      IS Image Status: (2/2)   IS Status: (28/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-openjdk-18/openjdk18-openshift:latest
+Tagging Image :===> docker tag fc8de886c147 registry.ocp4.lab.com:5000/redhat-openjdk-18/openjdk18-openshift:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-openjdk-18/openjdk18-openshift:latest
+
+
+
+IMAGESTREAM   :===> nodejs                                    IS Image Status: (1/4)   IS Status: (29/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhoar-nodejs/nodejs-10
+Tagging Image :===> docker tag 0d01232685c9 registry.ocp4.lab.com:5000/rhoar-nodejs/nodejs-10
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhoar-nodejs/nodejs-10
+
+
+
+IMAGESTREAM   :===> nodejs                                    IS Image Status: (2/4)   IS Status: (29/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/nodejs-10-rhel7
+Tagging Image :===> docker tag 3e32112e4287 registry.ocp4.lab.com:5000/rhscl/nodejs-10-rhel7
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/nodejs-10-rhel7
+
+
+
+IMAGESTREAM   :===> nodejs                                    IS Image Status: (3/4)   IS Status: (29/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/nodejs-8-rhel7:latest
+Tagging Image :===> docker tag 65d8e33f8671 registry.ocp4.lab.com:5000/rhscl/nodejs-8-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/nodejs-8-rhel7:latest
+
+
+
+IMAGESTREAM   :===> nodejs                                    IS Image Status: (4/4)   IS Status: (29/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhoar-nodejs/nodejs-8
+Tagging Image :===> docker tag 5e0eaaf20a48 registry.ocp4.lab.com:5000/rhoar-nodejs/nodejs-8
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhoar-nodejs/nodejs-8
+
+
+
+IMAGESTREAM   :===> rhpam74-businesscentral-monitoring-openshift  IS Image Status: (1/2)   IS Status: (30/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhpam-7/rhpam74-businesscentral-monitoring-openshift:1.0
+Tagging Image :===> docker tag 676d8bc7fcc0 registry.ocp4.lab.com:5000/rhpam-7/rhpam74-businesscentral-monitoring-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhpam-7/rhpam74-businesscentral-monitoring-openshift:1.0
+
+
+
+IMAGESTREAM   :===> rhpam74-businesscentral-monitoring-openshift  IS Image Status: (2/2)   IS Status: (30/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhpam-7/rhpam74-businesscentral-monitoring-openshift:1.1
+Tagging Image :===> docker tag 9f472dbffa58 registry.ocp4.lab.com:5000/rhpam-7/rhpam74-businesscentral-monitoring-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhpam-7/rhpam74-businesscentral-monitoring-openshift:1.1
+
+
+
+IMAGESTREAM   :===> fuse-apicurito-generator                  IS Image Status: (1/3)   IS Status: (31/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-apicurito-generator:1.2
+Tagging Image :===> docker tag d5c9d7c39055 registry.ocp4.lab.com:5000/fuse7/fuse-apicurito-generator:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-apicurito-generator:1.2
+
+
+
+IMAGESTREAM   :===> fuse-apicurito-generator                  IS Image Status: (2/3)   IS Status: (31/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-apicurito-generator:1.3
+Tagging Image :===> docker tag 08810c719af3 registry.ocp4.lab.com:5000/fuse7/fuse-apicurito-generator:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-apicurito-generator:1.3
+
+
+
+IMAGESTREAM   :===> fuse-apicurito-generator                  IS Image Status: (3/3)   IS Status: (31/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-apicurito-generator:1.4
+Tagging Image :===> docker tag 139088947105 registry.ocp4.lab.com:5000/fuse7/fuse-apicurito-generator:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-apicurito-generator:1.4
+
+
+
+IMAGESTREAM   :===> jboss-webserver31-tomcat7-openshift       IS Image Status: (1/5)   IS Status: (32/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver31-tomcat7-openshift:1.0
+Tagging Image :===> docker tag 199f5d796c63 registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat7-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat7-openshift:1.0
+
+
+
+IMAGESTREAM   :===> jboss-webserver31-tomcat7-openshift       IS Image Status: (2/5)   IS Status: (32/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver31-tomcat7-openshift:1.1
+Tagging Image :===> docker tag 588aefb9e1e3 registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat7-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat7-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-webserver31-tomcat7-openshift       IS Image Status: (3/5)   IS Status: (32/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver31-tomcat7-openshift:1.2
+Tagging Image :===> docker tag 2993874eb78f registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat7-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat7-openshift:1.2
+
+
+
+IMAGESTREAM   :===> jboss-webserver31-tomcat7-openshift       IS Image Status: (4/5)   IS Status: (32/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver31-tomcat7-openshift:1.3
+Tagging Image :===> docker tag 036bafe47cfe registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat7-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat7-openshift:1.3
+
+
+
+IMAGESTREAM   :===> jboss-webserver31-tomcat7-openshift       IS Image Status: (5/5)   IS Status: (32/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver31-tomcat7-openshift:1.4
+Tagging Image :===> docker tag d89bd2e77953 registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat7-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat7-openshift:1.4
+
+
+
+IMAGESTREAM   :===> jboss-datagrid71-openshift                IS Image Status: (1/4)   IS Status: (33/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-7/datagrid71-openshift:1.0
+Tagging Image :===> docker tag f6fbd24b8978 registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid71-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid71-openshift:1.0
+
+
+
+IMAGESTREAM   :===> jboss-datagrid71-openshift                IS Image Status: (2/4)   IS Status: (33/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-7/datagrid71-openshift:1.1
+Tagging Image :===> docker tag 6ce54941f5bb registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid71-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid71-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-datagrid71-openshift                IS Image Status: (3/4)   IS Status: (33/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-7/datagrid71-openshift:1.2
+Tagging Image :===> docker tag 7f71ef02cdc1 registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid71-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid71-openshift:1.2
+
+
+
+IMAGESTREAM   :===> jboss-datagrid71-openshift                IS Image Status: (4/4)   IS Status: (33/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-7/datagrid71-openshift:1.3
+Tagging Image :===> docker tag 1094c7dcb50e registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid71-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-7/datagrid71-openshift:1.3
+
+
+
+IMAGESTREAM   :===> jboss-fuse70-eap-openshift                IS Image Status: (1/1)   IS Status: (34/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-eap-openshift:1.0
+Tagging Image :===> docker tag b50c5d57a003 registry.ocp4.lab.com:5000/fuse7/fuse-eap-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-eap-openshift:1.0
+
+
+
+IMAGESTREAM   :===> ruby                                      IS Image Status: (1/3)   IS Status: (35/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/ruby-23-rhel7:latest
+Tagging Image :===> docker tag 7eb26fd28134 registry.ocp4.lab.com:5000/rhscl/ruby-23-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/ruby-23-rhel7:latest
+
+
+
+IMAGESTREAM   :===> ruby                                      IS Image Status: (2/3)   IS Status: (35/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/ruby-24-rhel7:latest
+Tagging Image :===> docker tag 7995e99c201b registry.ocp4.lab.com:5000/rhscl/ruby-24-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/ruby-24-rhel7:latest
+
+
+
+IMAGESTREAM   :===> ruby                                      IS Image Status: (3/3)   IS Status: (35/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/ruby-25-rhel7:latest
+Tagging Image :===> docker tag 614ce153e61f registry.ocp4.lab.com:5000/rhscl/ruby-25-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/ruby-25-rhel7:latest
+
+
+
+IMAGESTREAM   :===> python                                    IS Image Status: (1/3)   IS Status: (36/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/python-27-rhel7:latest
+Tagging Image :===> docker tag 8170b35922ec registry.ocp4.lab.com:5000/rhscl/python-27-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/python-27-rhel7:latest
+
+
+
+IMAGESTREAM   :===> python                                    IS Image Status: (2/3)   IS Status: (36/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/python-35-rhel7:latest
+Tagging Image :===> docker tag c44745b51c19 registry.ocp4.lab.com:5000/rhscl/python-35-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/python-35-rhel7:latest
+
+
+
+IMAGESTREAM   :===> python                                    IS Image Status: (3/3)   IS Status: (36/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/python-36-rhel7:latest
+Tagging Image :===> docker tag 3d6fd3579ac6 registry.ocp4.lab.com:5000/rhscl/python-36-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/python-36-rhel7:latest
+
+
+
+IMAGESTREAM   :===> redhat-openjdk18-openshift                IS Image Status: (1/6)   IS Status: (37/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-openjdk-18/openjdk18-openshift:1.0
+Tagging Image :===> docker tag 98be7beb1a14 registry.ocp4.lab.com:5000/redhat-openjdk-18/openjdk18-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-openjdk-18/openjdk18-openshift:1.0
+
+
+
+IMAGESTREAM   :===> redhat-openjdk18-openshift                IS Image Status: (2/6)   IS Status: (37/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-openjdk-18/openjdk18-openshift:1.1
+Tagging Image :===> docker tag 4fba0e27a948 registry.ocp4.lab.com:5000/redhat-openjdk-18/openjdk18-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-openjdk-18/openjdk18-openshift:1.1
+
+
+
+IMAGESTREAM   :===> redhat-openjdk18-openshift                IS Image Status: (3/6)   IS Status: (37/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-openjdk-18/openjdk18-openshift:1.2
+Tagging Image :===> docker tag e4c6b86c99cf registry.ocp4.lab.com:5000/redhat-openjdk-18/openjdk18-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-openjdk-18/openjdk18-openshift:1.2
+
+
+
+IMAGESTREAM   :===> redhat-openjdk18-openshift                IS Image Status: (4/6)   IS Status: (37/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-openjdk-18/openjdk18-openshift:1.3
+Tagging Image :===> docker tag 3bb0d233f675 registry.ocp4.lab.com:5000/redhat-openjdk-18/openjdk18-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-openjdk-18/openjdk18-openshift:1.3
+
+
+
+IMAGESTREAM   :===> redhat-openjdk18-openshift                IS Image Status: (5/6)   IS Status: (37/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-openjdk-18/openjdk18-openshift:1.4
+Tagging Image :===> docker tag 7b46b9b6f72a registry.ocp4.lab.com:5000/redhat-openjdk-18/openjdk18-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-openjdk-18/openjdk18-openshift:1.4
+
+
+
+IMAGESTREAM   :===> redhat-openjdk18-openshift                IS Image Status: (6/6)   IS Status: (37/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-openjdk-18/openjdk18-openshift:1.5
+Tagging Image :===> docker tag c1bf72469139 registry.ocp4.lab.com:5000/redhat-openjdk-18/openjdk18-openshift:1.5
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-openjdk-18/openjdk18-openshift:1.5
+
+
+
+IMAGESTREAM   :===> fuse7-eap-openshift                       IS Image Status: (1/5)   IS Status: (38/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-eap-openshift:1.0
+Tagging Image :===> docker tag b50c5d57a003 registry.ocp4.lab.com:5000/fuse7/fuse-eap-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-eap-openshift:1.0
+
+
+
+IMAGESTREAM   :===> fuse7-eap-openshift                       IS Image Status: (2/5)   IS Status: (38/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-eap-openshift:1.1
+Tagging Image :===> docker tag ba2baa466bb3 registry.ocp4.lab.com:5000/fuse7/fuse-eap-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-eap-openshift:1.1
+
+
+
+IMAGESTREAM   :===> fuse7-eap-openshift                       IS Image Status: (3/5)   IS Status: (38/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-eap-openshift:1.2
+Tagging Image :===> docker tag 2db07314cd40 registry.ocp4.lab.com:5000/fuse7/fuse-eap-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-eap-openshift:1.2
+
+
+
+IMAGESTREAM   :===> fuse7-eap-openshift                       IS Image Status: (4/5)   IS Status: (38/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-eap-openshift:1.3
+Tagging Image :===> docker tag 28c2475c2961 registry.ocp4.lab.com:5000/fuse7/fuse-eap-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-eap-openshift:1.3
+
+
+
+IMAGESTREAM   :===> fuse7-eap-openshift                       IS Image Status: (5/5)   IS Status: (38/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-eap-openshift:1.4
+Tagging Image :===> docker tag eadfb5a143ec registry.ocp4.lab.com:5000/fuse7/fuse-eap-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-eap-openshift:1.4
+
+
+
+IMAGESTREAM   :===> rhpam74-businesscentral-openshift         IS Image Status: (1/2)   IS Status: (39/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhpam-7/rhpam74-businesscentral-openshift:1.0
+Tagging Image :===> docker tag aa7df67551b0 registry.ocp4.lab.com:5000/rhpam-7/rhpam74-businesscentral-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhpam-7/rhpam74-businesscentral-openshift:1.0
+
+
+
+IMAGESTREAM   :===> rhpam74-businesscentral-openshift         IS Image Status: (2/2)   IS Status: (39/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhpam-7/rhpam74-businesscentral-openshift:1.1
+Tagging Image :===> docker tag 69cfe9905a0c registry.ocp4.lab.com:5000/rhpam-7/rhpam74-businesscentral-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhpam-7/rhpam74-businesscentral-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-eap70-openshift                     IS Image Status: (1/5)   IS Status: (40/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7/eap70-openshift:1.3
+Tagging Image :===> docker tag a1731c1d75a8 registry.ocp4.lab.com:5000/jboss-eap-7/eap70-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7/eap70-openshift:1.3
+
+
+
+IMAGESTREAM   :===> jboss-eap70-openshift                     IS Image Status: (2/5)   IS Status: (40/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7/eap70-openshift:1.4
+Tagging Image :===> docker tag 3cf251717105 registry.ocp4.lab.com:5000/jboss-eap-7/eap70-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7/eap70-openshift:1.4
+
+
+
+IMAGESTREAM   :===> jboss-eap70-openshift                     IS Image Status: (3/5)   IS Status: (40/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7/eap70-openshift:1.5
+Tagging Image :===> docker tag 48a09fb13e17 registry.ocp4.lab.com:5000/jboss-eap-7/eap70-openshift:1.5
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7/eap70-openshift:1.5
+
+
+
+IMAGESTREAM   :===> jboss-eap70-openshift                     IS Image Status: (4/5)   IS Status: (40/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7/eap70-openshift:1.6
+Tagging Image :===> docker tag 4490c33a88d5 registry.ocp4.lab.com:5000/jboss-eap-7/eap70-openshift:1.6
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7/eap70-openshift:1.6
+
+
+
+IMAGESTREAM   :===> jboss-eap70-openshift                     IS Image Status: (5/5)   IS Status: (40/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7/eap70-openshift:1.7
+Tagging Image :===> docker tag c79e69ff7150 registry.ocp4.lab.com:5000/jboss-eap-7/eap70-openshift:1.7
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7/eap70-openshift:1.7
+
+
+
+IMAGESTREAM   :===> golang                                    IS Image Status: (1/1)   IS Status: (41/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/devtools/go-toolset-rhel7:1.11.5
+Tagging Image :===> docker tag 2b397b46f0d6 registry.ocp4.lab.com:5000/devtools/go-toolset-rhel7:1.11.5
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/devtools/go-toolset-rhel7:1.11.5
+
+
+
+IMAGESTREAM   :===> jboss-processserver64-openshift           IS Image Status: (1/7)   IS Status: (42/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-processserver-6/processserver64-openshift:1.0
+Tagging Image :===> docker tag d77ef8330af9 registry.ocp4.lab.com:5000/jboss-processserver-6/processserver64-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-processserver-6/processserver64-openshift:1.0
+
+
+
+IMAGESTREAM   :===> jboss-processserver64-openshift           IS Image Status: (2/7)   IS Status: (42/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-processserver-6/processserver64-openshift:1.1
+Tagging Image :===> docker tag e080f911ea6a registry.ocp4.lab.com:5000/jboss-processserver-6/processserver64-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-processserver-6/processserver64-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-processserver64-openshift           IS Image Status: (3/7)   IS Status: (42/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-processserver-6/processserver64-openshift:1.2
+Tagging Image :===> docker tag 2a1e2bc8ac5d registry.ocp4.lab.com:5000/jboss-processserver-6/processserver64-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-processserver-6/processserver64-openshift:1.2
+
+
+
+IMAGESTREAM   :===> jboss-processserver64-openshift           IS Image Status: (4/7)   IS Status: (42/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-processserver-6/processserver64-openshift:1.3
+Tagging Image :===> docker tag 218cc04063df registry.ocp4.lab.com:5000/jboss-processserver-6/processserver64-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-processserver-6/processserver64-openshift:1.3
+
+
+
+IMAGESTREAM   :===> jboss-processserver64-openshift           IS Image Status: (5/7)   IS Status: (42/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-processserver-6/processserver64-openshift:1.4
+Tagging Image :===> docker tag 318edacc2616 registry.ocp4.lab.com:5000/jboss-processserver-6/processserver64-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-processserver-6/processserver64-openshift:1.4
+
+
+
+IMAGESTREAM   :===> jboss-processserver64-openshift           IS Image Status: (6/7)   IS Status: (42/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-processserver-6/processserver64-openshift:1.5
+Tagging Image :===> docker tag 0289165d903b registry.ocp4.lab.com:5000/jboss-processserver-6/processserver64-openshift:1.5
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-processserver-6/processserver64-openshift:1.5
+
+
+
+IMAGESTREAM   :===> jboss-processserver64-openshift           IS Image Status: (7/7)   IS Status: (42/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-processserver-6/processserver64-openshift:1.6
+Tagging Image :===> docker tag 785918f95e28 registry.ocp4.lab.com:5000/jboss-processserver-6/processserver64-openshift:1.6
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-processserver-6/processserver64-openshift:1.6
+
+
+
+IMAGESTREAM   :===> fuse7-karaf-openshift                     IS Image Status: (1/5)   IS Status: (43/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-karaf-openshift:1.0
+Tagging Image :===> docker tag 02c9b9ef185a registry.ocp4.lab.com:5000/fuse7/fuse-karaf-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-karaf-openshift:1.0
+
+
+
+IMAGESTREAM   :===> fuse7-karaf-openshift                     IS Image Status: (2/5)   IS Status: (43/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-karaf-openshift:1.1
+Tagging Image :===> docker tag e2a9658ebf12 registry.ocp4.lab.com:5000/fuse7/fuse-karaf-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-karaf-openshift:1.1
+
+
+
+IMAGESTREAM   :===> fuse7-karaf-openshift                     IS Image Status: (3/5)   IS Status: (43/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-karaf-openshift:1.2
+Tagging Image :===> docker tag 47e204e55132 registry.ocp4.lab.com:5000/fuse7/fuse-karaf-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-karaf-openshift:1.2
+
+
+
+IMAGESTREAM   :===> fuse7-karaf-openshift                     IS Image Status: (4/5)   IS Status: (43/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-karaf-openshift:1.3
+Tagging Image :===> docker tag 2d5c68055f82 registry.ocp4.lab.com:5000/fuse7/fuse-karaf-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-karaf-openshift:1.3
+
+
+
+IMAGESTREAM   :===> fuse7-karaf-openshift                     IS Image Status: (5/5)   IS Status: (43/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-karaf-openshift:1.4
+Tagging Image :===> docker tag b493d8f46bf1 registry.ocp4.lab.com:5000/fuse7/fuse-karaf-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-karaf-openshift:1.4
+
+
+
+IMAGESTREAM   :===> jboss-amq-62                              IS Image Status: (1/7)   IS Status: (44/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-amq-6/amq62-openshift:1.1
+Tagging Image :===> docker tag 6157061559a2 registry.ocp4.lab.com:5000/jboss-amq-6/amq62-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-amq-6/amq62-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-amq-62                              IS Image Status: (2/7)   IS Status: (44/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-amq-6/amq62-openshift:1.2
+Tagging Image :===> docker tag 67775712ec6e registry.ocp4.lab.com:5000/jboss-amq-6/amq62-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-amq-6/amq62-openshift:1.2
+
+
+
+IMAGESTREAM   :===> jboss-amq-62                              IS Image Status: (3/7)   IS Status: (44/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-amq-6/amq62-openshift:1.3
+Tagging Image :===> docker tag d81770c03379 registry.ocp4.lab.com:5000/jboss-amq-6/amq62-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-amq-6/amq62-openshift:1.3
+
+
+
+IMAGESTREAM   :===> jboss-amq-62                              IS Image Status: (4/7)   IS Status: (44/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-amq-6/amq62-openshift:1.4
+Tagging Image :===> docker tag d7f6fca64038 registry.ocp4.lab.com:5000/jboss-amq-6/amq62-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-amq-6/amq62-openshift:1.4
+
+
+
+IMAGESTREAM   :===> jboss-amq-62                              IS Image Status: (5/7)   IS Status: (44/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-amq-6/amq62-openshift:1.5
+Tagging Image :===> docker tag 98bb764bdf9d registry.ocp4.lab.com:5000/jboss-amq-6/amq62-openshift:1.5
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-amq-6/amq62-openshift:1.5
+
+
+
+IMAGESTREAM   :===> jboss-amq-62                              IS Image Status: (6/7)   IS Status: (44/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-amq-6/amq62-openshift:1.6
+Tagging Image :===> docker tag 5ce07869aed3 registry.ocp4.lab.com:5000/jboss-amq-6/amq62-openshift:1.6
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-amq-6/amq62-openshift:1.6
+
+
+
+IMAGESTREAM   :===> jboss-amq-62                              IS Image Status: (7/7)   IS Status: (44/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-amq-6/amq62-openshift:1.7
+Tagging Image :===> docker tag f46ba2b199c4 registry.ocp4.lab.com:5000/jboss-amq-6/amq62-openshift:1.7
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-amq-6/amq62-openshift:1.7
+
+
+
+IMAGESTREAM   :===> eap-cd-openshift                          IS Image Status: (1/7)   IS Status: (45/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7-tech-preview/eap-cd-openshift:12.0
+Tagging Image :===> docker tag 0af9143a443b registry.ocp4.lab.com:5000/jboss-eap-7-tech-preview/eap-cd-openshift:12.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7-tech-preview/eap-cd-openshift:12.0
+
+
+
+IMAGESTREAM   :===> eap-cd-openshift                          IS Image Status: (2/7)   IS Status: (45/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7-tech-preview/eap-cd-openshift:13.0
+Tagging Image :===> docker tag 4f4affe22e35 registry.ocp4.lab.com:5000/jboss-eap-7-tech-preview/eap-cd-openshift:13.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7-tech-preview/eap-cd-openshift:13.0
+
+
+
+IMAGESTREAM   :===> eap-cd-openshift                          IS Image Status: (3/7)   IS Status: (45/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7-tech-preview/eap-cd-openshift:14.0
+Tagging Image :===> docker tag c5eac070a281 registry.ocp4.lab.com:5000/jboss-eap-7-tech-preview/eap-cd-openshift:14.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7-tech-preview/eap-cd-openshift:14.0
+
+
+
+IMAGESTREAM   :===> eap-cd-openshift                          IS Image Status: (4/7)   IS Status: (45/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7-tech-preview/eap-cd-openshift:15.0
+Tagging Image :===> docker tag 42581e94ae2f registry.ocp4.lab.com:5000/jboss-eap-7-tech-preview/eap-cd-openshift:15.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7-tech-preview/eap-cd-openshift:15.0
+
+
+
+IMAGESTREAM   :===> eap-cd-openshift                          IS Image Status: (5/7)   IS Status: (45/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7-tech-preview/eap-cd-openshift:16.0
+Tagging Image :===> docker tag 278cabc69a93 registry.ocp4.lab.com:5000/jboss-eap-7-tech-preview/eap-cd-openshift:16.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7-tech-preview/eap-cd-openshift:16.0
+
+
+
+IMAGESTREAM   :===> eap-cd-openshift                          IS Image Status: (6/7)   IS Status: (45/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7-tech-preview/eap-cd-openshift-rhel8:17.0
+Tagging Image :===> docker tag bbfa9fa29b3c registry.ocp4.lab.com:5000/jboss-eap-7-tech-preview/eap-cd-openshift-rhel8:17.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7-tech-preview/eap-cd-openshift-rhel8:17.0
+
+
+
+IMAGESTREAM   :===> eap-cd-openshift                          IS Image Status: (7/7)   IS Status: (45/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7-tech-preview/eap-cd-openshift-rhel8:latest
+Tagging Image :===> docker tag 05b8509381b1 registry.ocp4.lab.com:5000/jboss-eap-7-tech-preview/eap-cd-openshift-rhel8:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7-tech-preview/eap-cd-openshift-rhel8:latest
+
+
+
+IMAGESTREAM   :===> apicast-gateway                           IS Image Status: (1/6)   IS Status: (46/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/3scale-amp21/apicast-gateway:1.4-2
+Tagging Image :===> docker tag 610da2e9863b registry.ocp4.lab.com:5000/3scale-amp21/apicast-gateway:1.4-2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/3scale-amp21/apicast-gateway:1.4-2
+
+
+
+IMAGESTREAM   :===> apicast-gateway                           IS Image Status: (2/6)   IS Status: (46/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/3scale-amp22/apicast-gateway:1.8
+Tagging Image :===> docker tag e01961db1ec3 registry.ocp4.lab.com:5000/3scale-amp22/apicast-gateway:1.8
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/3scale-amp22/apicast-gateway:1.8
+
+
+
+IMAGESTREAM   :===> apicast-gateway                           IS Image Status: (3/6)   IS Status: (46/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/3scale-amp23/apicast-gateway
+Tagging Image :===> docker tag 878d39af6d8d registry.ocp4.lab.com:5000/3scale-amp23/apicast-gateway
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/3scale-amp23/apicast-gateway
+
+
+
+IMAGESTREAM   :===> apicast-gateway                           IS Image Status: (4/6)   IS Status: (46/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/3scale-amp24/apicast-gateway
+Tagging Image :===> docker tag 4871b1c5cbaa registry.ocp4.lab.com:5000/3scale-amp24/apicast-gateway
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/3scale-amp24/apicast-gateway
+
+
+
+IMAGESTREAM   :===> apicast-gateway                           IS Image Status: (5/6)   IS Status: (46/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/3scale-amp25/apicast-gateway
+Tagging Image :===> docker tag f37beb16dc1f registry.ocp4.lab.com:5000/3scale-amp25/apicast-gateway
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/3scale-amp25/apicast-gateway
+
+
+
+IMAGESTREAM   :===> apicast-gateway                           IS Image Status: (6/6)   IS Status: (46/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/3scale-amp26/apicast-gateway
+Tagging Image :===> docker tag 120e5377997a registry.ocp4.lab.com:5000/3scale-amp26/apicast-gateway
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/3scale-amp26/apicast-gateway
+
+
+
+IMAGESTREAM   :===> redhat-sso70-openshift                    IS Image Status: (1/2)   IS Status: (47/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-sso-7/sso70-openshift:1.3
+Tagging Image :===> docker tag 624183f01471 registry.ocp4.lab.com:5000/redhat-sso-7/sso70-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-sso-7/sso70-openshift:1.3
+
+
+
+IMAGESTREAM   :===> redhat-sso70-openshift                    IS Image Status: (2/2)   IS Status: (47/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-sso-7/sso70-openshift:1.4
+Tagging Image :===> docker tag 7e39b75ef884 registry.ocp4.lab.com:5000/redhat-sso-7/sso70-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-sso-7/sso70-openshift:1.4
+
+
+
+IMAGESTREAM   :===> fuse7-console                             IS Image Status: (1/5)   IS Status: (48/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-console:1.0
+Tagging Image :===> docker tag bc4eb0d98306 registry.ocp4.lab.com:5000/fuse7/fuse-console:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-console:1.0
+
+
+
+IMAGESTREAM   :===> fuse7-console                             IS Image Status: (2/5)   IS Status: (48/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-console:1.1
+Tagging Image :===> docker tag 3150c67d619c registry.ocp4.lab.com:5000/fuse7/fuse-console:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-console:1.1
+
+
+
+IMAGESTREAM   :===> fuse7-console                             IS Image Status: (3/5)   IS Status: (48/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-console:1.2
+Tagging Image :===> docker tag 778a1e4d8000 registry.ocp4.lab.com:5000/fuse7/fuse-console:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-console:1.2
+
+
+
+IMAGESTREAM   :===> fuse7-console                             IS Image Status: (4/5)   IS Status: (48/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-console:1.3
+Tagging Image :===> docker tag c6af7d2d1cf8 registry.ocp4.lab.com:5000/fuse7/fuse-console:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-console:1.3
+
+
+
+IMAGESTREAM   :===> fuse7-console                             IS Image Status: (5/5)   IS Status: (48/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-console:1.4
+Tagging Image :===> docker tag 7054c076196a registry.ocp4.lab.com:5000/fuse7/fuse-console:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-console:1.4
+
+
+
+IMAGESTREAM   :===> jboss-webserver50-tomcat9-openshift       IS Image Status: (1/4)   IS Status: (49/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-5/webserver50-tomcat9-openshift:1.0
+Tagging Image :===> docker tag 0148e402880f registry.ocp4.lab.com:5000/jboss-webserver-5/webserver50-tomcat9-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-5/webserver50-tomcat9-openshift:1.0
+
+
+
+IMAGESTREAM   :===> jboss-webserver50-tomcat9-openshift       IS Image Status: (2/4)   IS Status: (49/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-5/webserver50-tomcat9-openshift:1.1
+Tagging Image :===> docker tag c72c249c9a66 registry.ocp4.lab.com:5000/jboss-webserver-5/webserver50-tomcat9-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-5/webserver50-tomcat9-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-webserver50-tomcat9-openshift       IS Image Status: (3/4)   IS Status: (49/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-5/webserver50-tomcat9-openshift:1.2
+Tagging Image :===> docker tag 89b6c46a3241 registry.ocp4.lab.com:5000/jboss-webserver-5/webserver50-tomcat9-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-5/webserver50-tomcat9-openshift:1.2
+
+
+
+IMAGESTREAM   :===> jboss-webserver50-tomcat9-openshift       IS Image Status: (4/4)   IS Status: (49/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-5/webserver50-tomcat9-openshift:latest
+Tagging Image :===> docker tag 89b6c46a3241 registry.ocp4.lab.com:5000/jboss-webserver-5/webserver50-tomcat9-openshift:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-5/webserver50-tomcat9-openshift:latest
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-openshift                IS Image Status: (1/8)   IS Status: (50/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-openshift:1.0
+Tagging Image :===> docker tag 369055aea10f registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.0
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-openshift                IS Image Status: (2/8)   IS Status: (50/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-openshift:1.1
+Tagging Image :===> docker tag 0a1a5709c48d registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-openshift                IS Image Status: (3/8)   IS Status: (50/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-openshift:1.2
+Tagging Image :===> docker tag b1fe9c394a0a registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.2
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-openshift                IS Image Status: (4/8)   IS Status: (50/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-openshift:1.3
+Tagging Image :===> docker tag 2daa7bafebb4 registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.3
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-openshift                IS Image Status: (5/8)   IS Status: (50/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-openshift:1.4
+Tagging Image :===> docker tag 369de5c0d398 registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.4
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-openshift                IS Image Status: (6/8)   IS Status: (50/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-openshift:1.5
+Tagging Image :===> docker tag b51120b6ea2d registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.5
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.5
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-openshift                IS Image Status: (7/8)   IS Status: (50/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-openshift:1.6
+Tagging Image :===> docker tag 49cef4f8f985 registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.6
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.6
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-openshift                IS Image Status: (8/8)   IS Status: (50/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-openshift:1.7
+Tagging Image :===> docker tag 3ada5223fc03 registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.7
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-openshift:1.7
+
+
+
+IMAGESTREAM   :===> redhat-sso73-openshift                    IS Image Status: (1/2)   IS Status: (51/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-sso-7/sso73-openshift:1.0
+Tagging Image :===> docker tag 694b806c37e7 registry.ocp4.lab.com:5000/redhat-sso-7/sso73-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-sso-7/sso73-openshift:1.0
+
+
+
+IMAGESTREAM   :===> redhat-sso73-openshift                    IS Image Status: (2/2)   IS Status: (51/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/redhat-sso-7/sso73-openshift:1.0
+Tagging Image :===> docker tag 694b806c37e7 registry.ocp4.lab.com:5000/redhat-sso-7/sso73-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/redhat-sso-7/sso73-openshift:1.0
+
+
+
+IMAGESTREAM   :===> fis-karaf-openshift                       IS Image Status: (1/2)   IS Status: (52/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-fuse-6/fis-karaf-openshift:1.0
+Tagging Image :===> docker tag b73012bc7ccf registry.ocp4.lab.com:5000/jboss-fuse-6/fis-karaf-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-fuse-6/fis-karaf-openshift:1.0
+
+
+
+IMAGESTREAM   :===> fis-karaf-openshift                       IS Image Status: (2/2)   IS Status: (52/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-fuse-6/fis-karaf-openshift:2.0
+Tagging Image :===> docker tag 2f87b06561e9 registry.ocp4.lab.com:5000/jboss-fuse-6/fis-karaf-openshift:2.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-fuse-6/fis-karaf-openshift:2.0
+
+
+
+IMAGESTREAM   :===> jboss-webserver30-tomcat8-openshift       IS Image Status: (1/3)   IS Status: (53/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver30-tomcat8-openshift:1.1
+Tagging Image :===> docker tag 472500561b27 registry.ocp4.lab.com:5000/jboss-webserver-3/webserver30-tomcat8-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver30-tomcat8-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-webserver30-tomcat8-openshift       IS Image Status: (2/3)   IS Status: (53/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver30-tomcat8-openshift:1.2
+Tagging Image :===> docker tag 6053f21b864e registry.ocp4.lab.com:5000/jboss-webserver-3/webserver30-tomcat8-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver30-tomcat8-openshift:1.2
+
+
+
+IMAGESTREAM   :===> jboss-webserver30-tomcat8-openshift       IS Image Status: (3/3)   IS Status: (53/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver30-tomcat8-openshift:1.3
+Tagging Image :===> docker tag a52a5c2c1c67 registry.ocp4.lab.com:5000/jboss-webserver-3/webserver30-tomcat8-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver30-tomcat8-openshift:1.3
+
+
+
+IMAGESTREAM   :===> rhdm74-optaweb-employee-rostering-openshift  IS Image Status: (1/2)   IS Status: (54/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhdm-7-tech-preview/rhdm74-optaweb-employee-rostering-openshift:1.0
+Tagging Image :===> docker tag 6c0222338b75 registry.ocp4.lab.com:5000/rhdm-7-tech-preview/rhdm74-optaweb-employee-rostering-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhdm-7-tech-preview/rhdm74-optaweb-employee-rostering-openshift:1.0
+
+
+
+IMAGESTREAM   :===> rhdm74-optaweb-employee-rostering-openshift  IS Image Status: (2/2)   IS Status: (54/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhdm-7-tech-preview/rhdm74-optaweb-employee-rostering-openshift:1.1
+Tagging Image :===> docker tag 42de78f5da2b registry.ocp4.lab.com:5000/rhdm-7-tech-preview/rhdm74-optaweb-employee-rostering-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhdm-7-tech-preview/rhdm74-optaweb-employee-rostering-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-fuse70-java-openshift               IS Image Status: (1/1)   IS Status: (55/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-java-openshift:1.0
+Tagging Image :===> docker tag f01a081e1d1c registry.ocp4.lab.com:5000/fuse7/fuse-java-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-java-openshift:1.0
+
+
+
+IMAGESTREAM   :===> jboss-fuse70-karaf-openshift              IS Image Status: (1/1)   IS Status: (56/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-karaf-openshift:1.0
+Tagging Image :===> docker tag 02c9b9ef185a registry.ocp4.lab.com:5000/fuse7/fuse-karaf-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-karaf-openshift:1.0
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-driver-openshift         IS Image Status: (1/8)   IS Status: (57/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-driver-openshift:1.0
+Tagging Image :===> docker tag 17c50e74c0c8 registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.0
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-driver-openshift         IS Image Status: (2/8)   IS Status: (57/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-driver-openshift:1.1
+Tagging Image :===> docker tag fff1a254bc45 registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-driver-openshift         IS Image Status: (3/8)   IS Status: (57/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-driver-openshift:1.2
+Tagging Image :===> docker tag a2486798ddfe registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.2
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-driver-openshift         IS Image Status: (4/8)   IS Status: (57/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-driver-openshift:1.3
+Tagging Image :===> docker tag bb3514648ac9 registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.3
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-driver-openshift         IS Image Status: (5/8)   IS Status: (57/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-driver-openshift:1.4
+Tagging Image :===> docker tag edf095e03051 registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.4
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-driver-openshift         IS Image Status: (6/8)   IS Status: (57/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-driver-openshift:1.5
+Tagging Image :===> docker tag 99ff4937593c registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.5
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.5
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-driver-openshift         IS Image Status: (7/8)   IS Status: (57/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-driver-openshift:1.6
+Tagging Image :===> docker tag 52da996837de registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.6
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.6
+
+
+
+IMAGESTREAM   :===> jboss-datavirt64-driver-openshift         IS Image Status: (8/8)   IS Status: (57/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datavirt-6/datavirt64-driver-openshift:1.7
+Tagging Image :===> docker tag a3c2262f72cf registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.7
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datavirt-6/datavirt64-driver-openshift:1.7
+
+
+
+IMAGESTREAM   :===> jboss-datagrid65-openshift                IS Image Status: (1/5)   IS Status: (58/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-6/datagrid65-openshift:1.2
+Tagging Image :===> docker tag 3b362ff19136 registry.ocp4.lab.com:5000/jboss-datagrid-6/datagrid65-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-6/datagrid65-openshift:1.2
+
+
+
+IMAGESTREAM   :===> jboss-datagrid65-openshift                IS Image Status: (2/5)   IS Status: (58/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-6/datagrid65-openshift:1.3
+Tagging Image :===> docker tag f996c0ff8931 registry.ocp4.lab.com:5000/jboss-datagrid-6/datagrid65-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-6/datagrid65-openshift:1.3
+
+
+
+IMAGESTREAM   :===> jboss-datagrid65-openshift                IS Image Status: (3/5)   IS Status: (58/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-6/datagrid65-openshift:1.4
+Tagging Image :===> docker tag 2d8b2db6821e registry.ocp4.lab.com:5000/jboss-datagrid-6/datagrid65-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-6/datagrid65-openshift:1.4
+
+
+
+IMAGESTREAM   :===> jboss-datagrid65-openshift                IS Image Status: (4/5)   IS Status: (58/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-6/datagrid65-openshift:1.5
+Tagging Image :===> docker tag 901964d20b93 registry.ocp4.lab.com:5000/jboss-datagrid-6/datagrid65-openshift:1.5
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-6/datagrid65-openshift:1.5
+
+
+
+IMAGESTREAM   :===> jboss-datagrid65-openshift                IS Image Status: (5/5)   IS Status: (58/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-datagrid-6/datagrid65-openshift:1.6
+Tagging Image :===> docker tag bc59a5e893c8 registry.ocp4.lab.com:5000/jboss-datagrid-6/datagrid65-openshift:1.6
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-datagrid-6/datagrid65-openshift:1.6
+
+
+
+IMAGESTREAM   :===> nginx                                     IS Image Status: (1/2)   IS Status: (59/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/nginx-110-rhel7:latest
+Tagging Image :===> docker tag 1e81c5a702e1 registry.ocp4.lab.com:5000/rhscl/nginx-110-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/nginx-110-rhel7:latest
+
+
+
+IMAGESTREAM   :===> nginx                                     IS Image Status: (2/2)   IS Status: (59/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/nginx-112-rhel7:latest
+Tagging Image :===> docker tag fc131486cd08 registry.ocp4.lab.com:5000/rhscl/nginx-112-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/nginx-112-rhel7:latest
+
+
+
+IMAGESTREAM   :===> jboss-fuse70-console                      IS Image Status: (1/1)   IS Status: (60/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/fuse7/fuse-console:1.0
+Tagging Image :===> docker tag bc4eb0d98306 registry.ocp4.lab.com:5000/fuse7/fuse-console:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/fuse7/fuse-console:1.0
+
+
+
+IMAGESTREAM   :===> jboss-decisionserver64-openshift          IS Image Status: (1/7)   IS Status: (61/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-decisionserver-6/decisionserver64-openshift:1.0
+Tagging Image :===> docker tag 62f4af88ac1a registry.ocp4.lab.com:5000/jboss-decisionserver-6/decisionserver64-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-decisionserver-6/decisionserver64-openshift:1.0
+
+
+
+IMAGESTREAM   :===> jboss-decisionserver64-openshift          IS Image Status: (2/7)   IS Status: (61/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-decisionserver-6/decisionserver64-openshift:1.1
+Tagging Image :===> docker tag a10eb77b002c registry.ocp4.lab.com:5000/jboss-decisionserver-6/decisionserver64-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-decisionserver-6/decisionserver64-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-decisionserver64-openshift          IS Image Status: (3/7)   IS Status: (61/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-decisionserver-6/decisionserver64-openshift:1.2
+Tagging Image :===> docker tag 18cd1489d394 registry.ocp4.lab.com:5000/jboss-decisionserver-6/decisionserver64-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-decisionserver-6/decisionserver64-openshift:1.2
+
+
+
+IMAGESTREAM   :===> jboss-decisionserver64-openshift          IS Image Status: (4/7)   IS Status: (61/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-decisionserver-6/decisionserver64-openshift:1.3
+Tagging Image :===> docker tag c47c0df212a6 registry.ocp4.lab.com:5000/jboss-decisionserver-6/decisionserver64-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-decisionserver-6/decisionserver64-openshift:1.3
+
+
+
+IMAGESTREAM   :===> jboss-decisionserver64-openshift          IS Image Status: (5/7)   IS Status: (61/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-decisionserver-6/decisionserver64-openshift:1.4
+Tagging Image :===> docker tag 4e7de265be87 registry.ocp4.lab.com:5000/jboss-decisionserver-6/decisionserver64-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-decisionserver-6/decisionserver64-openshift:1.4
+
+
+
+IMAGESTREAM   :===> jboss-decisionserver64-openshift          IS Image Status: (6/7)   IS Status: (61/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-decisionserver-6/decisionserver64-openshift:1.5
+Tagging Image :===> docker tag f0ff525840de registry.ocp4.lab.com:5000/jboss-decisionserver-6/decisionserver64-openshift:1.5
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-decisionserver-6/decisionserver64-openshift:1.5
+
+
+
+IMAGESTREAM   :===> jboss-decisionserver64-openshift          IS Image Status: (7/7)   IS Status: (61/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-decisionserver-6/decisionserver64-openshift:1.6
+Tagging Image :===> docker tag 3cc3886caba7 registry.ocp4.lab.com:5000/jboss-decisionserver-6/decisionserver64-openshift:1.6
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-decisionserver-6/decisionserver64-openshift:1.6
+
+
+
+IMAGESTREAM   :===> jboss-eap71-openshift                     IS Image Status: (1/5)   IS Status: (62/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7/eap71-openshift:1.1
+Tagging Image :===> docker tag 200a05f74626 registry.ocp4.lab.com:5000/jboss-eap-7/eap71-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7/eap71-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-eap71-openshift                     IS Image Status: (2/5)   IS Status: (62/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7/eap71-openshift:1.2
+Tagging Image :===> docker tag 29a803959457 registry.ocp4.lab.com:5000/jboss-eap-7/eap71-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7/eap71-openshift:1.2
+
+
+
+IMAGESTREAM   :===> jboss-eap71-openshift                     IS Image Status: (3/5)   IS Status: (62/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7/eap71-openshift:1.3
+Tagging Image :===> docker tag 420be769f632 registry.ocp4.lab.com:5000/jboss-eap-7/eap71-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7/eap71-openshift:1.3
+
+
+
+IMAGESTREAM   :===> jboss-eap71-openshift                     IS Image Status: (4/5)   IS Status: (62/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7/eap71-openshift:1.4
+Tagging Image :===> docker tag 237b03664fa5 registry.ocp4.lab.com:5000/jboss-eap-7/eap71-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7/eap71-openshift:1.4
+
+
+
+IMAGESTREAM   :===> jboss-eap71-openshift                     IS Image Status: (5/5)   IS Status: (62/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-eap-7/eap71-openshift:latest
+Tagging Image :===> docker tag 237b03664fa5 registry.ocp4.lab.com:5000/jboss-eap-7/eap71-openshift:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-eap-7/eap71-openshift:latest
+
+
+
+IMAGESTREAM   :===> jboss-webserver31-tomcat8-openshift       IS Image Status: (1/5)   IS Status: (63/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver31-tomcat8-openshift:1.0
+Tagging Image :===> docker tag 9a9dc440bed0 registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat8-openshift:1.0
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat8-openshift:1.0
+
+
+
+IMAGESTREAM   :===> jboss-webserver31-tomcat8-openshift       IS Image Status: (2/5)   IS Status: (63/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver31-tomcat8-openshift:1.1
+Tagging Image :===> docker tag d0425c49c679 registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat8-openshift:1.1
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat8-openshift:1.1
+
+
+
+IMAGESTREAM   :===> jboss-webserver31-tomcat8-openshift       IS Image Status: (3/5)   IS Status: (63/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver31-tomcat8-openshift:1.2
+Tagging Image :===> docker tag 48ba94f79742 registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat8-openshift:1.2
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat8-openshift:1.2
+
+
+
+IMAGESTREAM   :===> jboss-webserver31-tomcat8-openshift       IS Image Status: (4/5)   IS Status: (63/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver31-tomcat8-openshift:1.3
+Tagging Image :===> docker tag 8af68386efa1 registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat8-openshift:1.3
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat8-openshift:1.3
+
+
+
+IMAGESTREAM   :===> jboss-webserver31-tomcat8-openshift       IS Image Status: (5/5)   IS Status: (63/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/jboss-webserver-3/webserver31-tomcat8-openshift:1.4
+Tagging Image :===> docker tag e8ca33cee7df registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat8-openshift:1.4
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/jboss-webserver-3/webserver31-tomcat8-openshift:1.4
+
+
+
+IMAGESTREAM   :===> mariadb                                   IS Image Status: (1/1)   IS Status: (64/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/mariadb-102-rhel7:latest
+Tagging Image :===> docker tag f1528f099ec6 registry.ocp4.lab.com:5000/rhscl/mariadb-102-rhel7:latest
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/mariadb-102-rhel7:latest
+
+
+
+IMAGESTREAM   :===> httpd                                     IS Image Status: (1/1)   IS Status: (65/65)
+-------------------------------------------------------------------------------------------------------------------------
+Pulling Image :===> docker pull registry.redhat.io/rhscl/httpd-24-rhel7
+Tagging Image :===> docker tag 54a9312811c3 registry.ocp4.lab.com:5000/rhscl/httpd-24-rhel7
+Pushing Image :===> docker push registry.ocp4.lab.com:5000/rhscl/httpd-24-rhel7
+
+
+
+[root@bastion samples-operator]#
+
+
+
+
+[root@bastion samples-operator]# oc get cm registry-config -o yaml -n openshift-config
+apiVersion: v1
+data:
+  registry.ocp4.lab.com..5000: |
+    -----BEGIN CERTIFICATE-----
+    MIIF9TCCA92gAwIBAgIJAMTyxb2wF4RaMA0GCSqGSIb3DQEBCwUAMIGQMQswCQYD
+    VQQGEwJJTjERMA8GA1UECAwIS2FybmF0a2ExEjAQBgNVBAcMCUJhbmdhbG9yZTEM
+    MAoGA1UECgwDSFBFMQswCQYDVQQLDAJJVDEeMBwGA1UEAwwVcmVnaXN0cnkub2Nw
+    NC5sYWIuY29tMR8wHQYJKoZIhvcNAQkBFhByZWdpc3RyeUBsYWIuY29tMB4XDTIw
+    MDMyNDE3Mjg0MloXDTIxMDMyNDE3Mjg0MlowgZAxCzAJBgNVBAYTAklOMREwDwYD
+    VQQIDAhLYXJuYXRrYTESMBAGA1UEBwwJQmFuZ2Fsb3JlMQwwCgYDVQQKDANIUEUx
+    CzAJBgNVBAsMAklUMR4wHAYDVQQDDBVyZWdpc3RyeS5vY3A0LmxhYi5jb20xHzAd
+    BgkqhkiG9w0BCQEWEHJlZ2lzdHJ5QGxhYi5jb20wggIiMA0GCSqGSIb3DQEBAQUA
+    A4ICDwAwggIKAoICAQCq5zLb3P7L3TfbtETHvDWNJY/FASKRc4DYUpBdKJvuDqRq
+    MXlJU0EHfUhqYsP9r6EvARytdazgSV+6O+jPNsn8X86xaBHkd5Xn7FbxNP94THjQ
+    xN1kUHu6zWxAEYtt2djM+c4/5ysyrXfMp14MLMOq9CtnZ61bZSc6drEHZrXpABkj
+    apuv3ek2bIX0sz3hbdyAAeKxoa2IddRBOAheMPfyBsXiAjGf+F9zz1lzpSMc4EPV
+    q+CG0dMVVCWrD/+YiRwMY/zLwigG0D8Z8OJ7k6slvnPqyIqbCmyyodVCg1vBAMHj
+    Akj3C9VyE8uN5hRUaoE7k10ulfU2JCwHuYgz0P31gsiYaLBQcM+WJwmQpWaH/B/s
+    N1YdqzAj1OWEm5Vkk98HA6Pha2FBS13FwSFDPju112oD1W7W3L2ojfq2tyzuOKtt
+    +VVX7+0UhaJb5v5uR9Z9rw2OJUMOTM2Hb93cDrOJlJVI3u3kzzu+x34MJia51/1D
+    iLkaNyqCjub3ecRcEq1xgOjGI1u7ivpIVsgf1/7xJjXTbyIaWF4FW0CU1a2d2/tO
+    8QdI8GCy6qQzFbB6wXYXzQKrfuBObU9sl7ZkXyC341tZ0AtuAcf6oJJOug1K3/Pn
+    NqNTi3y7BXXsw0GBo+CPtBrfoxMFKs1kMdDldsId4GksyA3gehDLRxRHAdLUWQID
+    AQABo1AwTjAdBgNVHQ4EFgQUJsWTP82bmPYTsxEYeNj3G8iRIaowHwYDVR0jBBgw
+    FoAUJsWTP82bmPYTsxEYeNj3G8iRIaowDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0B
+    AQsFAAOCAgEAdpnWw0r29yy/qIwzAiMitXqYPMQykPsb7oR6Urc4qJjIKjbEgy0n
+    gOP8yVDfefsoTE7YS2Y+3dyXHD9f773QIStNNmsqY9IYIvitDxKufqiqRtzkxEGJ
+    cFc6bvDw0AzMP4z0OAag1WFDoxYZdzQNyMJhKv9T90YU9UMxI0qs6xGKf0UG88bC
+    8qtOOVUSMl/4wYv3T9PAhCN+IdyhyK1aMKy6lL2u+HTk0YL9KLPaCn6DSC596Olw
+    WeAzsrFCHxjCUue+IhOI8L0BaQZmwFTQObG3FLIuKA8WK9q7F7pkVp01EFJ7dF8i
+    qwBrNl7YWB3LIYSMkFTxrAyDvcHkWoom0c5jXmIg+zf8pNLm6P40aZfpLpkwDwbq
+    4nNCDCE50D9cdHXOvYHyPagE3tuReun7Kr4Bzm5+EApahXAANEDKRYbobT5jrwzN
+    X4xhEAJhgvCjpzgiJa3KHmqI2UDKuK/2MfoK6apaflAH09mNJyef7kIQiL+daId+
+    Lro/3twmsibZGUDZ3eXFaReB4hwFrpA/kgAPbCMA8WGQBeLJoYuWE6S8IwYIjlxU
+    jNzU6d7jxtfmpvPyyaSfkaVwi2aW7h5Nhd/3IedqrdRGRMeu9Z9MRsB1HPfM85tX
+    LNNm6uEPPcFudVZ2DdoGzwzWjw1aj7I9jSOLdNi4SZZC/HE7gq++xIg=
+    -----END CERTIFICATE-----
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2020-03-28T04:57:29Z"
+  name: registry-config
+  namespace: openshift-config
+  resourceVersion: "1515130"
+  selfLink: /api/v1/namespaces/openshift-config/configmaps/registry-config
+  uid: 0535b7ed-e216-4dfa-b352-c9990951601b
+[root@bastion samples-operator]# oc get co
+
+NAME                                       VERSION   AVAILABLE   PROGRESSING   DEGRADED   SINCE
+authentication                             4.3.5     True        False         False      3d10h
+cloud-credential                           4.3.5     True        False         False      3d11h
+cluster-autoscaler                         4.3.5     True        False         False      3d10h
+console                                    4.3.5     True        False         False      3d10h
+dns                                        4.3.5     True        False         False      3d11h
+image-registry                             4.3.5     True        False         False      3d10h
+ingress                                    4.3.5     True        False         False      3d10h
+insights                                   4.3.5     True        False         False      3d11h
+kube-apiserver                             4.3.5     True        False         False      3d11h
+kube-controller-manager                    4.3.5     True        False         False      3d11h
+kube-scheduler                             4.3.5     True        False         False      3d11h
+machine-api                                4.3.5     True        False         False      3d11h
+machine-config                             4.3.5     True        False         False      12h
+marketplace                                4.3.5     True        False         False      3d10h
+monitoring                                 4.3.5     True        False         False      9h
+network                                    4.3.5     True        False         False      3d11h
+node-tuning                                4.3.5     True        False         False      10h
+openshift-apiserver                        4.3.5     True        False         False      3d10h
+openshift-controller-manager               4.3.5     True        False         False      3d11h
+openshift-samples                          4.3.5     True        True          True       20h
+operator-lifecycle-manager                 4.3.5     True        False         False      3d11h
+operator-lifecycle-manager-catalog         4.3.5     True        False         False      3d11h
+operator-lifecycle-manager-packageserver   4.3.5     True        False         False      13h
+service-ca                                 4.3.5     True        False         False      3d11h
+service-catalog-apiserver                  4.3.5     True        False         False      3d10h
+service-catalog-controller-manager         4.3.5     True        False         False      3d10h
+storage                                    4.3.5     True        False         False      3d10h
+
+
+
+[root@bastion ~]# oc edit configs.samples.operator.openshift.io -n openshift-cluster-samples-operator -o yaml
+apiVersion: samples.operator.openshift.io/v1
+kind: Config
+metadata:
+  creationTimestamp: "2020-03-24T18:50:35Z"
+  finalizers:
+  - samples.operator.openshift.io/finalizer
+  generation: 4
+  name: cluster
+  resourceVersion: "1527722"
+  selfLink: /apis/samples.operator.openshift.io/v1/configs/cluster
+  uid: 0ee4defe-2cc5-4ae5-b025-a0f1e6f81e41
+spec:
+  architectures:
+  - x86_64
+  managementState: Managed
+  samplesRegistry: registry.ocp4.lab.com:5000
+  skippedImagestreams:
+  - jenkins-agent-nodejs
+  - jenkins-agent-maven
+  - jenkins
+status:
+  architectures:
+  - x86_64
+  conditions:
+  - lastTransitionTime: "2020-03-24T18:50:44Z"
+    lastUpdateTime: "2020-03-24T18:50:44Z"
+    status: "False"
+    type: RemovePending
+  - lastTransitionTime: "2020-03-27T09:32:33Z"
+    lastUpdateTime: "2020-03-27T09:32:33Z"
+    status: "True"
+    type: SamplesExist
+  - lastTransitionTime: "2020-03-27T09:32:30Z"
+    lastUpdateTime: "2020-03-27T09:32:30Z"
+    status: "True"
+    type: ConfigurationValid
+  - lastTransitionTime: "2020-03-27T18:30:23Z"
+    lastUpdateTime: "2020-03-27T18:30:23Z"
+    status: "True"
+    type: ImportCredentialsExist
+  - lastTransitionTime: "2020-03-27T09:32:36Z"
+    lastUpdateTime: "2020-03-28T05:35:11Z"
+    message: <imagestream/jenkins-agent-nodejs>dockerimage.image.openshift.io "registry.ocp4.lab.com:5000/openshift-release-dev/ocp-v4.0-art-dev@sha256:ca814925849e9d3fd3bb67de2e747a413ece27ca3cd13f312ec2c4b62d876faf"
+      not found<imagestream/jenkins-agent-nodejs><imagestream/jenkins-agent-maven>dockerimage.image.openshift.io
+      "registry.ocp4.lab.com:5000/openshift-release-dev/ocp-v4.0-art-dev@sha256:d54176211b27eee74e6d957a3c1f2149080f6aeed2995e1f4337f89c529ce95d"
+      not found<imagestream/jenkins-agent-maven><imagestream/jenkins>dockerimage.image.openshift.io
+      "registry.ocp4.lab.com:5000/openshift-release-dev/ocp-v4.0-art-dev@sha256:a5fe1d551f63d3b8bb7bc06933018a2c0010602a801d91253af9a44620b5f112"
+      not found<imagestream/jenkins>
+    reason: 'jenkins-agent-nodejs jenkins-agent-maven jenkins '
+    status: "True"
+    type: ImportImageErrorsExist
+  - lastTransitionTime: "2020-03-28T05:15:36Z"
+    lastUpdateTime: "2020-03-28T05:15:36Z"
+    status: "False"
+    type: ImageChangesInProgress
+  - lastTransitionTime: "2020-03-27T09:32:30Z"
+    lastUpdateTime: "2020-03-27T09:32:30Z"
+    status: "False"
+    type: MigrationInProgress
+  managementState: Managed
+  samplesRegistry: registry.ocp4.lab.com:5000
+  version: 4.3.5
+
+  
+#################### Skipping  image streams ##################
+
+[root@bastion ~]# oc get configs.samples.operator.openshift.io -n openshift-cluster-samples-operator -o yaml
+apiVersion: v1
+items:
+- apiVersion: samples.operator.openshift.io/v1
+  kind: Config
+  metadata:
+    creationTimestamp: "2020-03-24T18:50:35Z"
+    finalizers:
+    - samples.operator.openshift.io/finalizer
+    generation: 4
+    name: cluster
+    resourceVersion: "1567679"
+    selfLink: /apis/samples.operator.openshift.io/v1/configs/cluster
+    uid: 0ee4defe-2cc5-4ae5-b025-a0f1e6f81e41
+  spec:
+    architectures:
+    - x86_64
+    managementState: Managed
+    samplesRegistry: registry.ocp4.lab.com:5000
+    skippedImagestreams:
+    - jenkins-agent-nodejs
+    - jenkins-agent-maven
+    - jenkins
+  status:
+    architectures:
+    - x86_64
+    conditions:
+    - lastTransitionTime: "2020-03-24T18:50:44Z"
+      lastUpdateTime: "2020-03-24T18:50:44Z"
+      status: "False"
+      type: RemovePending
+    - lastTransitionTime: "2020-03-27T09:32:33Z"
+      lastUpdateTime: "2020-03-27T09:32:33Z"
+      status: "True"
+      type: SamplesExist
+    - lastTransitionTime: "2020-03-27T09:32:30Z"
+      lastUpdateTime: "2020-03-27T09:32:30Z"
+      status: "True"
+      type: ConfigurationValid
+    - lastTransitionTime: "2020-03-27T18:30:23Z"
+      lastUpdateTime: "2020-03-27T18:30:23Z"
+      status: "True"
+      type: ImportCredentialsExist
+    - lastTransitionTime: "2020-03-28T05:38:10Z"
+      lastUpdateTime: "2020-03-28T07:50:37Z"
+      status: "False"
+      type: ImportImageErrorsExist
+    - lastTransitionTime: "2020-03-28T05:15:36Z"
+      lastUpdateTime: "2020-03-28T05:15:36Z"
+      status: "False"
+      type: ImageChangesInProgress
+    - lastTransitionTime: "2020-03-27T09:32:30Z"
+      lastUpdateTime: "2020-03-27T09:32:30Z"
+      status: "False"
+      type: MigrationInProgress
+    managementState: Managed
+    samplesRegistry: registry.ocp4.lab.com:5000
+    skippedImagestreams:
+    - jenkins-agent-nodejs
+    - jenkins-agent-maven
+    - jenkins
+    version: 4.3.5
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
+[root@bastion ~]#
+

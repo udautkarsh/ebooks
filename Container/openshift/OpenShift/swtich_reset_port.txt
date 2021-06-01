@@ -1,0 +1,154 @@
+[R08-N3140-U45U45-IRF-5950]disp int Ten-GigabitEthernet brief | i "10.7.0.22"
+XGE1/0/6:4           UP   10G     F(a)   T    746  10.7.0.22-FLR-1 RH-CTRL-3
+XGE1/0/18:3          UP   10G     F(a)   T    1    10.7.0.22-PCI-1.1 RH-CTRL-3
+XGE2/0/6:4           UP   10G     F(a)   T    746  10.7.0.22-FLR-2 RH-CTRL-3
+XGE2/0/18:3          UP   10G     F(a)   T    1    10.7.0.22-PCI-1.2 RH-CTRL-3
+[R08-N3140-U45U45-IRF-5950]XGE1/0/6:4
+                           ^
+ % Unrecognized command found at '^' position.
+[R08-N3140-U45U45-IRF-5950]int XGE1/0/6:4
+[R08-N3140-U45U45-IRF-5950-Ten-GigabitEthernet1/0/6:4]dis this
+#
+interface Ten-GigabitEthernet1/0/6:4
+ port link-mode bridge
+ description 10.7.0.22-FLR-1 RH-CTRL-3
+ port link-type trunk
+ undo port trunk permit vlan 1
+ port trunk permit vlan 706 746
+ port trunk pvid vlan 746
+ port link-aggregation group 152
+#
+return
+[R08-N3140-U45U45-IRF-5950-Ten-GigabitEthernet1/0/6:4]default
+This command will restore the default settings. Continue? [Y/N]:Y
+[R08-N3140-U45U45-IRF-5950-Ten-GigabitEthernet1/0/6:4]dis this
+#
+interface Ten-GigabitEthernet1/0/6:4
+ port link-mode bridge
+#
+return
+[R08-N3140-U45U45-IRF-5950-Ten-GigabitEthernet1/0/6:4]description 10.7.0.22-FLR-1 RH-CTRL-3
+[R08-N3140-U45U45-IRF-5950-Ten-GigabitEthernet1/0/6:4]dis this
+#
+interface Ten-GigabitEthernet1/0/6:4
+ port link-mode bridge
+ description 10.7.0.22-FLR-1 RH-CTRL-3
+#
+return
+[R08-N3140-U45U45-IRF-5950-Ten-GigabitEthernet1/0/6:4]port link-aggregation group 152
+[R08-N3140-U45U45-IRF-5950-Ten-GigabitEthernet1/0/6:4]dis this
+#
+interface Ten-GigabitEthernet1/0/6:4
+ port link-mode bridge
+ description 10.7.0.22-FLR-1 RH-CTRL-3
+ port link-aggregation group 152
+#
+return
+[R08-N3140-U45U45-IRF-5950-Ten-GigabitEthernet1/0/6:4]int XGE2/0/6:4
+[R08-N3140-U45U45-IRF-5950-Ten-GigabitEthernet2/0/6:4]dis this
+#
+interface Ten-GigabitEthernet2/0/6:4
+ port link-mode bridge
+ description 10.7.0.22-FLR-2 RH-CTRL-3
+ port link-type trunk
+ undo port trunk permit vlan 1
+ port trunk permit vlan 706 746
+ port trunk pvid vlan 746
+ port link-aggregation group 152
+#
+return
+[R08-N3140-U45U45-IRF-5950-Ten-GigabitEthernet2/0/6:4]default
+This command will restore the default settings. Continue? [Y/N]:Y
+[R08-N3140-U45U45-IRF-5950-Ten-GigabitEthernet2/0/6:4]dis this
+#
+interface Ten-GigabitEthernet2/0/6:4
+ port link-mode bridge
+#
+return
+[R08-N3140-U45U45-IRF-5950-Ten-GigabitEthernet2/0/6:4]description 10.7.0.22-FLR-2
+[R08-N3140-U45U45-IRF-5950-Ten-GigabitEthernet2/0/6:4]port link-aggregation group 152
+[R08-N3140-U45U45-IRF-5950-Ten-GigabitEthernet2/0/6:4]dis this
+#
+interface Ten-GigabitEthernet2/0/6:4
+ port link-mode bridge
+ description 10.7.0.22-FLR-2
+ port link-aggregation group 152
+#
+return
+[R08-N3140-U45U45-IRF-5950-Ten-GigabitEthernet2/0/6:4]int br 152
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation152]dis this
+#
+interface Bridge-Aggregation152
+ description 10.7.0.22-VIM-CTRL3-FLRS
+ port link-type trunk
+ undo port trunk permit vlan 1
+ port trunk permit vlan 706 746
+ port trunk pvid vlan 746
+ link-aggregation mode dynamic
+ lacp edge-port
+#
+return
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation152]default
+This command will restore the default settings. Continue? [Y/N]:Y
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation152]dis this
+#
+interface Bridge-Aggregation152
+#
+return
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation152]int br 150
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation150]dis this
+#
+interface Bridge-Aggregation150
+ description 10.7.0.20-VIM-CTRL1-FLRS
+ port access vlan 746
+ link-aggregation mode dynamic
+ lacp edge-port
+#
+return
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation150]int br 152
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation152]dis this
+#
+interface Bridge-Aggregation152
+#
+return
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation152]description 10.7.0.22
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation152]port access vlan 746
+Configuring Ten-GigabitEthernet1/0/6:4 done.
+Configuring Ten-GigabitEthernet2/0/6:4 done.
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation152]link-aggregation mode dynamic
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation152]dis this
+#
+interface Bridge-Aggregation152
+ description 10.7.0.22
+ port access vlan 746
+ link-aggregation mode dynamic
+#
+return
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation152]lacp edge-port
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation152]dis this
+#
+interface Bridge-Aggregation152
+ description 10.7.0.22
+ port access vlan 746
+ link-aggregation mode dynamic
+ lacp edge-port
+#
+return
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation152]int br 151
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation151]dis this
+#
+interface Bridge-Aggregation151
+ description 10.7.0.21 VIM-CTRL2-FLRS
+ port access vlan 746
+ link-aggregation mode dynamic
+ lacp edge-port
+#
+return
+[R08-N3140-U45U45-IRF-5950-Bridge-Aggregation151]s f
+Validating file. Please wait...
+Saved the current configuration to mainboard device successfully.
+Slot 2:
+Save next configuration file successfully.
+
+
+d l v b 150

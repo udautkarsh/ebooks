@@ -1,0 +1,610 @@
+ocp-installation:
+=================
+locabalancer:	
+			LoadBalancer-1.ocp4.com		192.168.122.200
+			LoadBalancer-2.ocp4.com		192.168.122.201
+			
+BootStrap node(bastion):
+			bootstrap.ocp4.com				192.168.122.202
+
+master nodes:
+			master-0.ocp4.com				192.168.122.203
+			master-1.ocp4.com				192.168.122.204
+			master-2.ocp4.com 				192.168.122.205
+worker nodes:
+			worker0.ocp4.com					192.168.122.206
+			worker1.ocp4.com					192.168.122.207
+
+
+4.3 offline setup:
+==================
+Bastion:
+10.7.0.6
+
+Masters:
+10.7.0.20====>14:02:ec:44:b9:a0
+10.7.0.21====>14:02:ec:3c:65:08
+10.7.0.22====>80:30:e0:32:4e:68
+
+Workers:
+10.7.0.16======>14:58:d0:52:1b:08
+10.7.0.17======>80:30:e0:32:5e:18 		
+		
+Offline setup:
+===============
+
+10.7.0.5 == bastion
+
+10.7.0.7 ===> master 0
+10.7.0.8 ====> master 1
+10.7.0.9 ====> master 2
+
+10.7.0.24 ====> worker0
+10.7.0.29 =====> worker1
+
+4.2 online setup:
+=================
+
+LAB Details:
+	-	worker node:
+		-	10.7.0.10 
+		
+		-	10.7.0.29
+	-	master node:
+		-	10.7.0.26  ====> raid 1
+		-	10.7.0.28  ====> raid 1 
+		-	10.7.0.23  ====> raid 1	
+	-	bastion:
+		-	10.7.0.12
+
+master node:
+	-	10.7.0.28: FLR1 :: 3c:a8:2a:fd:1a:c0
+	-	10.7.0.26: FLR1	:: 3c:a8:2a:fc:29:80
+	-	10.7.0.23: FLR1 :: 3c:a8:2a:fd:fd:00
+	
+worker node:
+	-	10.7.0.18  FLR1 :: 5c:b9:01:c2:53:20
+	-	10.7.0.10  FLR1 :: 3c:a8:2a:fc:0a:b8
+	-	10.7.0.30
+	
+
+admin/HP1nvent
+
+undo port link-type
+ port link-mode bridge
+ description "10.7.0.5 FLR"
+ port access vlan 747
+ 
+int Bridge-Aggregation 12
+undo interface Bridge-Aggregation12
+
+
+Installation:
+=============
+Pre-requisites:
+
+1. Configure HTTP server	
+2. Configure DHCP.
+3. Provision the required load balancers.
+4. Configure the ports for your machines.
+5. Configure DNS.
+6. Ensure network connectivity.	
+
+1.) DHCP configuration:
+=======================
+yum install dhcp -y
+
+vim /etc/dhcp/dhcpd.conf
+
+authoritative;
+
+subnet 192.168.122.0 netmask 255.255.255.0 {
+        range 192.168.122.200 192.168.122.250;
+        option routers 192.168.122.1;
+        option broadcast-address 192.168.122.255;
+        default-lease-time -1;
+        max-lease-time -1;
+}
+subnet 10.10.10.0 netmask 255.255.255.0 {
+        range 10.10.10.200 10.10.10.250;
+        option routers 10.10.10.1;
+        option broadcast-address 10.10.10.255;
+        default-lease-time -1;
+        max-lease-time -1;
+}
+
+systemctl enable dhcpd
+systemctl start dhcpd
+
+2) Configure DNS:
+===============
+yum install bind bind-utils -y
+
+vim /etc/named.conf
+
+options {
+        listen-on port 53 { 127.0.0.1; 192.168.122.103; };
+        listen-on-v6 port 53 { ::1; };
+        directory       "/var/named";
+        dump-file       "/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+        recursing-file  "/var/named/data/named.recursing";
+        secroots-file   "/var/named/data/named.secroots";
+        allow-query     { localhost; any; };
+
+...
+...
+zone "." IN {
+        type hint;
+        file "named.ca";
+};
+zone "ocp4.com" IN {
+        type master;
+        file "forward.ocp4.com";
+        allow-update {none;};
+};
+
+zone "122.168.192.in-addr.arpa" IN {
+        type master;
+        file "reverse_192.ocp4.com";
+        allow-update { none; };
+};
+
+zone "10.10.10.in-addr.arpa" IN {
+        type master;
+        file "reverse_10.ocp4.com";
+        allow-update { none; };
+};
+
+
+
+
+[root@infra-services ~]# firewall-cmd --permanent --add-port=53/tcp
+success
+[root@infra-services ~]# firewall-cmd --permanent --add-port=53/udp
+success
+[root@infra-services ~]# firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: eth0 eth1
+  sources: 
+  services: ssh dhcpv6-client http ftp
+  ports: 
+  protocols: 
+  masquerade: no
+  forward-ports: 
+  source-ports: 
+  icmp-blocks: 
+  rich rules: 
+	
+[root@infra-services ~]# firewall-cmd --reload
+success
+[root@infra-services ~]# firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: eth0 eth1
+  sources: 
+  services: ssh dhcpv6-client http ftp
+  ports: 53/tcp 53/udp
+  protocols: 
+  masquerade: no
+  forward-ports: 
+  source-ports: 
+  icmp-blocks: 
+  rich rules: 
+	
+[root@infra-services ~]# 
+
+cp named.localhost forward.ocp4.com
+[root@infra-services named]# more /var/named/forward.ocp4.com 
+$TTL 1D
+@	IN SOA	infra-services.ocp4.com. root.ocp4.com. (
+					0	; serial
+					1D	; refresh
+					1H	; retry
+					1W	; expire
+					3H )	; minimum
+
+@	IN 	NS	infra-services.ocp4.com.
+
+@	IN 	A 	192.168.122.103
+
+
+
+infra-services	IN	A	192.168.122.103
+[root@infra-services named]# 
+
+
+oc edit proxy/cluster
+
+[root@infra-services named]# named-checkconf -z /etc/named.conf
+zone ocp4.com/IN: loaded serial 0
+zone 122.168.192.in-addr.arpa/IN: loaded serial 0
+zone 10.10.10.in-addr.arpa/IN: loaded serial 0
+zone localhost.localdomain/IN: loaded serial 0
+zone localhost/IN: loaded serial 0
+zone 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa/IN: loaded serial 0
+zone 1.0.0.127.in-addr.arpa/IN: loaded serial 0
+zone 0.in-addr.arpa/IN: loaded serial 0
+[root@infra-services named]# named-check
+named-checkconf  named-checkzone  
+[root@infra-services named]# named-check
+named-checkconf  named-checkzone  
+[root@infra-services named]# named-checkzone forward forward.ocp4.com 
+zone forward/IN: loaded serial 0
+OK
+[root@infra-services named]# named-checkzone reverse reverse_192.ocp4.com 
+zone reverse/IN: loaded serial 0
+OK
+[root@infra-services named]# named-checkzone reverse reverse_10.ocp4.com `
+> ^C
+[root@infra-services named]# named-checkzone reverse reverse_10.ocp4.com 
+zone reverse/IN: loaded serial 0
+OK
+[root@infra-services named]# 
+
+
+chown root:named reverse_192.ocp4.com
+chown root:named reverse_10.ocp4.com
+
+
+###############################
+#working
+
+firewall-cmd --list-all
+
+firewall-cmd --add-port=2379-2380/tcp  --permanent
+firewall-cmd --add-port=6443/tcp  --permanent
+firewall-cmd --add-port=9000-9999/tcp  --permanent
+firewall-cmd --add-port=10249-10259/tcp  --permanent
+firewall-cmd --add-port=10256/tcp  --permanent
+
+firewall-cmd --add-port=4789/udp  --permanent
+firewall-cmd --add-port=6081/udp  --permanent
+firewall-cmd --add-port=9000-9999/udp  --permanent
+firewall-cmd --add-port=30000-32767/udp --permanent
+
+firewall-cmd --add-port=80/tcp --permanent
+firewall-cmd --add-port=22623/tcp --permanent
+firewall-cmd --add-port=443/tcp --permanent
+
+firewall-cmd --reload
+firewall-cmd --list-all
+
+#remove rules
+
+
+firewall-cmd --list-all
+
+firewall-cmd --remove-port=2379-2380/tcp  --permanent
+firewall-cmd --remove-port=6443/tcp  --permanent
+firewall-cmd --remove-port=9000-9999/tcp  --permanent
+firewall-cmd --remove-port=10249-10259/tcp  --permanent
+firewall-cmd --remove-port=10256/tcp  --permanent
+
+firewall-cmd --remove-port=4789/udp  --permanent
+firewall-cmd --remove-port=6081/udp  --permanent
+firewall-cmd --remove-port=9000-9999/udp  --permanent
+firewall-cmd --remove-port=30000-32767/udp --permanent
+
+firewall-cmd --remove-port=80/tcp --permanent
+firewall-cmd --remove-port=22623/tcp --permanent
+firewall-cmd --remove-port=443/tcp --permanent
+
+firewall-cmd --reload
+firewall-cmd --list-all
+
+
+
+##################################
+
+- 67/udp
+      - 53/tcp
+      - 53/udp
+      - 443/tcp
+      - 80/tcp
+      - 8080/tcp
+      - 6443/tcp
+      - 6443/udp
+      - 22623/tcp
+      - 22623/udp
+      - 9000/tcp
+      - 69/udp
+      - 111/tcp
+      - 2049/tcp
+      - 20048/tcp
+      - 50825/tcp
+      - 53248/tcp
+
+##################################
+
+firewall-cmd --list-all
+firewall-cmd --add-port=67/udp  --permanent
+firewall-cmd --add-port=53/udp  --permanent
+firewall-cmd --add-port=53/tcp  --permanent
+firewall-cmd --add-port=443/tcp  --permanent
+firewall-cmd --add-port=80/tcp  --permanent
+firewall-cmd --add-port=8080/tcp  --permanent
+firewall-cmd --add-port=6443/udp  --permanent
+firewall-cmd --add-port=6443/tcp  --permanent
+firewall-cmd --add-port=22623/udp  --permanent
+firewall-cmd --add-port=22623/tcp  --permanent
+firewall-cmd --add-port=69/udp  --permanent
+firewall-cmd --add-port=9000/tcp  --permanent
+firewall-cmd --add-port=2049/tcp  --permanent
+firewall-cmd --add-port=111/tcp  --permanent
+firewall-cmd --add-port=20048/tcp  --permanent
+firewall-cmd --add-port=50825/tcp  --permanent
+firewall-cmd --add-port=53248/tcp  --permanent
+
+firewall-cmd --reload
+firewall-cmd --list-all
+
+
+#remove rules
+
+firewall-cmd --list-all
+
+firewall-cmd --remove-port=2379-2380/tcp  --permanent
+firewall-cmd --remove-port=6443/tcp  --permanent
+firewall-cmd --remove-port=9000-9999/tcp  --permanent
+firewall-cmd --remove-port=10249-10259/tcp  --permanent
+firewall-cmd --remove-port=10256/tcp  --permanent
+
+firewall-cmd --remove-port=4789/udp  --permanent
+firewall-cmd --remove-port=6081/udp  --permanent
+firewall-cmd --remove-port=9000-9999/udp  --permanent
+firewall-cmd --remove-port=30000-32767/udp --permanent
+
+firewall-cmd --remove-port=80/tcp --permanent
+firewall-cmd --remove-port=22623/tcp --permanent
+firewall-cmd --remove-port=443/tcp --permanent
+firewall-cmd --remove-port=67/udp  --permanent
+firewall-cmd --remove-port=53/udp  --permanent
+firewall-cmd --remove-port=53/tcp  --permanent
+firewall-cmd --remove-port=443/tcp  --permanent
+firewall-cmd --remove-port=443/udp  --permanent
+firewall-cmd --remove-port=80/tcp  --permanent
+firewall-cmd --remove-port=80/udp  --permanent
+firewall-cmd --remove-port=8080/tcp  --permanent
+firewall-cmd --remove-port=6443/udp  --permanent
+firewall-cmd --remove-port=6443/tcp  --permanent
+firewall-cmd --remove-port=22623/udp  --permanent
+firewall-cmd --remove-port=22623/tcp  --permanent
+firewall-cmd --remove-port=69/udp  --permanent
+firewall-cmd --remove-port=9000/tcp  --permanent
+firewall-cmd --remove-port=2049/tcp  --permanent
+firewall-cmd --remove-port=111/tcp  --permanent
+firewall-cmd --remove-port=20048/tcp  --permanent
+firewall-cmd --remove-port=50825/tcp  --permanent
+firewall-cmd --remove-port=53248/tcp  --permanent
+
+firewall-cmd --reload
+firewall-cmd --list-all
+
+
+
+Kubernestes needs:
+
+Master node(s):
+
+TCP     6443*       Kubernetes API Server
+TCP     2379-2380   etcd server client API
+TCP     10250       Kubelet API
+TCP     10251       kube-scheduler
+TCP     10252       kube-controller-manager
+TCP     10255       Read-Only Kubelet API
+Worker nodes (minions):
+
+TCP     10250       Kubelet API
+TCP     10255       Read-Only Kubelet API
+TCP     30000-32767 NodePort Services
+
+
+
+
+###############################
+# PXE
+##############################
+
+yum install httpd
+systemctl enable httpd
+systemctl start httpd
+yum -y install syslinux tftp-server
+sed -i '/disable/ s/yes/no/' /etc/xinetd.d/tftp
+systemctl enable xinetd
+systemctl start xinetd
+
+
+##############################
+# iPXE
+###############################
+yum install ipxe-bootimgs -y
+sudo mkdir -p /tftpboot
+cp /usr/share/ipxe/{undionly.kpxe,ipxe.efi,snponly.efi} /tftpboot
+
+
+
+###############################
+
+ssh-keygen -t rsa -b 4096 -N '' ~/.ssh/id_rsa
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
+tar -zxf openshift-client-linux-4.2.0.tar.gz -C /usr/local/bin
+tar -zxf openshift-install-linux-4.2.0.tar.gz -C /usr/local/bin
+
+oc get csr -ojson | jq -r '.items[] | select(.status == {} ) | .metadata.name' | xargs oc adm certificate approve
+
+oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"emptyDir":{}}}}'
+
+     maxRunning: 0
+      maxWaitInQueue: 0s
+  storage:
+    emptyDir: {}
+status:
+  conditions:
+  - lastTransitionTime: "2020-03-11T05:51:10Z"
+    message: The registry is r
+
+#######################################################
+#
+# Openshift command
+#
+#####################################################
+
+
+
+
+
+Opting out of remote health reporting
+$ oc set data secret/pull-secret -n openshift-config --from-file=.dockerconfigjson=<pull-secret-location>
+
+oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"emptyDir":{}}}}'
+oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{ "pvc": {"claim":"image-registry-storage"}}}}'
+
+
+####################################################
+#
+# Configure persistent storage for image registry
+#
+####################################################
+
+
+
+1. Firstly you have to create SC and a PV 
+    - A provisioned persistent volume (PV) with ReadWriteMany access mode
+    - Must have "100Gi" capacity.
+
+2. To configure the Image Registry to use user-created PVC
+    - The PVC should be in openshift-image-registry project.
+    - The PVC should have ReadWriteMany access mode.
+
+uday@bastion:~/csi/latest/image-registry$ more storage_class.yaml
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: image-registry-stroage-class
+  namespace: openshift-image-registry
+provisioner: csi.hpe.com
+parameters:
+  csi.storage.k8s.io/fstype: xfs
+  csi.storage.k8s.io/provisioner-secret-name: nimble-secret
+  csi.storage.k8s.io/provisioner-secret-namespace: kube-system
+  csi.storage.k8s.io/controller-publish-secret-name: nimble-secret
+  csi.storage.k8s.io/controller-publish-secret-namespace: kube-system
+  csi.storage.k8s.io/node-stage-secret-name: nimble-secret
+  csi.storage.k8s.io/node-stage-secret-namespace: kube-system
+  csi.storage.k8s.io/node-publish-secret-name: nimble-secret
+  csi.storage.k8s.io/node-publish-secret-namespace: kube-system
+  # Uncomment for k8s 1.14 for resize support
+  #csi.storage.k8s.io/resizer-secret-name: nimble-secret
+  #csi.storage.k8s.io/resizer-secret-namespace: kube-system
+  # Uncomment for k8s 1.15 for resize support
+  #csi.storage.k8s.io/controller-expand-secret-name: nimble-secret
+  #csi.storage.k8s.io/controller-expand-secret-namespace: kube-system
+  accessProtocol: "iscsi"
+  description: "Volume from csi"
+  dedupeEnabled: "false"
+  performancePolicy: "SQL Server"
+  limitIops: "76800"
+  # Uncomment for k8s 1.14+ for resize
+  #allowVolumeExpansion: true
+
+	
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+uday@bastion:~/csi/latest/image-registry$ more image-registry-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: image-registry-storage
+  namespace: openshift-image-registry
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: image-registry-stroage-class
+uday@bastion:~/csi/latest/image-registry$
+
+
+$ oc project openshift-image-registry
+$ oc create -f stroage-class.yaml
+$ oc apply -f image-registry-pvc.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+2: Configure the Custom Resource for the image registry
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+$ oc edit configs.imageregistry.operator.openshift.io
+
+storage:
+  pvc:
+    claim: image-registry-storage
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Check if the PV and PVC are bound to each other. 
+
+$ watch oc get pods 
+
+- https://access.redhat.com/solutions/4348211
+
+For validating if your image registry is using persistent storage, you can check the cluster operator status and configs.imageregistry.operator.openshift.io for your PVC claim.  
+
+# oc get clusteroperator image-registry
+
+# oc get configs.imageregistry.operator.openshift.io -o yaml
+
+
+# Schedular troubleshooting
+oc logs <openshift-kube-scheduler-xxxxx-xxxx> -n openshift-kube-scheduler 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

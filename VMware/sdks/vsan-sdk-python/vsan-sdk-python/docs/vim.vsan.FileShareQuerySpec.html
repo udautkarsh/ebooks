@@ -1,0 +1,194 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script type="text/javascript" src="./commonRes.js" language="JavaScript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vsan.FileShareQuerySpec" name="vim.vsan.FileShareQuerySpec"></a>
+<h1>Data Object - VsanFileShareQuerySpec(vim.vsan.FileShareQuerySpec)</h1>
+<dl>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.vsan.VsanFileServiceSystem.html#queryFileShares">VsanClusterQueryFileShares</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.vsan.FileShareQueryProperties.html">VsanFileShareQueryProperties</a>
+</dd>
+<dt>Since </dt>
+<dd>vSAN API 7.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Specification for querying vSAN file share information. If no information
+    other than the domain name has been provided then all the share information
+    under this domain will be returned.
+ 
+    If any field is present, then only the shares matching the field query will
+    be returned from the query spec. Due to the pagination mechanism, the file
+    shares loaded through different API calls are not guaranteed to be atomic.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="domainName" name="domainName"></a><strong>domainName</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The name of the domain which the share belongs to. If not specified, the file
+    shares under all the domains will be queried.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="limit" name="limit"></a><strong>limit</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         This field sets the upper limit for the maximum number of shares to be
+    returned per page. Default and maximum value for pagination limit is 64.
+    If the limit is larger than the allowed pagination size or is a negative
+    number, an InvalidArgument exception will be thrown.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="managedBy" name="managedBy"></a><strong>managedBy</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The filter for the managing entity of the file share. Valid values are in the
+    <a href="vim.vsan.FileShareManagingEntity.html">VsanFileShareManagingEntity</a> field.<br>See <a href="vim.vsan.FileShareManagingEntity.html">VsanFileShareManagingEntity</a><br>
+      <p></p>
+<B><I>Since </I></B>vSAN API vSAN 7.0U1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="names" name="names"></a><strong>names</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         List of vSAN file share names to be queried.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="offset" name="offset"></a><strong>offset</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         All file shares are sorted in alphabetical order. The offset indicates
+    the starting element of the file share name. For the query of multiple pages
+    the value should be the nextOffset of the return value of the last query. For
+    more explanation, see {@vim.vsan.FileShareQueryResult#nextOffset}. If the
+    offset cannot be found in the list, the next file share in alphabetical order
+    will be returned as the first element.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="pageNumber" name="pageNumber"></a><strong>pageNumber</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The page number to be returned. The page number can be used to browse the
+    pages of file shares returned between different pages. The page number starts
+    from 1, and defaults to 1. An InvalidArgument will be thrown if the page
+    number is set to a negative number or exceeds the maximum number of pages
+    to be returned.
+ 
+    The shares in the pagination starts from the offset specified by the
+    {@vim.vsan.FileShareQuerySpec#offset} parameter.
+      <p></p>
+<B><I>Since </I></B>vSAN API vSAN 7.0U1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="properties" name="properties"></a><strong>properties</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vsan.FileShareQueryProperties.html">VsanFileShareQueryProperties</a></td><td>
+<p></p>
+         Specify the share properties to be returend. If not specified, all the
+    properties will be queried and returned. It is highly recommended to include
+    the needed properties only to improve the query performance.
+      <p></p>
+<B><I>Since </I></B>vSAN API vSAN 7.0U1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="protocols" name="protocols"></a><strong>protocols</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The protocol types to be queried.<br>See <a href="vim.vsan.FileShareProtocol.html">VsanFileProtocol</a><br>
+      <p></p>
+<B><I>Since </I></B>vSAN API vSAN 7.0U1<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="uuids" name="uuids"></a><strong>uuids</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         List of the vSAN file share UUIDs to be queried.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">None</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="VsanFileShareQuerySpec">
+            <complexContent>
+               <extension base="vsan:DynamicData">
+                  <sequence>
+                     <element name="domainName" type="xsd:string" minOccurs="0"/>
+                     <element name="uuids" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="names" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="offset" type="xsd:string" minOccurs="0"/>
+                     <element name="limit" type="xsd:long" minOccurs="0"/>
+                     <element name="managedBy" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="protocols" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="pageNumber" type="xsd:long" minOccurs="0"/>
+                     <element name="properties" type="vsan:VsanFileShareQueryProperties" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

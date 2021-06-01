@@ -1,0 +1,124 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script type="text/javascript" src="./commonRes.js" language="JavaScript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vsan.FileShareNetPermission" name="vim.vsan.FileShareNetPermission"></a>
+<h1>Data Object - VsanFileShareNetPermission(vim.vsan.FileShareNetPermission)</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.cns.VSANFileCreateSpec.html#field_detail">CnsVSANFileCreateSpec</a>, <a href="vim.vsan.FileShareConfig.html#field_detail">VsanFileShareConfig</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>Since </dt>
+<dd>vSAN API 7.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The permission settings of users based on the network information. These
+    settings should include the IP information of the users, permission assigned
+    and the user squash information.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="allowRoot" name="allowRoot"></a><strong>allowRoot</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Whether to squash the root user or not. Only takes effect when the net
+    permission for the file share is set to READ_WRITE mode.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="ips" name="ips"></a><strong>ips</strong></td><td>xsd:string</td><td>
+<p></p>
+         the client IP information the share user entity. Currently the following IP
+    range formats will be supported:
+    <ul>
+       <li>Single IP address, e.g., 123.23.23.123</li>
+       <li>IP addresses with subnet mask, e.g., 123.23.23.0/8</li>
+       <li>IP address ranges specified with '-', e.g., 123.23.23.123-123.23.23.128</li>
+       <li>The string '*' which implies all clients</li>
+    </ul>
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="permissions" name="permissions"></a><strong>permissions</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         Permissions assigned to the specified user entity. No permission will be
+    assigned to this client matching the IP information if the field is not set.<br>See <a href="vim.vsan.FileShareAccessType.html">VsanFileShareAccessType</a><br>
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">None</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="VsanFileShareNetPermission">
+            <complexContent>
+               <extension base="vsan:DynamicData">
+                  <sequence>
+                     <element name="ips" type="xsd:string"/>
+                     <element name="permissions" type="xsd:string" minOccurs="0"/>
+                     <element name="allowRoot" type="xsd:boolean" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

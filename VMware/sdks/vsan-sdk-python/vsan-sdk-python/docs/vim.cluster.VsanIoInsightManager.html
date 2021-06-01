@@ -1,0 +1,765 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script type="text/javascript" src="./commonRes.js" language="JavaScript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.cluster.VsanIoInsightManager" name="vim.cluster.VsanIoInsightManager"></a>
+<h1>Managed Object -  
+						VsanIoInsightManager(vim.cluster.VsanIoInsightManager)</h1>
+<dl>
+<dt>See also</dt>
+<dd>
+<a href="vim.ClusterComputeResource.html">ClusterComputeResource</a>, <a href="vim.HostSystem.html">HostSystem</a>, <a href="vim.Task.html">Task</a>, <a href="vim.VirtualMachine.html">VirtualMachine</a>, <a href="vim.host.VsanHostIoInsightInfo.html">VsanHostIoInsightInfo</a>, <a href="vim.cluster.VsanIoInsightInstance.html">VsanIoInsightInstance</a>, <a href="vim.cluster.VsanIoInsightInstanceQuerySpec.html">VsanIoInsightInstanceQuerySpec</a>
+</dd>
+<dt>Since </dt>
+<dd>vSAN API 7.2</dd>
+<p></p>
+</dl>
+<br>
+<h2>Managed Object Description</h2>
+<p></p>
+         This managed object is designed to provide service interfaces to manage
+    ioinsight(s) for VMs virtual disks I/O performance metrics monitor and
+    collection on the target hosts.
+ 
+    It can be accessed through MOID of 'vsan-cluster-ioinsight-manager' via vSAN
+    service on vCenter, or accessed through MOID of 'vsan-ioinsight-manager' on
+    ESXi host.
+      <a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<br>
+<a id="method_detail" name="method_detail"></a>
+<p class="table-title">Methods</p>
+<table cellspacing="0">
+<tr class="r1">
+<th>
+				          Methods defined in this Managed Object
+				        </th>
+</tr>
+<tr class="r0">
+<td><a href="#deleteIoInsightInstance">DeleteIoInsightInstance</a>, <a href="#queryIoInsightInstances">QueryIoInsightInstances</a>, <a href="#renameIoInsightInstance">RenameIoInsightInstance</a>, <a href="#startIoInsight">StartIoInsight</a>, <a href="#stopIoInsight">StopIoInsight</a></td>
+</tr>
+</table>
+<br>
+<a id="deleteIoInsightInstance" name="deleteIoInsightInstance"></a>
+<h1>DeleteIoInsightInstance(deleteIoInsightInstance)</h1>
+<p></p>
+         Delete information of a completed ioinsight instance specified by
+    the passed-in runName.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.cluster.VsanIoInsightManager.html">VsanIoInsightManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>runName</strong><span title="Required Privilege: runName" class="privilege-ref"> P</span></td><td>xsd:string</td><td>
+<p></p>
+         Run name of the ioinsight instance.
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>cluster</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: cluster" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ClusterComputeResource.html">ClusterComputeResource</a></td><td>
+<p></p>
+         The target cluster where the ioinsight instance belongs to.
+                   This parameter is ignored while the API is called against
+                   host.
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">Required privilege - see tooltip for details</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if any argument passed to the function is not specified correctly.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the specified ioinsight instance is not found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the API is not supported by the called host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.VsanFault.html">VsanFault</a></td><td>Thrown if any other unexpected fault is encountered.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('DeleteIoInsightInstance-textarea');expandcontent(this, 'DeleteIoInsightInstance-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="DeleteIoInsightInstance-div">
+<textarea cols="20" rows="10" name="DeleteIoInsightInstance-textarea" wrap="off" readonly="1" id="DeleteIoInsightInstance-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="DeleteIoInsightInstance" type="vsan:DeleteIoInsightInstanceRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="DeleteIoInsightInstanceResponse">
+                  <complexType/>
+               </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="queryIoInsightInstances" name="queryIoInsightInstances"></a>
+<h1>QueryIoInsightInstances(queryIoInsightInstances)</h1>
+<p></p>
+         Retrieve all ioinsight instances
+    <a href="vim.cluster.VsanIoInsightInstance.html">VsanIoInsightInstance</a> according to the passed in
+    parameters.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.cluster.VsanIoInsightManager.html">VsanIoInsightManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>querySpec</strong><span title="Required Privilege: querySpec" class="privilege-ref"> P</span></td><td><a href="vim.cluster.VsanIoInsightInstanceQuerySpec.html">VsanIoInsightInstanceQuerySpec</a></td><td>
+<p></p>
+         Describe specifications for the query operation.
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>cluster</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: cluster" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ClusterComputeResource.html">ClusterComputeResource</a></td><td>
+<p></p>
+         The target cluster where the ioinsight instances belong to.
+                   This parameter is ignored while the API is called against
+                   host.
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">Required privilege - see tooltip for details</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vim.cluster.VsanIoInsightInstance.html">VsanIoInsightInstance[]</a></td><td></td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if any argument passed to the function is not specified correctly.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the API is not supported by the called host.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.VsanFault.html">VsanFault</a></td><td>Thrown if any other unexpected fault is encountered.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('QueryIoInsightInstances-textarea');expandcontent(this, 'QueryIoInsightInstances-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="QueryIoInsightInstances-div">
+<textarea cols="20" rows="10" name="QueryIoInsightInstances-textarea" wrap="off" readonly="1" id="QueryIoInsightInstances-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="QueryIoInsightInstances" type="vsan:QueryIoInsightInstancesRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="QueryIoInsightInstancesResponse">
+                  <complexType>
+                     <sequence>
+                        <element name="returnval" type="vsan:VsanIoInsightInstance" minOccurs="0" maxOccurs="unbounded"/>
+                     </sequence>
+                  </complexType>
+               </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="renameIoInsightInstance" name="renameIoInsightInstance"></a>
+<h1>RenameIoInsightInstance(renameIoInsightInstance)</h1>
+<p></p>
+         Rename an ioinsight instance which is completed already
+    (see <a href="vim.cluster.VsanIoInsightInstanceState.html">VsanIoInsightInstanceState</a>).
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.cluster.VsanIoInsightManager.html">VsanIoInsightManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>oldRunName</strong><span title="Required Privilege: oldRunName" class="privilege-ref"> P</span></td><td>xsd:string</td><td>
+<p></p>
+         The current run name of an completed ioinsight instance.
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>newRunName</strong><span title="Required Privilege: newRunName" class="privilege-ref"> P</span></td><td>xsd:string</td><td>
+<p></p>
+         New run name for the completed ioinsight instance.
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>cluster</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: cluster" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ClusterComputeResource.html">ClusterComputeResource</a></td><td>
+<p></p>
+         The target cluster where the ioinsight instance belongs to.
+                   This parameter is ignored while the API is called against
+                   host.
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">Required privilege - see tooltip for details</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if any argument passed to the function is not specified correctly.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if the specified ioinsight instance is not found.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td>Thrown if the API is not supported by the called host.</td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.VsanFault.html">VsanFault</a></td><td>Thrown if any other unexpected fault is encountered.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('RenameIoInsightInstance-textarea');expandcontent(this, 'RenameIoInsightInstance-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="RenameIoInsightInstance-div">
+<textarea cols="20" rows="10" name="RenameIoInsightInstance-textarea" wrap="off" readonly="1" id="RenameIoInsightInstance-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="RenameIoInsightInstance" type="vsan:RenameIoInsightInstanceRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="RenameIoInsightInstanceResponse">
+                  <complexType/>
+               </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="startIoInsight" name="startIoInsight"></a>
+<h1>StartIoInsight(startIoInsight)</h1>
+<p></p>
+         Start ioinsight tool(s) running on the whole vSAN cluster or on the
+    specified ESXi host(s) for VMs virtual disks I/O performance metrics
+    monitor.
+ 
+    Given the parameters passed-in, ioinsight tool(s) will be started
+    on the ESXi host(s) to monitor and collect VMDKs I/O performance metrics of
+    the specified VMs.
+    Once the specified run duration has expired, ioinsight will stop running
+    automatically. The collected performance metrics will be persisted in vSAN
+    datastore.
+ 
+    This API returns a task which is running background and performing actually
+    ioinsight start operation on each host. Please wait for the task to be
+    completed, and retrieve the final result - one or more
+    <a href="vim.host.VsanHostIoInsightInfo.html">VsanHostIoInsightInfo</a> from the corresponding task
+    information.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.cluster.VsanIoInsightManager.html">VsanIoInsightManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>cluster</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: cluster" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ClusterComputeResource.html">ClusterComputeResource</a></td><td>
+<p></p>
+         The cluster to which the ESXi host(s) belong.
+                   This parameter is ignored while the API is called against
+                   host.
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>runName</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: runName" class="privilege-ref"> P</span></td><td>xsd:string</td><td>
+<p></p>
+         Caller can specify a meaningful name for ioinsight one time
+                   execution, and use that name for ioinsight metrics query in
+                   the future.
+                   This parameter can be ignored while the API is called against
+                   host.
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>durationSec</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: durationSec" class="privilege-ref"> P</span></td><td>xsd:long</td><td>
+<p></p>
+         Duration in seconds for ioinsight execution.
+                       Once duration has expired ioinsight will stop on it's
+                       own. The valid range of duration is between from 60 second
+                       to 86400 seconds (24 hours).
+                       If this parameter is not provided, the API will try to
+                       append targetVMs to the ioinsight(s) running on
+                       targetHosts as new monitor targets.
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>targetHosts</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: targetHosts" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.HostSystem.html">HostSystem[]</a></td><td>
+<p></p>
+         One or multiple ESXi hosts on which ioinsight is
+                       installed and going to be started.
+                       If this parameter is not provided, all hosts of the
+                       cluster will be treated as targets, and this case is only
+                       supported while being invoked against vCenter.
+                       If the API is called against host, this parameter is must
+                       to have and should be exactly same as the target host.
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>targetVMs</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: targetVMs" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference[]</a>
+<br> to a
+                  <a href="vim.VirtualMachine.html">VirtualMachine[]</a></td><td>
+<p></p>
+         One or multiple target VMs will be monitored by ioinsight.
+                     If this parameter is not provided, all VMs on the host
+                     will be treated as targets.
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">Required privilege - see tooltip for details</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>Task which is performing actually ioinsight start operation in the background.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if any argument passed to the API is not specified correctly.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if no ESXi host could be contacted to perform the operation when this method is called against vCenter, or ioinsight cannot be found on host.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.VsanFault.html">VsanFault</a></td><td>Thrown if any other unexpected failure happened during starting ioinsight.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('StartIoInsight-textarea');expandcontent(this, 'StartIoInsight-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="StartIoInsight-div">
+<textarea cols="20" rows="10" name="StartIoInsight-textarea" wrap="off" readonly="1" id="StartIoInsight-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="StartIoInsight" type="vsan:StartIoInsightRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="StartIoInsightResponse">
+                  <complexType>
+                     <sequence>
+                        <element name="returnval" type="vsan:ManagedObjectReference"/>
+                     </sequence>
+                  </complexType>
+               </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<a id="stopIoInsight" name="stopIoInsight"></a>
+<h1>StopIoInsight(stopIoInsight)</h1>
+<p></p>
+         Stop ioinsight tool(s) running on the ESXi host(s) by given parameters
+    passed-in.
+    The collected VMDKs I/O performance metrics will be persisted in vSAN
+    datastore for further query by:
+    vim.cluster.VsanPerformanceManager#QueryVsanPerf.
+ 
+    This API returns a task which is running background and performing actually
+    ioinsight stop operation on each host. Please wait for the task to be
+    completed, and retrieve the final result - one or more
+    <a href="vim.host.VsanHostIoInsightInfo.html">VsanHostIoInsightInfo</a> from the corresponding task
+    information.
+      <dl>
+<dt>Required Privileges</dt>
+<dd>None</dd>
+</dl>
+<p class="table-title">
+		Parameters
+		</p>
+<table cellspacing="0">
+<tr>
+<th>Name</th><th>Type</th><th>Description</th>
+</tr>
+<tr class="r1">
+<td><strong>_this</strong></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a></td><td>
+					A reference to the 
+						<a href="vim.cluster.VsanIoInsightManager.html">VsanIoInsightManager</a>
+						used to make the method call.
+					</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>cluster</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: cluster" class="privilege-ref"> P</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.ClusterComputeResource.html">ClusterComputeResource</a></td><td>
+<p></p>
+         The cluster to which the target ESXi host(s) belong. This
+                   parameter is ignored while the API is called against host.
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><strong>runName</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: runName" class="privilege-ref"> P</span></td><td>xsd:string</td><td>
+<p></p>
+         The name of running ioinsight to be stopped. This parameter
+                   can be ingnored while being called against host.
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><strong>hostsIoInsightInfos</strong><span title="Need not be set" class="footnote-ref">*</span><span title="Required Privilege: hostsIoInsightInfos" class="privilege-ref"> P</span></td><td><a href="vim.host.VsanHostIoInsightInfo.html">VsanHostIoInsightInfo[]</a></td><td>
+<p></p>
+         One or multiple host ioinsight(s) information, which
+                               indicate the target ioinsight(s) to be stopped or the
+                               VMs to be unmonitored.
+                               If <a href="vim.host.VsanIoInsightInfo.html#monitoredVMs">monitoredVMs</a>
+                               are specified by the parameter, the API will try to
+                               unmonitor the VMs from running ioinsight(s), otherwise
+                               it will entirely stop the specified ioinsight(s) if no
+                               valid runName is provided.
+                               If neither this parameter nor runName is provided,
+                               the API will try to stop ioinsight(s) on each host in
+                               the cluster, and this case is only supported while
+                               being invoked against vCenter. If the API is called
+                               against host, this parameter is must to have and
+                               <a href="vim.host.VsanHostIoInsightInfo.html#host">host</a> should be
+                               exactly same as the target host.
+      <p></p>
+<B><I>Since </I></B>vSAN API 7.2<br>
+</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set </span><span class="privilege-ref">P</span><span class="footnote">Required privilege - see tooltip for details</span>
+<br>
+<p class="table-title">
+		Return Value
+		</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr>
+<td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Task.html">Task</a></td><td>Task which is performing actually ioinsight stop operation in the background on each host.</td>
+</tr>
+</table>
+<br>
+<p class="table-title">
+         Faults
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th><th>
+               Description
+            </th>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.InvalidArgument.html">InvalidArgument</a></td><td>Thrown if any argument passed to the function is not specified correctly.</td>
+</tr>
+<tr class="r0">
+<td><a href="vim.fault.NotFound.html">NotFound</a></td><td>Thrown if no ESXi host could be contacted to perform the operation when this method is called against vCenter.</td>
+</tr>
+<tr class="r1">
+<td><a href="vmodl.fault.NotSupported.html">NotSupported</a></td><td></td>
+</tr>
+<tr class="r0">
+<td><a href="vmodl.RuntimeFault.html">RuntimeFault</a></td><td>Thrown if any type of runtime fault is thrown that is not covered by the other faults; for example, a communication error.</td>
+</tr>
+<tr class="r1">
+<td><a href="vim.fault.VsanFault.html">VsanFault</a></td><td>Thrown if the caller doesn't have the required privilege, or the cluster has no hosts.</td>
+</tr>
+</table>
+<p class="table-title">
+         Events
+      </p>
+<table cellspacing="0">
+<tr>
+<th>
+               Type
+            </th>
+</tr>
+<tr class="r1">
+<td colspan="2">None</td>
+</tr>
+</table>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('StopIoInsight-textarea');expandcontent(this, 'StopIoInsight-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="StopIoInsight-div">
+<textarea cols="20" rows="10" name="StopIoInsight-textarea" wrap="off" readonly="1" id="StopIoInsight-textarea">         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="StopIoInsight" type="vsan:StopIoInsightRequestType"/>
+         <element xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="StopIoInsightResponse">
+                  <complexType>
+                     <sequence>
+                        <element name="returnval" type="vsan:ManagedObjectReference"/>
+                     </sequence>
+                  </complexType>
+               </element></textarea>
+</div>
+<br>
+<br>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td></td><td><a href="#method_detail">Local Methods</a></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

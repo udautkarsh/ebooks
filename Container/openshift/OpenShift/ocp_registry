@@ -1,0 +1,339 @@
+Create an RHEL 7.6 VIM:
+=================================
+artifacts:
+==========
+wget https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.2/latest/rhcos-4.2.0-x86_64-installer-initramfs.img
+wget https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.2/latest/rhcos-4.2.0-x86_64-installer-kernel
+wget https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.2/latest/rhcos-4.2.0-x86_64-metal-bios.raw.gz
+wget https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.2/latest/rhcos-4.2.0-x86_64-metal-uefi.raw.gz
+
+	export https_proxy=http://16.85.88.10:8080
+	export http_proxy=http://16.85.88.10:8080
+	export no_proxy=192.168.122.1,lab.com
+
+
+Preperation:
+============
+
+	export https_proxy=http://16.85.88.10:8080
+	export http_proxy=http://16.85.88.10:8080
+	export no_proxy=nfv.com
+
+	firewall-cmd --add-port=5000/tcp --zone=internal --permanent 
+	firewall-cmd --add-port=5000/tcp --zone=public   --permanent 
+	firewall-cmd --reload
+	yum -y install docker httpd-tools
+	systemctl enable --now docker
+	yum -y install podman httpd-tools
+
+	wget https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-install-linux-4.2.13.tar.gz
+	wget https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux-4.2.13.tar.gz
+
+	tar -zxf openshift-client-linux-4.2.13.tar.gz -C /usr/local/bin
+	tar -zxf openshift-install-linux-4.2.13.tar.gz -C /usr/local/bin
+
+	echo -n 'admin:HP1nvent@123' | base64 -w0 
+	cat ./pull-secret.txt | jq .  > /root/pull-secret.json	
+
+
+Procedure:
+==========
+
+	mkdir -p /opt/registry/{auth,certs,data}
+	cd /opt/registry/certs
+	
+	openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days 365 -out domain.crt -subj "/C=IN/ST=Karnatka/L=Bangalore/O=HPE/OU=IT/CN=registry.mylab.com/emailAddress=registry@mylab.com"
+		
+	htpasswd -bBc /opt/registry/auth/htpasswd admin HP1nvent@123
+	cd
+	./1_container.sh
+	
+	sleep 5
+	curl -u admin:HP1nvent@123 -k https://registry.mylab.com:5000/v2/_catalog
+	echo "Login test"
+	docker login -u admin -p HP1nvent@123  https://registry.mylab.com:5000
+	
+	cp /opt/registry/certs/domain.crt /etc/pki/ca-trust/source/anchors/
+	update-ca-trust
+	
+	sleep 1
+	
+	source  ./2_registry-env.sh
+	./3_mirror.sh 
+
+	
+
+docker login -u admin -p HP1nvent@123  https://registry.mylab.com:5000
+if above command throws x509: authentication error, restart docker service and then container on registry servr
+
+if you want to login to this registry from other server:
+	install docker
+	then cp /opt/registry/certs/domain.crt /etc/pki/ca-trust/source/anchors/ 
+	and update-ca-trust 
+	then restart docker.service
+	then update no_proxy with the domain or ip of registry server
+		[root@management installation]# cat /etc/environment
+		export https_proxy=http://16.85.88.10:8080
+		export http_proxy=http://16.85.88.10:8080
+		export no_proxy=lab.com,vimlab.com,10.7.12.2,10.7.15.0/24,10.7.21.0/24
+
+
+curl -u admin:HP1nvent@123 -k https://registry.ocp4.nfv.com:5000/v2/_catalog
+
+echo -n 'admin:HP1nvent@123' | base64 -w0
+curl -u admin:HP1nvent@123 -k https://registry.ocp4.nfv.com:5000/v2/ocp4/openshift4/tags/list | python -m json.tool
+oc adm -a ${LOCAL_SECRET_JSON} release extract --command=openshift-install "${LOCAL_REGISTRY}/${LOCAL_REPOSITORY}:${OCP_RELEASE}"
+oc adm -a ${LOCAL_SECRET_JSON} release extract --command=openshift-install "${LOCAL_REGISTRY}/${LOCAL_REPOSITORY}:${OCP_RELEASE}"
+get the pull secret=====> pull-secret.text
+cat ./pull-secret.text | jq .  > ./pull-secret.json
+
+Cleanup:
+========
+
+	rm -fr /opt
+	rm -fr /etc/pki/ca-trust/source/anchors/domain.crt
+	docker ps | awk '{ print $1 }' | grep -vi container | xargs docker stop
+	docker ps -a | awk '{ print $1 }' | grep -vi container | xargs docker rm
+	
+
+	rm -fr /opt
+	rm -fr /etc/pki/ca-trust/source/anchors/domain.crt
+	podman ps | awk '{ print $1 }' | grep -vi container | xargs podman stop
+	podman ps -a | awk '{ print $1 }' | grep -vi container | xargs podman rm
+	
+
+	
+Login:
+=====
+podman login -u uday-singh https://quay.io -p us@HPE5649
+podman login -u uday-singh https://registry.redhat.io -p us@HPE5649
+docker login https://registry.redhat.io -u uday-singh -p us@HPE5649
+podman login -u uday-singh https://registry.redhat.io -p us@HPE5649 --authfile /var/lib/kubelet/config.json
+podman login -u admin -p HP1nvent@123 registry.lab.com:5000
+
+custom images:
+==============
+podman pull docker.io/ubuntu
+podman images ==========> get image id
+podman push ccc6e87d482b bastion.lab.com:5000/ocp4/openshift4/myimages/ubuntu
+
+Mirror sample registry:
+=======================
+export https_proxy=http://16.85.88.10:8080
+export http_proxy=http://16.85.88.10:8080
+export no_proxy=nfv.com
+
+
+http_proxy=http://16.85.88.10:8080
+https_proxy=http://16.85.88.10:8080
+no_proxy=localhost,127.0.0.1,lab.com
+
+
+from master:
+-------------
+
+oc create configmap registry-config --from-file=/opt/registry/certs/domain.crt -n openshift-config
+oc get cm registry-config -o yaml -n openshift-config
+MIRROR_ADDR_HOSTNAME=registry.ocp4.lab.com
+oc create configmap registry-config --from-file=${MIRROR_ADDR_HOSTNAME}..5000=$path/ca.crt -n openshift-config
+oc get image.config.openshift.io/cluster -o yaml
+oc patch image.config.openshift.io/cluster --patch '{"spec":{"additionalTrustedCA":{"name":"registry-config"}}}' --type=merge
+oc patch image.config.openshift.io/cluster --patch '{"spec":{}}' --type=merge
+
+oc project openshift-cluster-samples-operator
+oc edit configs.samples.operator.openshift.io -o yaml
+oc edit configs.samples.operator.openshift.io -n openshift-cluster-samples-operator -o yaml
+oc edit configs.samples.operator.openshift.io -n openshift-cluster-samples-operator -o yaml	
+		spec:
+		  architectures:
+		  - x86_64
+		  managementState: Managed
+		  samplesRegistry: registry.ocp4.nfv.com:5000/ocp4/openshift4
+		  skippedImagestreams:
+		  - php
+		  
+oc project openshift-cluster-samples-operator
+
+#create authentication:
+
+mkdir /root/.docker/
+podman login -u uday-singh https://registry.redhat.io --authfile /root/.docker/config.json
+# generate base64 for local registry server and append this in confg.json
+echo -n "admin:HP1nvent@123" | base64
+YWRtaW46SFAxbnZlbnRAMTIz
+
+/root/.docker/config.json
+
+{
+        "auths": {
+                "registry.redhat.io": {
+                        "auth": "dWRheS1zaW5naDp1c0BIUEU1NjQ5"
+                },
+                "registry.ocp4.nfv.com:5000": {
+                        "auth": "YWRtaW46SFAxbnZlbnRAMTIz"
+                }
+        }
+}
+
+[root@bastion ~]# echo -n "YWRtaW46SFAxbnZlbnRAMTIz" | base64 -d
+admin:HP1nvent@123[root@bastion ~]#
+
+
+# SAMPLES OPERATOR ON ocp4.3:
+=============================
+oc get configs.samples.operator.openshift.io -n openshift-cluster-samples-operator -o yaml
+oc get configs.samples.operator.openshift.io/cluster -o yaml
+oc patch configs.samples.operator.openshift.io/cluster --type merge -p '{"spec":{"managementState": "Managed"}}'
+oc patch configs.samples.operator.openshift.io/cluster --type merge -p '{"spec":{"managementState": "Removed"}}'
+oc patch configs.samples.operator.openshift.io/cluster --type merge -p '{"spec":{"samplesRegistry": "registry.lab.com:5000"}}'
+ oc patch configs.samples.operator.openshift.io/cluster --type merge -p '{"spec":{"skippedImagestreams": ["jenkins-agent-nodejs","jenkins-agent-maven","jenkins"]}}'
+oc edit configs.samples.operator.openshift.io -n openshift-cluster-samples-operator -o yaml
+
+MIRROR_ADDR_HOSTNAME=registry.ocp4.lab.com
+oc create configmap registry-config --from-file=${MIRROR_ADDR_HOSTNAME}..5000=/etc/pki/ca-trust/source/anchors/domain.crt -n openshift-config
+oc create configmap registry-config --from-file=registry.lab.com..5000=/etc/pki/ca-trust/source/anchors/domain.crt -n openshift-config
+
+oc get image.config.openshift.io/cluster -o yaml
+
+oc patch image.config.openshift.io cluster --type json -p '[{ 'op': 'remove', 'path': '/spec/additionalTrustedCA'}]'
+oc delete cm registry-config -n openshift-config
+
+oc edit configs.samples.operator.openshift.io -n openshift-cluster-samples-operator -o yaml
+
+   spec:
+  architectures:
+  - x86_64
+  managementState: Managed
+  samplesRegistry: registry.ocp4.lab.com:5000
+  skippedImagestreams:
+  - jenkins-agent-nodejs
+  - jenkins-agent-maven
+  - jenkins
+
+oc patch configs.samples.operator.openshift.io/cluster --type merge -p '{"spec":{"samplesRegistry": "registry.lab.com:5000"}}'
+
+
+
+Once OCP cluster is deployed using local repository, "oc get co" command will show operator "sample-operator" as degraded (if not immediately then maybe after 3-4 hours).
+
+oc get is -n openshift
+oc describe co openshift-samples
+oc describe is dotnet-runtime
+oc describe is -n openshift 
+
+oc get co image-registry -o go-template='{{{{range .status.conditions}}}}{{{{.type}}}} {{{{.status}}}} {{{{end}}}}'
+oc image mirror registry.redhat.io/rhel7:latest registry.ocp4.nfv.com:5000/ocp4/rhel7:latest
+oc image mirror registry.redhat.io/rhscl/php-70-rhel7:latest registry.ocp4.nfv.com:5000/ocp4/openshift4/rhscl/php-70-rhel7:latest --loglevel=7
+
+oc image mirror registry.redhat.io/$j:latest registry.ocp4.nfv.com:5000/$j:latest
+ oc get is apicast-gateway -n openshift -o go-template='{{range  .spec.tags}} {{.from.name}} {{end}}'
+ oc get is jenkins-agent-nodejs -n openshift -o json | jq .spec.tags[].from.name | grep registry.redhat.io
+ jenkins-agent-nodejs
+
+
+for is in $(oc describe co openshift-samples | grep imagestreams | cut -d ":" -f 3 | cut -d ";" -f 1); do echo ""; echo "ImageStream===>$is"; for i in $(o
+c describe is $is -n openshift | grep "tagged from " | grep -v quay.io| cut -d "/" -f 2-3); do sleep 1; echo "command: oc image mirror registry.redhat.io/
+$i registry.lab.com:5000/ocp4/openshift4/$i";oc image mirror registry.redhat.io/$i registry.lab.com:5000/ocp4/openshift4/$i; done; done 2>&1 | tee mirror.
+log
+
+for is in $(oc describe co openshift-samples | grep imagestreams | cut -d ":" -f 3 | cut -d ";" -f 1); do echo ""; echo "ImageStream===>$is"; for i in $(o
+c describe is $is -n openshift | grep "tagged from " | grep -v quay.io| cut -d "/" -f 2-3); do sleep 1; echo "command: oc image mirror registry.redhat.io/
+$i registry.lab.com:5000/ocp4/openshift4/$i"; done; done 2>&1 | tee mirror.
+log
+
+
+
+[root@registry ~]# docker exec -it 546e5ce51f0d /bin/sh
+/ #  more /etc/docker/registry/config.yml
+version: 0.1
+log:
+  fields:
+    service: registry
+storage:
+  cache:
+    blobdescriptor: inmemory
+  filesystem:
+    rootdirectory: /var/lib/registry
+http:
+  addr: :5000
+  headers:
+    X-Content-Type-Options: [nosniff]
+health:
+  storagedriver:
+    enabled: true
+    interval: 10s
+    threshold: 3
+compatibility:
+  schema1:
+    enabled: true
+/ #
+
+
+
+
+oc delete pod <signle podname>
+		  
+# IMAGE REGISTRY IN OCP4.3
+==========================
+in 4.3 management state is removed:
+	oc get configs.imageregistry.operator.openshift.io/cluster -o yaml
+Bring it back to managed state:
+	oc patch configs.imageregistry.operator.openshift.io/cluster --type merge -p '{"spec":{"managementState": "Managed"}}'
+	oc patch configs.imageregistry.operator.openshift.io/cluster --type merge -p '{"spec":{"managementState": "Removed"}}'
+	
+	oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{"emptyDir":{}}}}'
+	oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{ "pvc": {"claim":"image-registry-storage"}}}}'
+	
+oc patch configs.imageregistry.operator.openshift.io/cluster --type merge -p '{"spec":{"defaultRoute":true}}'
+oc patch configs.imageregistry.operator.openshift.io cluster --type merge --patch '{"spec":{"storage":{ "pvc": {"claim":"image-registry-storage"}}}}'
+
+oc patch dc deployment-example --type json -p '[{ "op": "remove", "path": "/spec/template/metadata/labels/version" }]'
+oc patch configs.imageregistry.operator.openshift.io/cluster --type json -p '[{ "op": "remove", "path": "/spec/storage/emptyDir"}]'
+oc patch configs.imageregistry.operator.openshift.io cluster --type json -p '[{ 'op': 'remove', 'path': '/spec/storage/emptyDir'}]'
+oc patch configs.imageregistry.operator.openshift.io cluster --type json -p '[{ 'op': 'remove', 'path': '/spec/storage/pvc'}]'
+
+oc patch configs.imageregistry.operator.openshift.io/cluster --type json -p='[{ "op": "replace", "path": "/spec/storage/emptyDir"},{"op": "replace", "path": "/spec/storage/pvc/claim", "value": "image-registry-storage"}]'
+
+oc patch dc deployment-example --type='json' 
+-p='[{"op": "replace", "path": "/metadata/labels/version", "value": "version2" },
+{"op": "replace", "path": "/spec/template/metadata/labels/version", "value": "version2" }]'
+
+
+ [
+     { "op": "test", "path": "/a/b/c", "value": "foo" },
+     { "op": "remove", "path": "/a/b/c" },
+     { "op": "add", "path": "/a/b/c", "value": [ "foo", "bar" ] },
+     { "op": "replace", "path": "/a/b/c", "value": 42 },
+     { "op": "move", "from": "/a/b/c", "path": "/a/b/d" },
+     { "op": "copy", "from": "/a/b/d", "path": "/a/b/e" }
+
+spec:
+  defaultRoute: false
+  disableRedirect: false
+  httpSecret: de601c302b476846f4b1a4c886fb086c90b47dabba23a1f127f6e3b44555aa6fb3a41435dfba83f0094b1b48199b1d1ba4ad8d6cedafd73ea517ea2864a97ec3
+  logging: 2
+  managementState: Managed
+  proxy:
+    http: ""
+    https: ""
+    noProxy: ""
+  readOnly: false
+  replicas: 1
+  requests:
+    read:
+      maxInQueue: 0
+      maxRunning: 0
+      maxWaitInQueue: 0s
+    write:
+      maxInQueue: 0
+      maxRunning: 0
+      maxWaitInQueue: 0s
+  storage:
+    emptyDir: {}
+    pvc:
+	
+      claim: image-registry-storage
+status:
+
+oc get cm trusted-ca -o yaml -n openshift-image-registry > ca-certs.txt
+oc get secret -o yaml -n openshift-config > secret.txt

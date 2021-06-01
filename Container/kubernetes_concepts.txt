@@ -1,0 +1,27 @@
+what is pause container in kubernetes:
+======================================
+
+	create a pod and locate its worker node. That worker node will have a secret container running per pod.
+
+	The 'pause' container is a container which holds the network namespace for the pod. Kubernetes creates pause containers to acquire the respective pod’s IP address and set up the network namespace for all other containers that join that pod.
+
+	The pause container is part of each pod that is responsible to create shared network, assign ip address within the pod for all business containers inside this pod, also the pause container shared the volume for entire pod. If the pause container is dead, kubernetes consider the pod died and kill it and reschedule a new one.
+
+	If you docker stop the pause container, you would find that the Pod would have a new internal IP without any change in Restart count of the Pod. However, if you docker stop the container of the Pod, you would find the Pod status as Completed and then if you would docker start the same, you would find Pod in Running again with Restart count of the Pod incremented by 1 with no change in IP.
+
+	ref:
+	https://groups.google.com/forum/#!topic/kubernetes-users/jVjv0QK4b_o
+	https://www.ianlewis.org/en/almighty-pause-container
+
+
+Endpoints:
+==========
+	Kubernetes internally creats endpoints per service ===> kubectl get endpoints
+	
+
+Services:
+=========
+	set of IP table rules
+	
+
+

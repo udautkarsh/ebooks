@@ -1,0 +1,13 @@
+yum install bind bind-utils
+
+#copy files
+cp named.conf /etc/named.conf
+cp ocp4* /var/named	
+firewall-cmd --permanent --add-port=53/tcp
+firewall-cmd --permanent --add-port=53/udp
+firewall-cmd --reload
+firewall-cmd --list-all
+named-checkconf -z /etc/named.conf
+named-checkzone forward ocp4-forward.conf (forward_conf file name)
+named-checkzone reverse ocp4-reverse.conf (reverse_conf file name)
+systemctl enable named

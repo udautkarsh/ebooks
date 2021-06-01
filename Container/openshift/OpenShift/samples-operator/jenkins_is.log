@@ -1,0 +1,63 @@
+[root@I ~]# oc get is jenkins-agent-maven -o yaml -n openshift
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  annotations:
+    openshift.io/display-name: Jenkins Maven Agent
+    openshift.io/image.dockerRepositoryCheck: "2020-04-07T08:57:05Z"
+    samples.operator.openshift.io/version: 4.3.8
+  creationTimestamp: "2020-04-07T08:26:52Z"
+  generation: 4
+  labels:
+    samples.operator.openshift.io/managed: "true"
+  name: jenkins-agent-maven
+  namespace: openshift
+  resourceVersion: "4317936"
+  selfLink: /apis/image.openshift.io/v1/namespaces/openshift/imagestreams/jenkins-agent-maven
+  uid: 70872938-b3e3-42af-a8e8-000445ad06af
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+  - annotations:
+      description: Provides a Jenkins Agent with Maven tooling
+      iconClass: icon-jenkins
+      openshift.io/display-name: Jenkins Maven Agent
+      openshift.io/provider-display-name: Red Hat, Inc.
+      tags: jenkins
+    from:
+      kind: ImageStreamTag
+      name: v4.0
+    generation: 1
+    importPolicy: {}
+    name: latest
+    referencePolicy:
+      type: Local
+  - annotations:
+      description: Provides a Jenkins Agent with Maven tooling
+      iconClass: icon-jenkins
+      openshift.io/display-name: Jenkins Maven Agent
+      openshift.io/provider-display-name: Red Hat, Inc.
+      tags: jenkins
+    from:
+      kind: DockerImage
+      name: registry.lab.com:5000/openshift-release-dev/ocp-v4.0-art-dev@sha256:64cffbc5d2420db3de94662ee1602e83c8ba37cb77c738513bb23883bd498625
+    generation: 4
+    importPolicy: {}
+    name: v4.0
+    referencePolicy:
+      type: Local
+status:
+  dockerImageRepository: image-registry.openshift-image-registry.svc:5000/openshift/jenkins-agent-maven
+  tags:
+  - conditions:
+    - generation: 4
+      lastTransitionTime: "2020-04-07T08:57:05Z"
+      message: dockerimage.image.openshift.io "registry.lab.com:5000/openshift-release-dev/ocp-v4.0-art-dev@sha256:64cffbc5d2420db3de94662ee1602e83c8ba37cb77c738513bb23883bd498625"
+        not found
+      reason: NotFound
+      status: "False"
+      type: ImportSuccess
+    items: null
+    tag: v4.0
+

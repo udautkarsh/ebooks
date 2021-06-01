@@ -1,0 +1,247 @@
+Operational commands:
+---------------------
+Management Commands:
+  container   Manage containers
+  image       Manage images
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  volume      Manage volumes
+
+Container:
+===========
+docker container ls 
+docker container prune 
+docker container ls -H tcp://10.10.10.11:2375
+docker container run --name weather-app -d -p 80:3000 linuxacademycontent/weather-app
+docker container inspect 97be4d230a57
+docker container port d8c90048479e
+docker run -d centos tail -f /dev/null
+docker container run -d centos sleep infinity
+# running conainer with default port defined in image:
+docker container run -d nginx
+	64d92a743ab7  nginx  "/docker-entrypoin..."  3 minutes ago    Up 3 minutes   80/tcp     vigilant_easley
+# Running container to map all defined ports:
+docker container run -P -d nginx
+	f7cd4fe213ec  nginx  "/docker-entrypoin..."   4 minutes ago   Up 4 minutes  0.0.0.0:32768->80/tcp   optimistic_banach
+# Running container to expose any additional port not defined originally in image:
+docker container run -d --expose 300 nginx
+	28de9d7e5de8  nginx  "/docker-entrypoin..."   3 minutes ago   Up 3 minutes  80/tcp, 300/tcp      wonderful_lewin
+# Running container with manual port mapping
+docker container run -d --expose 300 -p <host-port>:<container port>  nginx
+docker container run -d --expose 300 -p 80:80  nginx
+	d8c90048479e  nginx  "/docker-entrypoin..."   2 minutes ago   Up 2 minutes  0.0.0.0:8081->80/tcp    stupefied_bardeen
+
+Image:
+======
+docker image ls
+
+
+Network:
+========
+docker network ls
+[root@server0 ~]# docker network ls
+# default networks
+NETWORK ID          NAME                DRIVER              SCOPE
+f7460e057226        bridge              bridge              local
+c72be1d0ba6e        host                host                local
+12434a9d7a8d        none                null                local
+
+docker network prune ========> deletes only custom created unused network.
+
+docker network inspect bridge
+docker network connect <network> <container> ====> so far it worked only for custom networks
+docker network disconnect <network> <container>
+
+docker network create --driver bridge --subnet 20.20.20.0/24 --gateway 20.20.20.1 mynet
+docker network create --driver bridge --subnet 20.30.0.0/16 --gateway 20.30.0.1 --ip-range 20.30.4.0/24 mynet1
+
+Volumes:
+========
+#bind mounts: These are not volumes hence will not appear in "docker volume ls"
+	#using --mount flag
+		docker container run -d --name nginx-vol1 --mount type=bind,source=/root/vol1/,target=/app nginx
+	#using volume flag
+		docker container run -d --name nginx-vol2 -v /root/vol2:/app nginx
+
+
+
+
+
+
+
+Resources:
+===============
+eboot: Running Your Image” from chapter 4 of Docker: Up & Running, 2nd Edition by Karl Matthias and Sean P. Kane
+ebook: using docker by adrian mouat ===> Chapter 3. First Steps
+ebook: using docker by adrian mouat ===> Chapter 4. Docker Fundamentals
+eboot: The section ”Sharing Secrets” from Using Docker by Adrian Mouat (O'Reilly)
+eboot: The section ”Container Health Checks” from Chapter 6 of Docker: Up & Running, 2nd Edition by Karl Matthias and Sean P. Kane (O'Reilly) 
+
+
+1) List of default set of enabled registries in docker
+========================================================
+vim /etc/containers/registries.conf
+		[registries.search]
+		registries = ['registry.access.redhat.com', 'docker.io', 'registry.fedoraproject.org', 'quay.io', 'registry.centos
+		.org']
+
+
+
+
+When we use "docker build" to build our image, docker first uses the "build context" to collect a list of files to send to the Docker daemon. This is the list of files that are available to us during the build phase; one reason to have files available is so that we can ADD or COPY them into the image. Consequently, if a file is NOT needed in our final image, it SHOULD be ignored by listing it in the .dockerignore file. If we do not have a .dockerignore file, or we unnecessarily include files we do not need, then our builds take longer because Docker is forced to copy them to the daemon, which for large projects can take a while, affecting build times. Common candidates for the .dockerignore file include version control folders (.git, .svn), documentation files, any and all Docker related files (like the Dockerfile itself!).
+
+We should always aim to "pin" down the version of our base image. This way we know what we are inheriting, and be sure that it is what we have inspected and vetted. Using the "latest" tag on our base images makes our builds non-deterministic, and often can lead to rather surprising results (or bugs). Pinning down the base image version also means that when we are ready to upgrade, we do so diligently, and deliberately.
+
+ARGs can be defaulted in our Dockerfile, and in order to override the defaults, we can supply new values via the --build-arg flag to Docker build command. However, these are only available to us INSIDE the Dockerfile. So unless we "use" them which we can by capturing them as values of LABELs or ENVs, or supply them to RUN instructions, they will NOT be persisted within the image. Consequently they are not available in the resulting container.
+
+
+The role of the RUN instruction is to modify the intermediate container, perhaps to install libraries, or modify file permissions. These changes happen as part of building our new image.
+
+
+2) DOckerfile atrributes
+
+	A) Compile time instructions: These gets executes and its impact is registered in the form of layer once "docker built" command is executed. The beahaviour of any of these atributes cannot be changed using "docker run"
+	===========================================================================================================================================================================================================================
+
+		FROM:
+		----
+			===> it has to be the first line except ARG , which can precede FROM
+			===> never use latest tag
+
+		ARG:
+		----
+			===> Think of these as arguments passed to a function and its scope is only as long as docker build runs.
+			===> Only parameter which is allowed to precede FROM
+			===> Can be used along with ENV to receive user inputs
+
+		RUN:
+		---
+
+
+		.dockerignore
+		-------------
+			list the files and directories that you want docker daemon (daemon context) to ignore. This is similar to .gitignore 
+
+		ADD/COPY:
+		----------
+
+			ADD has some strange behaviour so avoid using ADD
+
+
+		USER:
+		------
+			create user =====> RUN groupadd -r app && useradd -r -g app appuser
+
+			switch user ====> USER appuser //all instruction after this in Dockerfile will be executed as "appuser"
+
+
+	B) Run time instructions: They come to in effect when container gets started. The values can be chnaged while docker run. The behaviour of these attributes can be changed using "docker run" by passing their values as arguments and gets executed when docker run command is executed.
+	
+		ENV:
+		---
+		
+			===> Pass arguments while creating containers/registries. Cane be used along with ARG to assign default values if specifically not assigned by user.
+			
+		ENTRYPOINT/CMD:
+		---------------
+			
+			=====> If any of these is/are skipped then these values might be inherited from base image (FROM <base image:xxyy>)
+			
+			ENTRYPOINT ['echo']  =========> This is the comand
+			CMD ['hello world']  =========> This is the argument
+			
+			=====> Avoid using shell from rather use exec form
+				CMD java -jar <some arguments>  ============> not encouraged as 2 processes gets started one a shell and other the actual command
+				CMD ["","",""]                  ============> With this syntax only one processes gets started the atual command.   
+			
+		
+		LABEL:
+		
+		EXPOSE:
+		
+	
+		
+	
+docker build --build-arg http_proxy=http://10.239.4.80:913 --build-arg https_proxy=http://10.239.4.80:913 .
+
+
+Building images from docker:
+============================
+
+1) Dockerfile:
+
+
+	FROM registry.access.redhat.com/rhel7
+	RUN yum-config-manager --enable "rhel-7-server-rpms" --enable "rhel-7-server-extras-rpms" --enable "rhel-7-server-ansible-2.8-rpms" --enable "rhel-7-server-ose-4.2-rpms"
+	RUN yum install openshift-ansible openshift-clients jq -y
+	RUN yum install vim -y
+	RUN yum install iputils -y
+	RUN yum install bind-utils -y
+	RUN mkdir auth
+	ADD ./kubeconfig auth/
+	ADD ./oc /usr/local/bin
+	CMD tail -f /dev/null
+
+
+2) Create image:
+
+	docker build --tag=uday_rhel:1.0 .
+
+3) 	Create container:
+	
+	docker create --name uday uday_rhel:1.0
+
+	note the container-id
+	
+4)  Start container
+
+	docker start <container-id>
+
+
+TROUBLESHOOTING:
+----------------
+
+subscription-manager is disabled when running inside a container. Please refer to your host system for subscription management.
+
+
+Appendix:
+=========
+
+How to access multiple remote docker engine using single centralized docker client:
+====================================================================================
+
+	1) Install docker on both machines: lets say servr0 and server1
+	2) Remote server should expose port 2375 so that clients can connect to
+	mkdir -p /etc/systemd/system/docker.service.d
+	vim /etc/systemd/system/docker.service.d/options.conf
+	Contents:
+		[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H unix:// -H tcp://0.0.0.0:2375
+		
+		From <https://nickjanetakis.com/blog/docker-tip-73-connecting-to-a-remote-docker-daemon> 
+		
+	3) # Reload the systemd daemon.
+sudo systemctl daemon-reload
+	4) # Restart Docker.
+sudo systemctl restart docker
+	
+	From <https://nickjanetakis.com/blog/docker-tip-73-connecting-to-a-remote-docker-daemon> 
+	
+	5) firewall-cmd --permanent --add-port=2375/tcp
+	6) firewall-cmd --reload
+	7) Now from client:
+		a. docker -H tcp://10.10.10.11:2375 ps
+		b. docker -H tcp://10.10.10.10:2375 image ls
+		c. Or permanent configuration:
+			echo "export DOCKER_HOST=tcp://X.X.X.X:2375" >> ~/.bashrc && source ~/.bashrc
+			
+			From <https://nickjanetakis.com/blog/docker-tip-73-connecting-to-a-remote-docker-daemon> 
+
+

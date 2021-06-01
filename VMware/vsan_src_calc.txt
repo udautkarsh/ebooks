@@ -1,0 +1,51 @@
+CONSTANTS:
+==========
+	HOST_FOOTPRINT = 7100 MB
+	CAPACITY_DISK_FOOTPRINT = 160 MB (ALL_FLASH)
+	CACHE_DISK_FOOTPRINT = 20 MB (ALL_FLASH)
+	DISKGROUP_FIXED_FOOTPRINT = 1360 MB (ALL_FLASH) *
+	CAPACITY_DISK_FOOTPRINT = 180 MB (HYBRID)
+	CACHE_DISK_FOOTPRINT = 10 MB (HYBRID)
+	DISKGROUP_FIXED_FOOTPRINT = 1610 MB (HYBRID)
+	DISKGROUP_SCALABLE_FOOTPRINT = 0.5% of system memory ** 
+
+Notes:
+	For diskgroups that has the compression-only feature turned on, there is an additional cost of 39.5 MB per capacity disk.
+	For diskgroups that has the deduplication feature turned on, there is an additional cost of 120 MB per disk group.
+	For hybrid configuration, the scalable footprint would be 0.5% of system memory or 0.2% of the cache disk size, whichever is smaller.
+
+vCPU requirements: 10% CPU overhead for vSAN
+
+MAX Memory: At least 32-GB memory for fully operational vSAN with 5 disk groups per host and 7 capacity devices per disk group
+
+Custom calculations:
+=====================
+	FORMULA:
+	------- 
+	vSANFootprint  = HOST_FOOTPRINT + ( NumDiskGroups * ( DISKGROUP_FIXED_FOOTPRINT + DISKGROUP_SCALABLE_FOOTPRINT + ( CacheSize * CACHE_DISK_FOOTPRINT) + NumCapacityDisks * CAPACITY_DISK_FOOTPRINT)))
+
+
+
+
+MANAGEMENT POD: on each ESXI : RAM = 256 GB, Cache Disk=400, Capacity disk = 4, No of Disk Group =1
+----------------------------------------------------------------------------------------------------
+
+
+			vSANFootprint = 7100 + (1 * ( 1610 + 800 + 400*10 + 4*180 )) = 7100 + 1610 + 800 + 4000 + 720 = 14230MB = ~15 GB
+
+
+EDGE POD: on each ESXI : RAM = 512 GB, Cache Disk=400*2=800GB, Capacity disk = 6, No of Disk Group =1
+--------------------------------------------------------------------------------------------------------
+
+			vSANFootprint = 7100 + (1 * ( 1610 + 1600 + 800*10 + 6*180 )) = 7100 + 1610 + 1600 + 8000 + 1080 = 19390MB = ~20GB
+
+
+RESOURCE POD: on each ESXI : RAM = 512 GB, Cache Disk=400*2=800GB, Capacity disk = 6, No of Disk Group =1
+--------------------------------------------------------------------------------------------------------
+			
+			vSANFootprint = 7100 + (1 * ( 1610 + 1600 + 800*10 + 6*180 )) = 7100 + 1610 + 1600 + 8000 + 1080 = 19390MB = ~20GB
+				
+				
+				
+
+

@@ -1,0 +1,55 @@
+cluster drs:
+==============
+
+Implementation:
+================
+
+from pyVmomi import vim
+from pyVim.task import WaitForTask
+cluster_spec = vim.cluster.ConfigSpecEx()
+drs_config = vim.cluster.DrsConfigInfo()
+task = ci.ReconfigureComputeResource_Task(cluster_spec, True)
+
+query:
+======
+(Pdb) ci.configuration.drsConfig.enabled
+False
+(Pdb) ci.configuration.drsConfig.enableVmBehaviorOverrides
+True
+(Pdb) ci.configuration.drsConfig.defaultVmBehavior
+'manual'
+(Pdb) ci.configuration.drsConfig.vmotionRate
+3
+(Pdb) ci.configuration.drsConfig.scaleDescendantsShares
+'disabled'
+(Pdb)
+
+
+
+
+vSPhere HA
+============
+ 
+ Implementation:
+ ==============
+ 
+ from pyVmomi import vim
+from pyVim.task import WaitForTask
+ cluster_spec = vim.cluster.ConfigSpecEx()
+ das_info = vim.cluster.DasConfigInfo()
+ das_info.enabled = True
+ das_info.admissionControlEnabled = True
+ das_info.hostMonitoring='enabled'
+ das_info.vmMonitoring='vmMonitoringOnly'
+ acp_config = vim.cluster.FailoverLevelAdmissionControlPolicy()
+ acp_config.failoverLevel = "2"
+ 
+ das_info.admissionControlPolicy=acp_config
+ cluster_spec.dasConfig = das_info
+ task = ci.ReconfigureComputeResource_Task(cluster_spec, True)
+ res = WaitForTask(task, si)
+ 
+ 
+Query:
+=======
+ci.configuration.dasConfig.enabled

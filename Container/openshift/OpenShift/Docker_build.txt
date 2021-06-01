@@ -1,0 +1,39 @@
+Building images from docker:
+============================
+
+1) Dockerfile:
+
+
+	FROM registry.access.redhat.com/rhel7
+	RUN yum-config-manager --enable "rhel-7-server-rpms" --enable "rhel-7-server-extras-rpms" --enable "rhel-7-server-ansible-2.8-rpms" --enable "rhel-7-server-ose-4.2-rpms"
+	RUN yum install openshift-ansible openshift-clients jq -y
+	RUN yum install vim -y
+	RUN yum install iputils -y
+	RUN yum install bind-utils -y
+	RUN mkdir auth
+	ADD ./kubeconfig auth/
+	ADD ./oc /usr/local/bin
+	CMD tail -f /dev/null
+
+
+2) Create image:
+
+	docker build --tag=uday_rhel:1.0 .
+
+3) 	Create container:
+	
+	docker create --name uday uday_rhel:1.0
+
+	note the container-id
+	
+4)  Start container
+
+	docker start <container-id>
+
+
+TROUBLESHOOTING:
+----------------
+
+subscription-manager is disabled when running inside a container. Please refer to your host system for subscription management.
+
+

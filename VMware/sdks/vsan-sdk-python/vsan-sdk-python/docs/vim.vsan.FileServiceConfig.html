@@ -1,0 +1,169 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script type="text/javascript" src="./commonRes.js" language="JavaScript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vsan.FileServiceConfig" name="vim.vsan.FileServiceConfig"></a>
+<h1>Data Object - VsanFileServiceConfig(vim.vsan.FileServiceConfig)</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.vsan.ReconfigSpec.html#field_detail">VimVsanReconfigSpec</a>, <a href="vim.vsan.ConfigInfoEx.html#field_detail">VsanConfigInfoEx</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.Network.html">Network</a>, <a href="vim.vsan.FileServiceDomainConfig.html">VsanFileServiceDomainConfig</a>
+</dd>
+<dt>Since </dt>
+<dd>vSAN API 7.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         The file service configuration for a vSAN cluster, including
+    whether file service is enabled or not, the memory and CPU configuration for
+    file service backend part and virtual machine, etc.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="domains" name="domains"></a><strong>domains</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vsan.FileServiceDomainConfig.html">VsanFileServiceDomainConfig[]</a></td><td>
+<p></p>
+         The list of domains created. The first element of this list is
+    the default domain. Leave this field empty when there is no domain to be
+    configured with the file service enable process.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="enabled" name="enabled"></a><strong>enabled</strong></td><td>xsd:boolean</td><td>
+<p></p>
+         Indicates whether file service is enabled in the vSAN cluster.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="fileServerCPUMhz" name="fileServerCPUMhz"></a><strong>fileServerCPUMhz</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The reserved CPU used by VDFS backend services, like server, proxy and
+    sockrelay. The units is MHZ. The default value is 0, which means no dedicated
+    CPU resources is bound. This reconfiguration takes effect during enabling
+    file service. That means, file service should be disabled first if it is
+    running.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="fileServerMemoryMB" name="fileServerMemoryMB"></a><strong>fileServerMemoryMB</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The reserved memory used by VDFS backend services, like server, proxy and
+    sockrelay. The unit is MB. The default and minimum value is 960. This
+    reconfiguration takes effect during enabling file service. That means,
+    file service should be disabled firstly if it is running.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="fsvmCPU" name="fsvmCPU"></a><strong>fsvmCPU</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         CPU cores configured for vSAN File Service Virtual Machine(by default is 2).
+    This reconfiguration takes effect during enabling file service. That means,
+    file service should be disabled first if it is running.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="fsvmMemoryMB" name="fsvmMemoryMB"></a><strong>fsvmMemoryMB</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:long</td><td>
+<p></p>
+         The reserved memory used by vSAN file service virtual machines. The unit is
+    MB. The default and minimum values is 2048. This reconfiguration takes
+    effect during enabling file service. That means, file service should be
+    disabled first if it is running.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="network" name="network"></a><strong>network</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vmodl.ManagedObjectReference.html">ManagedObjectReference</a>
+<br> to a
+                  <a href="vim.Network.html">Network</a></td><td>
+<p></p>
+         The network that the file service will be deployed on to provide file
+    access. Please note the security setting of this network will be updated
+    with forged transmit and promiscuous mode enabled.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">None</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="VsanFileServiceConfig">
+            <complexContent>
+               <extension base="vsan:DynamicData">
+                  <sequence>
+                     <element name="enabled" type="xsd:boolean"/>
+                     <element name="fileServerMemoryMB" type="xsd:long" minOccurs="0"/>
+                     <element name="fileServerCPUMhz" type="xsd:long" minOccurs="0"/>
+                     <element name="fsvmMemoryMB" type="xsd:long" minOccurs="0"/>
+                     <element name="fsvmCPU" type="xsd:long" minOccurs="0"/>
+                     <element name="network" type="vsan:ManagedObjectReference" minOccurs="0"/>
+                     <element name="domains" type="vsan:VsanFileServiceDomainConfig" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

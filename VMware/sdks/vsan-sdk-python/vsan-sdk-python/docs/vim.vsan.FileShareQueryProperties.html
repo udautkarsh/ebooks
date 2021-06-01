@@ -1,0 +1,145 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script type="text/javascript" src="./commonRes.js" language="JavaScript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vsan.FileShareQueryProperties" name="vim.vsan.FileShareQueryProperties"></a>
+<h1>Data Object - VsanFileShareQueryProperties(vim.vsan.FileShareQueryProperties)</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.vsan.FileShareQuerySpec.html#field_detail">VsanFileShareQuerySpec</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>Since </dt>
+<dd>vSAN API vSAN 7.0U1</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         Defines the set of share properties returned from the
+    vim.vsan.VsanFileServiceSystem#QueryFileShares API. The properties
+    {@vim.vsan.FileShare#uuid}, {@vim.vsan.FileShareConfig#name} and
+    {@vim.vsan.FileShareConfig#domainName} are always included as they are
+    the identifiers of the file share.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="includeAllLabels" name="includeAllLabels"></a><strong>includeAllLabels</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Specify whether to return {@vim.vsan.FileShareConfig#labels} property of the
+    share. The default value is False. If this field is True, all share labels
+    will be returned.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="includeBasic" name="includeBasic"></a><strong>includeBasic</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Basic share properties include all properties for a file share, except
+    {@vim.vsan.FileShareConfig#labels},
+    {@vim.vsan.FileShareRuntimeInfo#usedCapacity} and
+    {@vim.vsan.FileShareRuntimeInfo#vsanObjectUuids}.
+    The default value is True.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="includeUsedCapacity" name="includeUsedCapacity"></a><strong>includeUsedCapacity</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Specify whether to return {@vim.vsan.FileShareRuntimeInfo#usedCapacity}
+    property of the share. The default value is False.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="includeVsanObjectUuids" name="includeVsanObjectUuids"></a><strong>includeVsanObjectUuids</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:boolean</td><td>
+<p></p>
+         Specify whether to return {@vim.vsan.FileShareRuntimeInfo#vsanObjectUuids}
+    property of the share. The default value is False.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="labelKeys" name="labelKeys"></a><strong>labelKeys</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         Specify the label keys to be returned. This field will be ignored if
+    <a href="vim.vsan.FileShareQueryProperties.html#includeAllLabels">includeAllLabels</a> is set to True.
+    If a label key does not exist in a share, the label will not be returned
+    with the share. An InvalidArgument will be thrown if the number of label
+    keys exceeds 5.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r1">
+<td colspan="3">None</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="VsanFileShareQueryProperties">
+            <complexContent>
+               <extension base="vsan:DynamicData">
+                  <sequence>
+                     <element name="includeBasic" type="xsd:boolean" minOccurs="0"/>
+                     <element name="includeUsedCapacity" type="xsd:boolean" minOccurs="0"/>
+                     <element name="includeVsanObjectUuids" type="xsd:boolean" minOccurs="0"/>
+                     <element name="includeAllLabels" type="xsd:boolean" minOccurs="0"/>
+                     <element name="labelKeys" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,324 @@
+##############################################################
+# Configure identity provider
+##############################################################
+yum install httpd-tools -y
+htpasswd -c -B -b users.htpasswd user1 HP1nvent@123
+oc create secret generic htpass-secret --from-file=htpasswd=./users.htpasswd -n openshift-config
+oc delete secret htpass-secret -n openshift-config
+oc get secret -n openshift-config
+oc get oauth/cluster -o yaml > auth
+
+
+uday@bastion:~/sanity/identity$ more htpasswdCR.yaml
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+  - name: <my_htpasswd_provider> ===============================>>> any name	
+    mappingMethod: claim
+    type: HTPasswd
+    htpasswd:
+      fileData:
+        name: htpass-secret      ===========>>> same name as was used in command "oc create secret generic htpass-secret"
+
+oc apply -f htpasswdCR.yaml
+
+oc login -u <username> -p <password> --server=https://api.ocp4.nfv.com:6443
+ 
+
+###############################################
+# Adding more users
+###############################################
+oc describe oauth cluster
+
+
+		Name:         cluster
+		Namespace:
+		Labels:       <none>
+		Annotations:  kubectl.kubernetes.io/last-applied-configuration:
+						{"apiVersion":"config.openshift.io/v1","kind":"OAuth","metadata":{"annotations":{},"name":"cluster"},"spec":{"identityProviders":[{"htpass...
+					  release.openshift.io/create-only: true
+		API Version:  config.openshift.io/v1
+		Kind:         OAuth
+		Metadata:
+		  Creation Timestamp:  2019-11-19T06:15:06Z
+		  Generation:          2
+		  Resource Version:    342135
+		  Self Link:           /apis/config.openshift.io/v1/oauths/cluster
+		  UID:                 ee445604-0a93-11ea-8dc5-525400840eb0
+		Spec:
+		  Identity Providers:
+			Htpasswd:
+			  File Data:
+				Name:        htpass-secret     ========================>> take a note of this 
+			Mapping Method:  claim
+			Name:            my_htpasswd_provider
+			Type:            HTPasswd
+		Events:              <none>
+
+oc get secret <enter Htpasswd file data name noted above > -ojsonpath={.data.htpasswd} -n openshift-config | base64 -d | tee htpasswd.txt
+htpasswd -b htpasswd.txt <newuser> <newuser password>
+oc create secret generic  < enter Htpasswd file data name noted above > --from-file=htpasswd=htpasswd.txt --dry-run -o yaml -n openshift-config | oc replace -f -
+
+
+
+################################################
+# Deleting users
+###############################################
+
+oc login -u kubeadmin -p tiwsa-KufWu-wL8rT-7TwKE
+
+or 
+
+ oc login -u <any admin user> -p <password> --server=https://api.ocp4.nfv.com:6443
+
+uday@bastion:~/sanity/identity$ oc get users
+NAME        UID                                    FULL NAME   IDENTITIES
+newuser     dd1d3f47-118f-11ea-9128-0a580a80004c               my_htpasswd_provider:newuser
+ocp-admin   b45a629c-0c16-11ea-8341-0a580a81001c               my_htpasswd_provider:ocp-admin
+user1       00580150-0c17-11ea-bc67-0a580a820024               my_htpasswd_provider:user1
+user2       33fea445-0c18-11ea-87aa-0a580a80002f               my_htpasswd_provider:user2
+
+uday@bastion:~/sanity/identity$ oc delete user/newuser
+user.user.openshift.io "newuser" deleted
+uday@bastion:~/sanity/identity$ oc delete identity/my_htpasswd_provider:newuser
+identity.user.openshift.io "my_htpasswd_provider:newuser" deleted
+uday@bastion:~/sanity/identity$ oc get secret -n openshift-config
+NAME                                  TYPE                                  DATA   AGE
+builder-dockercfg-xqdwj               kubernetes.io/dockercfg               1      9d
+builder-token-7xr6l                   kubernetes.io/service-account-token   4      9d
+builder-token-9m26g                   kubernetes.io/service-account-token   4      9d
+default-dockercfg-4qtzs               kubernetes.io/dockercfg               1      9d
+default-token-9ddsx                   kubernetes.io/service-account-token   4      9d
+default-token-vnk4c                   kubernetes.io/service-account-token   4      9d
+deployer-dockercfg-d5p9k              kubernetes.io/dockercfg               1      9d
+deployer-token-qpqm2                  kubernetes.io/service-account-token   4      9d
+deployer-token-vxrl7                  kubernetes.io/service-account-token   4      9d
+etcd-client                           SecretTypeTLS                         2      9d
+etcd-metric-client                    SecretTypeTLS                         2      9d
+etcd-metric-signer                    SecretTypeTLS                         2      9d
+etcd-signer                           SecretTypeTLS                         2      9d
+htpass-secret                         Opaque                                1      7d23h
+initial-service-account-private-key   Opaque                                1      9d
+pull-secret                           kubernetes.io/dockerconfigjson        1      9d
+uday@bastion:~/sanity/identity$ oc get secret htpass-secret -ojsonpath={.data.htpasswd} -n openshift-config | base64 -d | tee htpasswd
+user1:$2y$05$ZCOJbvDuWafGe9dm7YDJTuxXgOSpKxQ6gIYzN6LDGMd38YQJnMReK
+user2:$apr1$lRao1ncW$OGRZ42WTtfBzfLbaTHmJf.
+newuser:$apr1$mCuuwVK7$hUTXve/n.6J3QLINrO.F6/
+uday@bastion:~/sanity/identity$ ls
+auth  htpasswd  htpasswd.txt  htpasswdCR.yaml  users.htpasswd
+uday@bastion:~/sanity/identity$ vim htpasswd
+uday@bastion:~/sanity/identity$ oc create secret generic htpass-secret --from-file=htpasswd --dry-run -o yaml -n openshift-config | oc replace -f -
+secret/htpass-secret replaced
+uday@bastion:~/sanity/identity$ oc get co
+NAME                                       VERSION   AVAILABLE   PROGRESSING   DEGRADED   SINCE
+authentication                             4.2.0     True        True          False      9d
+cloud-credential                           4.2.0     True        False         False      9d
+cluster-autoscaler                         4.2.0     True        False         False      9d
+console                                    4.2.0     True        False         False      9d
+dns                                        4.2.0     True        False         False      9d
+image-registry                             4.2.0     True        False         False      9d
+ingress                                    4.2.0     True        False         False      3d18h
+insights                                   4.2.0     True        False         False      9d
+kube-apiserver                             4.2.0     True        False         False      9d
+kube-controller-manager                    4.2.0     True        False         False      9d
+kube-scheduler                             4.2.0     True        False         False      9d
+machine-api                                4.2.0     True        False         False      9d
+machine-config                             4.2.0     True        False         False      9d
+marketplace                                4.2.0     True        False         False      9d
+monitoring                                 4.2.0     True        False         False      15h
+network                                    4.2.0     True        False         False      9d
+node-tuning                                4.2.0     True        False         False      9d
+openshift-apiserver                        4.2.0     True        False         False      9d
+openshift-controller-manager               4.2.0     True        False         False      9d
+openshift-samples                          4.2.0     True        False         False      9d
+operator-lifecycle-manager                 4.2.0     True        False         False      9d
+operator-lifecycle-manager-catalog         4.2.0     True        False         False      9d
+operator-lifecycle-manager-packageserver   4.2.0     True        False         False      9d
+service-ca                                 4.2.0     True        False         False      9d
+service-catalog-apiserver                  4.2.0     True        False         False      9d
+service-catalog-controller-manager         4.2.0     True        False         False      9d
+storage                                    4.2.0     True        False         False      9d
+uday@bastion:~/sanity/identity$ oc get co
+NAME                                       VERSION   AVAILABLE   PROGRESSING   DEGRADED   SINCE
+authentication                             4.2.0     True        False         False      9d
+cloud-credential                           4.2.0     True        False         False      9d
+cluster-autoscaler                         4.2.0     True        False         False      9d
+console                                    4.2.0     True        False         False      9d
+dns                                        4.2.0     True        False         False      9d
+image-registry                             4.2.0     True        False         False      9d
+ingress                                    4.2.0     True        False         False      3d18h
+insights                                   4.2.0     True        False         False      9d
+kube-apiserver                             4.2.0     True        False         False      9d
+kube-controller-manager                    4.2.0     True        False         False      9d
+kube-scheduler                             4.2.0     True        False         False      9d
+machine-api                                4.2.0     True        False         False      9d
+machine-config                             4.2.0     True        False         False      9d
+marketplace                                4.2.0     True        False         False      9d
+monitoring                                 4.2.0     True        False         False      15h
+network                                    4.2.0     True        False         False      9d
+node-tuning                                4.2.0     True        False         False      9d
+openshift-apiserver                        4.2.0     True        False         False      9d
+openshift-controller-manager               4.2.0     True        False         False      9d
+openshift-samples                          4.2.0     True        False         False      9d
+operator-lifecycle-manager                 4.2.0     True        False         False      9d
+operator-lifecycle-manager-catalog         4.2.0     True        False         False      9d
+operator-lifecycle-manager-packageserver   4.2.0     True        False         False      9d
+service-ca                                 4.2.0     True        False         False      9d
+service-catalog-apiserver                  4.2.0     True        False         False      9d
+service-catalog-controller-manager         4.2.0     True        False         False      9d
+storage                                    4.2.0     True        False         False      9d
+uday@bastion:~/sanity/identity$ oc login -u newuser -p password
+Login failed (401 Unauthorized)
+Verify you have provided correct credentials.
+
+
+
+################################################################
+# User and projects
+###############################################################
+
+oc login --token=Zz35_V8cQnBG06zyFie1O9ZFySfvNCCW3d5oNIfAMz4 --server=https://api.ocp4.nfv.com:6443 =========> get this from 
+
+or 
+
+oc login -u kubeadmin -p tiwsa-KufWu-wL8rT-7TwKE --server=https://api.ocp4.nfv.com:6443
+
+or 
+
+oc login -u ocp-admin -p HP1nvent@123 --server=https://api.ocp4.nfv.com:6443
+
+oc new-project demo --description="For sprint demo" --display-name="sprint-demo"
+oc create user demo --full-name="demo user"
+oc adm policy add-cluster-role-to-user cluster-admin demo
+
+
+##############################################
+# Images
+##############################################
+
+oc new-app docker.io/openshift/jenkins-2-centos7
+oc new-app openshift/hello-openshift
+oc new-app -e MYSQL_USER=admin -e MYSQL_PASSWORD=redhat -e MYSQL_DATABASE=mysqldb registry.redhat.io/openshift3/mysql-55-rhel7
+oc new-app -e MYSQL_USER=admin -e MYSQL_PASSWORD=redhat -e MYSQL_DATABASE=mysqldb openshift/mysql-55-centos7
+
+
+		
+######### POD creation Template #########
+==========================================		
+kubectl/oc create -f nginx-pod.yaml
+oc get pods -o wide
+oc get nodes --show-labels
+oc label nodes worker-0.ocp4.nfv.com node=node-0
+oc label nodes worker-0.ocp4.nfv.com node=node-0 --overwrite=true  ======> update labels
+oc get nodes --show-labels
+oc delete pod <pod name>
+
+
+########## Replication Controller ###########
+=============================================
+oc create -f 5-pod-rc-sa.yaml
+oc get rc
+oc delete -f 5-pod-rc-sa.yaml
+oc scale rc <rc name> --replicas=5
+
+############ Deployment ##############
+#
+
+
+
+#############################################
+# Ingress controller
+#############################################
+
+	on master node:
+	===============
+		oc new-app openshift/hello-openshift
+		oc expose svc/hello-openshift
+		oc get route hello-openshift
+		curl hello-openshift-sanity.apps.ocp4.nfv.com:8080
+	on bastion node:
+	================
+		curl hello-openshift-sanity.apps.ocp4.nfv.com:<port> ============> OpenShift Router only accepts 80 and 443 port. So routes only be access through port 80/443.
+	
+##############################################################
+# Using a Service External IP to Get Traffic into the Cluster
+##############################################################
+Confguration of external cidr: https://access.redhat.com/solutions/4550681
+
+oc get networks.config cluster -o yaml
+oc edit networks.config cluster -o yaml
+		spec:
+		  clusterNetwork:
+		  - cidr: 10.132.0.0/14 # This may be different on your cluster, DON'T CHANGE YOURS!
+			hostPrefix: 23 # This may be different on your cluster, DON'T CHANGE YOURS!
+		  externalIP:
+			autoAssignCIDRs: # Here goes the CIDR for what was formerly called "ingressIPNetworkCIDR" 
+			- 192.168.132.254/29 # Only one CIDR is allowed at this list
+			policy:
+			  allowedCIDRs: # Here go the CIDRs allowed for what was formerly called "externalIPNetworkCIDRs"
+			  - 192.168.132.0/29 # External IPs under this CIDR are allowed
+			  - 192.168.132.8/29 # External IPs under this CIDR are allowed, you can add more.
+			  rejectedCIDRs: # Here go some CIDRs to reject. This is optional
+			  - 192.168.132.7/32 # This CIDR will not be allowed even if it is part of another CIDR in allowed section above.
+
+	on master node:
+	===============
+		oc new-app openshift/hello-openshift
+		oc expose svc/hello-openshift
+		oc edit svc hello-openshift
+			locate type: ClusterIP and change it to type: LoadBalancer
+			save and quit
+		oc get svc
+		curl <external ip>:8080
+		route add -net 10.7.10.0/24 gw 10.7.45.103 ======> eno49
+			[root@master-0 ~]# route -n
+			Kernel IP routing table
+			Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+			0.0.0.0         10.7.45.1       0.0.0.0         UG    100    0        0 eno49
+			10.7.10.0       10.7.45.103     255.255.255.0   UG    0      0        0 eno49
+			10.7.45.0       0.0.0.0         255.255.255.0   U     100    0        0 eno49
+			10.128.0.0      0.0.0.0         255.252.0.0     U     0      0        0 tun0
+			172.30.0.0      0.0.0.0         255.255.0.0     U     0      0        0 tun0
+	on bastion node:
+	================
+		route add -net 10.7.10.0/24 gw 10.7.45.103
+		root@bastion:~# route -n
+			Kernel IP routing table
+			Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+			0.0.0.0         10.7.45.1       0.0.0.0         UG    0      0        0 pg-oam
+			10.7.10.0       10.7.45.103     255.255.255.0   UG    0      0        0 pg-oam
+			10.7.45.0       0.0.0.0         255.255.255.0   U     0      0        0 pg-oam
+			169.254.0.0     0.0.0.0         255.255.0.0     U     1000   0        0 pg-oam
+			192.168.122.0   0.0.0.0         255.255.255.0   U     0      0        0 virbr0
+
+	
+	
+
+
+
+
+image-registry.openshift-image-registry.svc:5000/sanity/myapp:latest
+
+
+
+
+###################################################################
+# Cluster monitoring configruation
+###################################################################
+
+
+Events:
+  Type     Reason            Age        From               Message
+  ----     ------            ----       ----               -------
+  Warning  FailedScheduling  <unknown>  default-scheduler  0/6 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 5 node(s) didn't match node selector.
+  Warning  FailedScheduling  <unknown>  default-scheduler  0/6 nodes are available: 1 node(s) had taints that the pod didn't tolerate, 5 node(s) didn't match node selector.
+[root@c9npsvm sanity]#
+
+
+
+
+
+

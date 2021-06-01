@@ -1,0 +1,181 @@
+<html xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vim2="urn:vim2" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script type="text/javascript" src="./commonRes.js" language="JavaScript"></script>
+<link href="doc-style.css" type="text/css" rel="StyleSheet">
+</head>
+<script src="dynamic-content.js" type="text/javascript"></script>
+<body>
+<table cellspacing="0" class="header-footer" id="top">
+<tr>
+<td>
+<br>
+</td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<a id="vim.vsan.FileServiceDomainConfig" name="vim.vsan.FileServiceDomainConfig"></a>
+<h1>Data Object - VsanFileServiceDomainConfig(vim.vsan.FileServiceDomainConfig)</h1>
+<dl>
+<dt>Property of</dt>
+<dd>
+<a href="vim.vsan.FileServiceConfig.html#field_detail">VsanFileServiceConfig</a>, <a href="vim.vsan.FileServiceDomain.html#field_detail">VsanFileServiceDomain</a>
+</dd>
+<dt>Parameter to</dt>
+<dd>
+<a href="vim.vsan.VsanFileServiceSystem.html#createFileServiceDomain">VsanClusterCreateFsDomain</a>, <a href="vim.vsan.VsanFileServiceSystem.html#reconfigureFileServiceDomain">VsanClusterReconfigureFsDomain</a>, <a href="vim.vsan.VsanFileServiceSystem.html#performFileServicePreflightCheck">VsanPerformFileServiceEnablePreflightCheck</a>
+</dd>
+<dt>Extends</dt>
+<dd>
+<a href="vmodl.DynamicData.html">DynamicData</a>
+</dd>
+<dt>See also</dt>
+<dd>
+<a href="vim.vsan.DirectoryServerConfig.html">VsanDirectoryServerConfig</a>, <a href="vim.vsan.FileServiceIpConfig.html">VsanFileServiceIpConfig</a>
+</dd>
+<dt>Since </dt>
+<dd>vSAN API 7.0</dd>
+<p></p>
+</dl>
+<H2>Data Object 
+                  Description</H2>
+<p></p>
+         A vSAN File Service Domain is unique namespace. Network and security
+    configuration can be uniquely set for this namespace. One or more file shares
+    be managed with this namespace. A file service domain may be integrated with
+    a Directory Service like Microsoft Active Directory, although this
+    integration is not mandatory.
+      <p></p>
+<a id="field_detail" name="field_detail"></a>
+<p class="table-title">Properties</p>
+<table cellspacing="0">
+<tr>
+<th>
+	          Name
+	        </th><th>
+	          Type
+	        </th><th>
+	          Description
+	        </th>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="directoryServerConfig" name="directoryServerConfig"></a><strong>directoryServerConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vsan.DirectoryServerConfig.html">VsanDirectoryServerConfig</a></td><td>
+<p></p>
+         The directory server integrated with for the domain. If Directory server
+    configuration is provided NFS shares can be configured with KRB5
+    authentication, otherwise only AUTH_SYS(sys or unmanaged client) configs
+    are allowed.
+      <p></p>
+<B><I>Since </I></B>vSAN API vSAN 7.0U1<br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="dnsServerAddresses" name="dnsServerAddresses"></a><strong>dnsServerAddresses</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The IP address of DNS server address, which is used to resolve the hostnames
+    within the DNS domain. Providing this parameter is a must for file service
+    domain creation operation.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="dnsSuffixes" name="dnsSuffixes"></a><strong>dnsSuffixes</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string[]</td><td>
+<p></p>
+         The list of DNS suffixes which can be resolved by the DNS servers. An
+    exhaustive list of all DNS domains and subdomains from where clients can
+    access the file shares must be provided. Providing this parameter is a must
+    for file service domain creation operation.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="fileServerIpConfig" name="fileServerIpConfig"></a><strong>fileServerIpConfig</strong><span title="Need not be set" class="footnote-ref">*</span></td><td><a href="vim.vsan.FileServiceIpConfig.html">VsanFileServiceIpConfig[]</a></td><td>
+<p></p>
+         Define a pool of IP addresses that will be used by vSAN File Service to
+    provide file access from multiple file server. Each file server will be bound
+    to one of the IP configurations in the IP pool and serve the NFS requests.
+ 
+    A minimum of one such address is needed, more may be required based on load
+    and number of shares. To evenly spread the workload, it is recommended to
+    have equal (or greater) number of IP addresses than the number of hosts in
+    the cluster. All the IP address will be required to be on the same subnet.
+ 
+    One primary IP must be specified for the NFS referral server. All the file
+    shares on vSAN file service can be listed and accessed with this primary IP.
+    When a referral is encountered, the NFS client will automatically receive the
+    actual managing file server location from referral server with the primary
+    IP.
+ 
+    This field is required for domain creation.
+      <br>
+</td>
+</tr>
+<tr class="r1">
+<td nowrap="1"><a id="name" name="name"></a><strong>name</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The vSAN File Service domain name should be unique within a vSAN cluster,
+    Any valid unique identifier can be used as name. No white spaces and special
+    characters(except _ - .) with length of the domain name limited to 80 char.
+    It is not necessary to associate this domain with any Directory Service (AD
+    domain).
+ 
+    This field is required for domain creation.
+      <br>
+</td>
+</tr>
+<tr class="r0">
+<td nowrap="1"><a id="version" name="version"></a><strong>version</strong><span title="Need not be set" class="footnote-ref">*</span></td><td>xsd:string</td><td>
+<p></p>
+         The domain config version. It is recommended to leave this field unset to let
+    the domain configuration negotiated between the vCenter and ESXi.
+      <p></p>
+<B><I>Since </I></B>vSAN API vSAN 7.0U1<br>
+</td>
+</tr>
+<tr class="r1">
+<td colspan="3">
+						Properties inherited from <a href="vmodl.DynamicData.html">DynamicData</a></td>
+</tr>
+<tr class="r0">
+<td colspan="3">None</td>
+</tr>
+</table>
+<span class="footnote-ref">*</span><span class="footnote">Need not be set</span>
+<br>
+<a style="margin-bottom:10px; margin-top:10px; cursor:hand; cursor:pointer" onclick="resize_textarea('wsdl-textarea');expandcontent(this, 'wsdl-div')">Show WSDL type definition</a>
+<div class="switchcontent" id="wsdl-div">
+<textarea cols="20" rows="10" name="wsdl-textarea" wrap="off" readonly="1" id="wsdl-textarea">         <complexType xmlns="http://www.w3.org/2001/XMLSchema" xmlns:vsan="urn:vsan" name="VsanFileServiceDomainConfig">
+            <complexContent>
+               <extension base="vsan:DynamicData">
+                  <sequence>
+                     <element name="name" type="xsd:string" minOccurs="0"/>
+                     <element name="dnsServerAddresses" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="dnsSuffixes" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="fileServerIpConfig" type="vsan:VsanFileServiceIpConfig" minOccurs="0" maxOccurs="unbounded"/>
+                     <element name="directoryServerConfig" type="vsan:VsanDirectoryServerConfig" minOccurs="0"/>
+                     <element name="version" type="xsd:string" minOccurs="0"/>
+                  </sequence>
+               </extension>
+            </complexContent>
+         </complexType></textarea>
+</div>
+<br>
+<br>
+<table cellspacing="0" class="header-footer" id="bottom">
+<tr>
+<td><a href="#top">Top of page</a></td><td></td><td><a href="#field_detail">Local Properties</a></td><td></td>
+</tr>
+<tr>
+<td><a href="index-mo_types.html">Managed Object Types</a></td><td><a href="index-do_types.html">Data Object Types</a></td><td><a href="index-properties.html">All Properties</a></td><td><a href="index-methods.html">All Methods</a></td>
+</tr>
+</table>
+<br>
+<script language="javascript">document.write(ID_Copyright);</script>
+<br>
+<script language="javascript">document.write(ID_VersionInformation);</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+uday@bastion:~/sanity/images/new-app$ oc new-build --strategy docker --binary --docker-image centos:centos7 --name myappimage
+--> Found container image 5e35e35 (2 weeks old) from Docker Hub for "centos:centos7"
+
+    * An image stream tag will be created as "centos:centos7" that will track the source image
+    * A Docker build using binary input will be created
+      * The resulting image will be pushed to image stream tag "myimage:latest"
+      * A binary build was created, use 'oc start-build --from-dir' to trigger a new build
+
+--> Creating resources with label build=myimage ...
+    imagestream.image.openshift.io "centos" created
+    imagestream.image.openshift.io "myimage" created
+    buildconfig.build.openshift.io "myimage" created
+--> Success
+uday@bastion:~/sanity/images/new-app$ oc new-build --strategy docker --binary --docker-image centos:centos7 --name myimage
+start-build myapp --from-dir . --followyimage
+Uploading directory "." as binary input for the build ...
+..
+Uploading finished
+build.build.openshift.io/myimage-1 started
+Receiving source from STDIN as archive ...
+Replaced Dockerfile FROM image centos:centos7
+Caching blobs under "/var/cache/blobs".
+
+Pulling image centos@sha256:285bc3161133ec01d8ca8680cd746eecbfdbc1faa6313bd863151c4b26d7e5a5 ...
+Getting image source signatures
+Copying blob sha256:ab5ef0e5819490abe86106fd9f4381123e37a03e80e650be39f7938d30ecb530
+Copying config sha256:5e35e350aded98340bc8fcb0ba392d809c807bc3eb5c618d4a0674d98d88bccd
+Writing manifest to image destination
+Storing signatures
+STEP 1: FROM centos@sha256:285bc3161133ec01d8ca8680cd746eecbfdbc1faa6313bd863151c4b26d7e5a5
+STEP 2: EXPOSE 8080
+73169f0c3061abc8518652209d02fbe001c9cf97f46981662f3d78ab03012b5f
+STEP 3: COPY index.html /var/run/web/index.html
+6c7dfc0bf49608f6053b8bf8baa02aad13880b97bcfddd7197662009144a6611
+STEP 4: CMD cd /var/run/web && python -m SimpleHTTPServer 8080
+1282b5ed3104aec7a8b7df74bd490d25b851d0e7f07834ce775cea6f6e96d72d
+STEP 5: ENV "OPENSHIFT_BUILD_NAME"="myimage-1" "OPENSHIFT_BUILD_NAMESPACE"="sanity"
+3190d41e89c60f50c225ac7ef799fd0deea73495820343efa7440ff096ad0c26
+STEP 6: LABEL "io.openshift.build.name"="myimage-1" "io.openshift.build.namespace"="sanity"
+STEP 7: COMMIT temp.builder.openshift.io/sanity/myimage-1:ccc82c76
+3250bbb014d27818fb9d8faf47cfe114652727dbda068db346e7e0f225b50028
+
+Pushing image image-registry.openshift-image-registry.svc:5000/sanity/myimage:latest ...
+Getting image source signatures
+Successfully pushed image-registry.openshift-image-registry.svc:5000/sanity/myimage:latest
+Warning: Push failed, retrying in 5s ...
+Getting image source signatures
+Failed to stream the build logs - to view the logs, run oc logs build/myimage-1
+Error: unable to stream the build logs; caused by: unexpected EOF

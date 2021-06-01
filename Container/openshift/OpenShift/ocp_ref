@@ -1,0 +1,492 @@
+OCP: Openshift Container Platform
+---------------------------------
+OpenShift Container Platform is a platform for developing and running containerized applications. It is
+
+
+Containers vs VMs:
+==================
+==> Adv container
+
+==> Adv VMs
+    The main benefit of virtual machines is the full isolation they provide.
+	While containers are much more lightweight compared to VMs, they impose certain
+     constraints on the apps running inside them. VMs have no such constraints,
+     because each VM runs its own kernel. For example if a container demands specific kernel version of the host, it may not be transferable, lets say from rhel docker machine to windows docker machine
+	 
+	You can’t containerize an application built for the x86 architecture
+and expect it to run on an ARM-based machine because it also runs Docker. You
+still need a VM for that.
+	 
+	
+Kubernetes vs Openshift:
+-=======================
+==> Openshift provides integrated registry which kubernetes does not.
+
+
+
+1) Openshift Origin is opensource community. Later its name changed to OKD
+2) What is ignition:
+	Ignition is a new provisioning utility designed specifically for CoreOS Container Linux. At the the most basic level, it is a tool for manipulating disks during early boot. This includes partitioning disks, formatting partitions, writing files (regular files, systemd units, networkd units, etc.), and configuring users. On first boot, Ignition reads its configuration from a source-of-truth (remote URL, network metadata service, hypervisor bridge, etc.) and applies the configuration.
+	Even though Ignition only runs once, it packs a powerful punch. Because Ignition runs so early in the boot process (in the initramfs, to be exact), it is able to accomplish configuration all before the userspace has begun booting, which enables advanced features that Container Linux admins require.
+	
+	initramfs, short for initial RAM filesystem, is a cpio archive of the initial filesystem loaded into memory after the kernel finishes initializing the system and before user-space begins the init process. The Linux kernel mounts the contents of initramfs as the initial root filesystem, before the real root (e.g. on your hard drive) is mounted. This initial root contains files needed to mount the real root filesystem and initialize your system—the most important bits being kernel modules.
+
+	The Linux kernel is modular, which is to say it supports the dynamic loading and unloading of object files. Many parts of the kernel can be made into a module, for example support for a given filesystem type or a driver to access a particular disk. This allows Linux systems to build kernels with only the bare essentials compiled into the main kernel image but provide functionality for every other conceivable feature and hardware as a module, allowing the user to load or not load them as needed.  
+
+	But what if the root filesystem is on a filesystem or disk that requires a kernel module to access? You wouldn't be able to boot! You'd need the modules to access the disk, but the modules are on the disk. initramfs solves this problem by allowing the kernel to access the modules from a special RAM filesystem, avoiding any chicken-or-the-egg problem.
+	
+	a. What problem does initramfs solve??
+	
+		The Linux kernel is modular: you can dynamically load and unload object files (called modules) in to and out of the kernel. Consequently, most Linux systems compile only a bare minimum base kernel image, and provide most other functionality—including nearly all device drivers—as modules. This allows the system to support every conceivable device and feature that Linux supports without inflicting those costs on every user.
+
+		But this leads to a problem. What if you need a module to boot the system? For example, you'll need a module to support your root filesystem (ext3, say) and a driver for that filesystem's disk (ata, say). So we'd have to compile those into the base kernel. But what if you have an encrypted disk? Or a network disk? RAID? Logical disks? Pretty soon half the modules are back in the base kernel.
+
+		Enter initramfs. It allows you to bundle an image of a RAM disk with that base kernel image. Inside that disk image is the modules needed to boot the system. In particular, it has filesystem and disk driver modules that allow users to mount their root filesystem.
+		
+	b. What is relationship between initrd and initramfs?
+	
+		Both initrd and initramfs are works on same concept, that "early user space" root file system that can be used to get at least the minimum functionality loaded in order to let the boot process continue.
+
+		Intrd: RHEL6
+
+			initrd is for Linux kernels 2.4 and lower.
+			Initrd requires at least one file system driver be compiled into the kernel
+			A disk created by Initrd has got to have a fixed size
+			All of the reads/writes on Initrd are buffered redundantly (unnecessarily) into main memory
+			So, initrd is deprecated and is replaced by initramfs
+			
+		Initramfs: RHEL7
+
+		-	initramfs is a Linux 2.6 and above.
+		-	This feature is made up from a cpio archive of files that enables an initial root filesystem and init program to reside in kernel memory cache, rather 
+			than on a ramdisk, as with initrd filesystems.
+		-	with initramfs, you create an archive with the files which the kernel extracts to a tmpfs.
+		-	intramfs can increase boot-time flexibility, memory efficiency, and simplicity
+		-	dracut is the tool used to create the initramfs image.
+		-	initramfs location of init : /init
+		
+	c.	 How can I identify whether the image is initrd or initramfs image?
+	
+		The file command might tell you; but otherwise simply try a command line:
+
+			zcat $INITFILE | cpio -it
+			
+		If that generates a file list than the image is an “initramfs” (which is implemented as a compressed cpio file). Otherwise it’s a filesystem image, probably on the old xiafs or ext2 or the specialized cramfs (used by Debian in bygone days). The file command should detect the “magic” bytes in any such files and you should be able to mount them on a loopback device (possibly after decompressing them).
+	
+3)	CRI-O is not supported as a stand-alone container engine. You must use CRI-O as a container engine for a Kubernetes installation, such as OKD. To run containers without Kubernetes or OKD, use podman.
+
+4) 	Red-Hat acquired a company called core-os.RHCOS is the immutable container host version of Red Hat Enterprise Linux (RHEL) and features a RHEL kernel with
+	SELinux enabled by default. It includes thekubelet, which is the Kubernetes node agent, and the CRI-O container runtime, which is optimized for Kubernetes.In OpenShift Container Platform 4.2, you must use RHCOS for all control plane machines, but you can use Red Hat Enterprise Linux (RHEL) as the operating system for compute, or worker, machines. If you choose to use RHEL workers, you must perform more system maintenance than if you use RHCOS for
+	all of the cluster machines.
+
+5)	Operating system updates are delivered as an Atomic OSTree repository that is embedded in a container image that is rolled out across the cluster by an Operator.
+
+6) 	Ignition files: OpenShift Container Platform uses Ignition version 2 and Ignition config version 2.3
+	These two basic types of OpenShift Container Platform clusters are frequently called 
+		-	installer-provisioned infrastructure clusters ******* only applicable for AWS ********
+		-	user-provisioned infrastructure clusters.
+		OpenShift has support for bare metal deployments with either User provided infrastructure (UPI), or Installer-provided instrastructure (IPI).
+
+			The following is a summary of key differences:
+
+			UPI bare metal
+
+				Provisioning hosts is an external requirement
+				Requires extra DNS configuration
+				Requires setup of load balancers
+				Offers more control and choice over infrastructure
+				
+			IPI bare metal
+
+				Has built-in hardware provisioning components, 
+				will provision nodes with RHCOS automatically, and 
+				supports the Machine API for ongoing management of these hosts.
+				Automates internal DNS requirements
+				Automates setup of self-hosted load balancers
+				Supports “openshift-install create cluster” for bare metal environments using this infrastructure automation, but requires the use of compatible hardware, as described in install_ipi.md.
+				
+	need 3 ignition files each for bootstrap, master and worker machines
+	With these three configurations and correctly configured infrastructure, you can start an OpenShift Container Platform cluster
+	
+	You use three sets of files during installation: an installation configuration file that is named installconfig. yaml, Kubernetes manifests, and Ignition config files for your machine types
+	
+	The installation configuration file is transformed into Kubernetes manifests, and then the manifests are wrapped into Ignition config files. The installation 	program uses these Ignition config files to create the cluster.
+
+7) OpenShift vs Kubernetes: OpenShift is 10x 
+	Kubernetes manages only applications while OpenShift manages both applications and platform
+	
+8)	Services in kubernets:
+
+	Basically, services are a type of resource that configures a proxy to forward the requests to a set of pods, which will receive traffic & is determined by the selector. Once the service is created it has an assigned IP address which will accept requests on the port.
+
+	Now, there are various service types that give you the option for exposing a service outside of your cluster IP address.
+
+	Types of Services
+
+	There are mainly 4 types of services.
+
+	ClusterIP: This is the default service type which exposes the service on a cluster-internal IP by making the service only reachable within the cluster.
+
+	NodePort: This exposes the service on each Node’s IP at a static port. Since, a ClusterIP service, to which the NodePort service will route, is automatically created. We can contact the NodePort service outside the cluster.
+
+	LoadBalancer: This is the service type which exposes the service externally using a cloud provider’s load balancer. So, the NodePort and ClusterIP services, to which the external load balancer will route, are automatically created.
+
+	ExternalName: This service type maps the service to the contents of the externalName field by returning a CNAME record with its value.
+
+	So, guys that was all about services. Now, you might be wondering how do external services connect to these networks right?
+
+	Well, that’s by none other than Ingress Network.
+
+	Ingress Network
+	Well, Ingress network is the most powerful way of exposing services as it is a collection of rules that allow inbound connections, that can be configured to give services externally through reachable URLs. So, it basically acts as an entry point to the Kubernetes cluster that manages external access to the services in a cluster.
+
+9) CoreOS worker nodes: A minimum of two CoreOS worker nodes must be specified for the infrastructure components in the initial cluster deployment. The default router, image registry and monitoring service are initially deployed on these two worker nodes, along with any applications you subsequently deploy. The worker nodes will be distributed randomly, so they may not be spread across the ESXi hosts as depicted in the figure.
+
+ARCHICTURE:
+============
+OCP components:
+	-	Installer program	
+	-	Bootstrap machine
+	-	Control Plane
+		-	Master nodes
+			-	API server, 
+			-	etcd, 
+			-	controller manager server, 
+			-	HAProxy services
+			
+	-	Compute/data/user Plane
+		-	worker nodes
+			-	CRI-O: A container engine
+			-	Kubelet: which is the service that accepts and fulfills requests for running and stopping container workloads
+			-	Service proxy: manages communication for pods across workers
+			
+			-	
+Questions:
+==========
+1)	license/subscription requirements
+
+
+Download:
+-	supporting node:
+	-	-	wget https://nyifiles.pfsense.org/mirror/downloads/pfSense-CE-2.4.4-RELEASE-p3-amd64.iso.gz
+-	Installer program:
+	-	wget https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux-4.1.18.tar.gz
+	-	wget https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-install-linux-4.1.18.tar.gz
+	-	wget https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/release.txt
+	-	wget https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/sha256sum.txt
+	-	
+	
+-	RHCOS:
+	-	wget https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.1/latest/rhcos-4.1.0-x86_64-installer-initramfs.img
+	-	wget https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.1/latest/rhcos-4.1.0-x86_64-installer-kernel
+	-	wget https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.1/latest/rhcos-4.1.0-x86_64-installer.iso
+	-	wget https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.1/latest/rhcos-4.1.0-x86_64-metal-bios.raw.gz
+	-	wget https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos/4.1/latest/rhcos-4.1.0-x86_64-metal-uefi.raw.gz
+	
+Installation:
+=============
+Pre-requisites:
+
+1. Configure HTTP server	
+2. Configure DHCP.
+3. Provision the required load balancers.
+4. Configure the ports for your machines.
+5. Configure DNS.
+6. Ensure network connectivity.	
+
+1.) DHCP configuration:
+==================
+yum install dhcp -y
+
+vim /etc/dhcp/dhcpd.conf
+
+authoritative;
+
+subnet 192.168.122.0 netmask 255.255.255.0 {
+        range 192.168.122.200 192.168.122.250;
+        option routers 192.168.122.1;
+        option broadcast-address 192.168.122.255;
+        default-lease-time -1;
+        max-lease-time -1;
+}
+subnet 10.10.10.0 netmask 255.255.255.0 {
+        range 10.10.10.200 10.10.10.250;
+        option routers 10.10.10.1;
+        option broadcast-address 10.10.10.255;
+        default-lease-time -1;
+        max-lease-time -1;
+}
+
+systemctl enable dhcpd
+systemctl start dhcpd
+
+2) Configure DNS:
+===============
+yum install bind bind-utils -y
+
+vim /etc/named.conf
+
+options {
+        listen-on port 53 { 127.0.0.1; 192.168.122.103; };
+        listen-on-v6 port 53 { ::1; };
+        directory       "/var/named";
+        dump-file       "/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+        recursing-file  "/var/named/data/named.recursing";
+        secroots-file   "/var/named/data/named.secroots";
+        allow-query     { localhost; any; };
+
+...
+...
+zone "." IN {
+        type hint;
+        file "named.ca";
+};
+zone "ocp4.com" IN {
+        type master;
+        file "forward.ocp4.com";
+        allow-update {none;};
+};
+
+zone "122.168.192.in-addr.arpa" IN {
+        type master;
+        file "reverse_192.ocp4.com";
+        allow-update { none; };
+};
+
+zone "10.10.10.in-addr.arpa" IN {
+        type master;
+        file "reverse_10.ocp4.com";
+        allow-update { none; };
+};
+
+
+
+
+[root@infra-services ~]# firewall-cmd --permanent --add-port=53/tcp
+success
+[root@infra-services ~]# firewall-cmd --permanent --add-port=53/udp
+success
+[root@infra-services ~]# firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: eth0 eth1
+  sources: 
+  services: ssh dhcpv6-client http ftp
+  ports: 
+  protocols: 
+  masquerade: no
+  forward-ports: 
+  source-ports: 
+  icmp-blocks: 
+  rich rules: 
+	
+[root@infra-services ~]# firewall-cmd --reload
+success
+[root@infra-services ~]# firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: eth0 eth1
+  sources: 
+  services: ssh dhcpv6-client http ftp
+  ports: 53/tcp 53/udp
+  protocols: 
+  masquerade: no
+  forward-ports: 
+  source-ports: 
+  icmp-blocks: 
+  rich rules: 
+	
+[root@infra-services ~]# 
+
+cp named.localhost forward.ocp4.com
+[root@infra-services named]# more /var/named/forward.ocp4.com 
+$TTL 1D
+@	IN SOA	infra-services.ocp4.com. root.ocp4.com. (
+					0	; serial
+					1D	; refresh
+					1H	; retry
+					1W	; expire
+					3H )	; minimum
+
+@	IN 	NS	infra-services.ocp4.com.
+
+@	IN 	A 	192.168.122.103
+
+
+
+infra-services	IN	A	192.168.122.103
+[root@infra-services named]# 
+
+root@infra-services named]# more /var/named/reverse_192.ocp4.com 
+$TTL 1D
+@	IN SOA	infra-services.ocp4.com. root.ocp4.com. (
+					0	; serial
+					1D	; refresh
+					1H	; retry
+					1W	; expire
+					3H )	; minimum
+
+@	IN 	NS	infra-services.ocp4.com.
+
+@	IN 	PTR 	ocp4.com.
+
+
+
+infra-services	IN	A	192.168.122.103
+103		IN	PTR	infra-services.ocp4.com
+[root@infra-services named]# more /var/named/reverse_10.ocp4.com 
+$TTL 1D
+@	IN SOA	infra-services.ocp4.com. root.ocp4.com. (
+					0	; serial
+					1D	; refresh
+					1H	; retry
+					1W	; expire
+					3H )	; minimum
+
+@	IN 	NS	infra-services.ocp4.com.
+
+@	IN 	PTR 	ocp4.com.
+
+
+
+infra-services	IN	A	10.10.10.103
+103		IN	PTR	infra-services.ocp4.com
+[root@infra-services named]# 
+
+
+
+
+[root@infra-services named]# named-checkconf -z /etc/named.conf
+zone ocp4.com/IN: loaded serial 0
+zone 122.168.192.in-addr.arpa/IN: loaded serial 0
+zone 10.10.10.in-addr.arpa/IN: loaded serial 0
+zone localhost.localdomain/IN: loaded serial 0
+zone localhost/IN: loaded serial 0
+zone 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa/IN: loaded serial 0
+zone 1.0.0.127.in-addr.arpa/IN: loaded serial 0
+zone 0.in-addr.arpa/IN: loaded serial 0
+[root@infra-services named]# named-check
+named-checkconf  named-checkzone  
+[root@infra-services named]# named-check
+named-checkconf  named-checkzone  
+[root@infra-services named]# named-checkzone forward forward.ocp4.com 
+zone forward/IN: loaded serial 0
+OK
+[root@infra-services named]# named-checkzone reverse reverse_192.ocp4.com 
+zone reverse/IN: loaded serial 0
+OK
+[root@infra-services named]# named-checkzone reverse reverse_10.ocp4.com `
+> ^C
+[root@infra-services named]# named-checkzone reverse reverse_10.ocp4.com 
+zone reverse/IN: loaded serial 0
+OK
+[root@infra-services named]# 
+
+
+chown root:named reverse_192.ocp4.com
+chown root:named reverse_10.ocp4.com
+
+
+
+
+LAB Details:
+	-	worker node:
+		-	10.7.0.10 
+		
+		-	10.7.0.29
+	-	master node:
+		-	10.7.0.26  ====> raid 1
+		-	10.7.0.28  ====> raid 1 
+		-	10.7.0.23  ====> raid 1	
+	-	bastion:
+		-	10.7.0.12
+
+master node:
+	-	10.7.0.28: FLR1 :: 3c:a8:2a:fd:1a:c0
+	-	10.7.0.26: FLR1	:: 3c:a8:2a:fc:29:80
+	-	10.7.0.23: FLR1 :: 3c:a8:2a:fd:fd:00
+	
+worker node:
+	-	10.7.0.18  FLR1 :: 5c:b9:01:c2:53:20
+	-	10.7.0.10  FLR1 :: 3c:a8:2a:fc:0a:b8
+	-	10.7.0.30
+	
+
+ovs-vsctl add-port br0 bond1
+
+root@ocp4-installer:~# ovs-vsctl show
+55dcb9de-6c13-4b22-87ac-185b142a1653
+    Bridge "br0"
+        Port pg-can
+            tag: 743
+            Interface pg-can
+                type: internal
+        Port pg-pxe
+            tag: 741
+            Interface pg-pxe
+                type: internal
+        Port "vnet1"
+            tag: 745
+            Interface "vnet1"
+        Port pg-api-int
+            tag: 742
+            Interface pg-api-int
+                type: internal
+        Port pg-oam
+            tag: 745
+            Interface pg-oam
+                type: internal
+        Port "br0"
+            Interface "br0"
+                type: internal
+        Port pg-bls
+            tag: 746
+            Interface pg-bls
+                type: internal
+        Port "bond1"
+            Interface "bond1"
+        Port "vnet0"
+            Interface "vnet0"
+    ovs_version: "2.11.0"
+root@ocp4-installer:~#
+
+741  	10.7.41.0/24  	10.7.41.1  	OCP-PXE		====> PXE booting	
+742		10.7.42.0/24	10.7.42.1	OCP-API-INT	====> Internal API calls	
+743		10.7.43.0/24	10.7.43.1	OCP-CAN		====> Customer access network
+744		10.7.44.0/24	10.7.44.1	OCP-DATA 	====> Data Network
+745		10.7.45.0/24	10.7.45.1	OCP-OAM  	====> DNS DHCP Management
+746		10.7.46.0/24	10.7.46.1	OCP-BLS  	====> storage
+
+VLAN Name 	RHOSP Network 		Description
+=========	==============		=============
+iLO-OOBM 	Management 			iLO-OOBM network.
+
+BLS 		Storage network 	Block Storage network.
+
+CLM 		Internal API 		Cloud Management network for
+								internal/admin endpoint and
+								inter-service communication.
+OAM 		Operation and 		network for connectivity to NTP,
+								DNS, LDAP types infrastructure
+								services				
+			Management 
+
+CAN 		Customer Access  	Consumer Access Network or
+			Network					public endpoint for APIs.
+			
+VIM-PXE 	Provision network  PXE network for RHOSP
+			(VIM)					Overcloud and Undercloud.
+								
+Provider VLAN Provider VLAN Provider VLANs.
+HPE
+
+10.131.5.110
+10.131.0.6
+Project:
+========
+1) All nodes need direct internet access. Proxy does not work
+2)
